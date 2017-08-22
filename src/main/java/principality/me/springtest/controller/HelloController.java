@@ -1,10 +1,9 @@
-package yejf.springtest.controller;
+package principality.me.springtest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import yejf.springtest.domain.repository.PersonRepository;
-import yejf.springtest.service.PersonService;
+import principality.me.springtest.service.PersonService;
 
 /**
  * Created by win7 on 2017/7/23.

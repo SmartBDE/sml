@@ -1,6 +1,8 @@
-package yejf.springtest.controller
+package principality.me.springtest.controller
 
 import org.springframework.web.bind.annotation.{RequestMapping, RequestMethod, ResponseBody, RestController}
+import principality.me.springtest.domain.model.Message
+import principality.springtest.domain.model.Message
 import yejf.springtest.domain.model.Message
 
 /**

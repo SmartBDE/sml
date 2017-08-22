@@ -1,9 +1,7 @@
-package yejf.springtest;
+package principality.me.springtest;
 
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.web.bind.annotation.*;
 
 @SpringBootApplication
 public class Application {

@@ -1,4 +1,4 @@
-package yejf.springtest.service;
+package principality.me.springtest.service;
 
 import com.mongodb.*;
 import org.slf4j.Logger;
@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.stereotype.Component;
-import yejf.springtest.domain.model.Person;
+import principality.me.springtest.domain.model.Person;
 
 @Component
 public class MongoBean {

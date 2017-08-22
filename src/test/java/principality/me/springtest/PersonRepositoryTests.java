@@ -1,4 +1,4 @@
-package yejf.springtest;
+package principality.me.springtest;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -6,10 +6,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
-import yejf.springtest.domain.model.Person;
-import yejf.springtest.domain.repository.PersonRepository;
+import principality.me.springtest.domain.repository.PersonRepository;
+import principality.me.springtest.domain.model.Person;
 
 /**
  * Created by win7 on 2017/7/23.

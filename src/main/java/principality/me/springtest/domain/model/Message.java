@@ -1,4 +1,4 @@
-package yejf.springtest.domain.model;
+package principality.me.springtest.domain.model;
 
 /**
  * Created by win7 on 2017/8/3.

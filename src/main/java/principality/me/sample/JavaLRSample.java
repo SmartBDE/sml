@@ -1,4 +1,4 @@
-package principality.me;
+package principality.me.sample;
 
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.Function;

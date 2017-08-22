@@ -1,4 +1,4 @@
-package yejf.springtest.domain.model;
+package principality.me.springtest.domain.model;
 
 import org.springframework.data.annotation.Id;
 

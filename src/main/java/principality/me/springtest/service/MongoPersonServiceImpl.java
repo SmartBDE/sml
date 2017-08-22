@@ -1,12 +1,9 @@
-package yejf.springtest.service;
+package principality.me.springtest.service;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import yejf.springtest.domain.model.Person;
-import yejf.springtest.domain.repository.PersonRepository;
-
-import java.util.List;
+import principality.me.springtest.domain.model.Person;
+import principality.me.springtest.domain.repository.PersonRepository;
 
 /**
  * Created by win7 on 2017/7/23.

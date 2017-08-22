@@ -1,8 +1,6 @@
-package yejf.springtest.service;
+package principality.me.springtest.service;
 
-import yejf.springtest.domain.model.Person;
-
-import java.util.List;
+import principality.me.springtest.domain.model.Person;
 
 /**
  * Created by win7 on 2017/7/23.
