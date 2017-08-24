@@ -12,8 +12,11 @@ public class JavaLRSampleTests {
     public void test() throws Exception {
         JavaLRSample lrSample = new JavaLRSample();
 
-        SparkSession spark = SparkSession.builder().appName("JavaLRSampleTests").getOrCreate();
-        lrSample.run(spark, "..\\data\\mllib\\sample_linear_regression_data.txt", 10);
+        SparkSession spark = SparkSession.builder()
+                .master("local")
+                .appName("JavaLRSampleTests")
+                .getOrCreate();
+        lrSample.run(spark, "..\\sml\\data\\mllib\\sample_linear_regression_data.txt", 10);
 
         spark.stop();
     }
