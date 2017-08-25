@@ -14,15 +14,15 @@
   - mongodb的读写性能优越
   - mongodb和spark都是内存大户？
   - 是否有比bson性能更好的数据格式？
-- BI层，spark sql + spagoBI ? zeppelin ?
+- BI层，presto + prestogres + spagoBI ?
   - 常规的商业智能团队，采用 统计 + 平台实施 的人才组合模式
-  - zeppelin？输入SQL，生成报表？
   - spagoBI，成熟的BI产品？http://www.spagobi.org/homepage/services/documentation/
 - DI层，提供模型查询接口
   - REST API，完成对后端接口的调用
   - 服务层，提供预测结果的调用（需要考虑访问的性能）
     - 模型AB测试支持
   - 核心数据存储层（保存模型/请求上下文/其他？）
+    - zeppelin？输入SQL，生成报表？方便统计人员调研？
     - 第三方系统支持数据的拉取？导入更多的数据？
     - 支持对计算结果的可视化查看，分析，调优？
     - 记录评估结果，以便和将来发生的真实情况做对比

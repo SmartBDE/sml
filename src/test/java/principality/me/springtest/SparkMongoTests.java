@@ -53,7 +53,9 @@ public class SparkMongoTests {
                     singletonList(Document.parse("{ $match: { test : { $gt : 5 } } }")));
 
             System.out.println(aggregatedRdd.count());
-            System.out.println(aggregatedRdd.first().toJson());
+            if (aggregatedRdd.count() > 0) {
+                System.out.println(aggregatedRdd.first().toJson());
+            }
 
             Dataset<Row> implicitDS = MongoSpark.load(jsc).toDF();
             implicitDS.printSchema();
