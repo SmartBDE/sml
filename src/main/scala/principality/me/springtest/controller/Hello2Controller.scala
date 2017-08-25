@@ -8,7 +8,7 @@ import principality.me.springtest.domain.model.Message
  */
 @RestController
 @RequestMapping(Array("/api"))
-class ApiController {
+class Hello2Controller {
   @RequestMapping(value = Array("/hello2"), method = Array(RequestMethod.GET))
   @ResponseBody
   def hello(): Message = {
