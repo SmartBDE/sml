@@ -30,24 +30,24 @@
     - 模型的评估
     - 模型的持续演进
 
-### implementation
+### implementation (*)
 
-- input: logstash, http in, mongodb out, filter support
-- storage: mongodb, pb level data, log/file ability, mature scale/backup/restore
-- bi: spagobi, presto with mongodb
+- input: logstash, http in, mongodb/kafka out, filter support
+- storage: mongodb, pb level data, log/file, with scale/backup/restore
+- bi: spagobi -> presto with mongodb
 - di: <- TODO
 
 ### 项目划分
 
-- pipeline: data reader, writer, formatter for storage
+- pipeline: data reader, writer, formatter for storage (*)
 - scratch: sample code for practise
 - sml:
   - core, {algorithm-controller, training-dataset, training-workflow, trained-model}
-  - algorithm {for train, for service-such as: adaboost multiple models}
+  - algorithm {for train, for service-such as: adaboost multiple models} (*)
 - service: service interface, use spring framework
   - http
   - websocket + kafka
-- admin:
+- admin: (*)
   - dashboard implement
   - logic management
 
