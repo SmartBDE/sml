@@ -18,8 +18,8 @@
   - 常规的商业智能团队，采用 统计 + 平台实施 的人才组合模式
   - spagoBI，成熟的BI产品？http://www.spagobi.org/homepage/services/documentation/
 - DI层，提供模型查询接口
-  - REST API，完成对后端接口的调用
   - 服务层，提供预测结果的调用（需要考虑访问的性能）
+    - REST API，完成对后端接口的调用，Websocket+kafka，实现实时消息交互
     - 模型AB测试支持
   - 核心数据存储层（保存模型/请求上下文/其他？）
     - zeppelin？输入SQL，生成报表？方便统计人员调研？
@@ -29,6 +29,27 @@
   - 离线计算层，负责核心数据的持续运算（对性能敏感，需要较多的服务器资源？）
     - 模型的评估
     - 模型的持续演进
+
+### implementation
+
+- input: logstash, http in, mongodb out, filter support
+- storage: mongodb, pb level data, log/file ability, mature scale/backup/restore
+- bi: spagobi, presto with mongodb
+- di: <- TODO
+
+### 项目划分
+
+- pipeline: data reader, writer, formatter for storage
+- scratch: sample code for practise
+- sml:
+  - core, {algorithm-controller, training-dataset, training-workflow, trained-model}
+  - algorithm {for train, for service-such as: adaboost multiple models}
+- service: service interface, use spring framework
+  - http
+  - websocket + kafka
+- admin:
+  - dashboard implement
+  - logic management
 
 # 核心组件
 
