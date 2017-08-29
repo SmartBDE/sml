@@ -1,12 +1,9 @@
-package principality.me.springtest;
+package principality.me;
 
 import org.apache.spark.sql.SparkSession;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
 import principality.me.sample.JavaLRSample;
 
-@RunWith(SpringRunner.class)
 public class JavaLRSampleTests {
     @Test
     public void test() throws Exception {
@@ -16,7 +13,7 @@ public class JavaLRSampleTests {
                 .master("local")
                 .appName("JavaLRSampleTests")
                 .getOrCreate();
-        lrSample.run(spark, "..\\sml\\data\\mllib\\sample_linear_regression_data.txt", 10);
+        lrSample.run(spark, "..\\data\\mllib\\sample_linear_regression_data.txt", 10);
 
         spark.stop();
     }
