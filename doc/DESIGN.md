@@ -43,10 +43,10 @@
 
 - pipeline: data reader, writer, formatter for storage (*)
 - scratch: sample code for practise
-- sml:
+- sml: (*)
   - core, {algorithm-controller, training-dataset, training-workflow, trained-model}
-  - algorithm {for train, for service-such as: adaboost multiple models} (*)
-- service: service interface, use spring framework
+  - algorithm {for train, for service-such as: adaboost multiple models}
+- publisher: service interface, use spring framework
   - http
   - websocket + kafka
 - admin: (*)
@@ -106,9 +106,7 @@
 存在差异，以及结果输出时，对数据格式有不同的要求，应当提供
 数据预处理管道，满足各种场景。
 
-# 控制组件
-
-### 引擎
+### 控制组件：引擎
 
 实现类，对算法引擎的实现，核心是训练和评估
 - 训练：计算获取模型，并保存
@@ -116,15 +114,13 @@
 - 模型持久化：考虑模型有单机和多机两种情况，保存的策略不一样（单机训练，多机部署/多机训练，单机部署）
 - 评估：调用引擎的评估计算，返回结果，结果可用于保存，方便评估
 
-### 评估
+### 控制组件：评估
 
 评估包含引擎和评估量度(metric)，继承自deployment(deployment extends EngineFactory)
 
 ### 量度 Metric
 
 对结果进行评估，包括有平均值、方差、汇集、零值等
-
-# 流程组件
 
 ### 流程参数
 
@@ -138,10 +134,10 @@
 
 包括数据的读入、初始化、格式转换等等功能
 
-### 插件
+### 服务插件
 
 定义引擎的插件接口，可以从持久化介质装载到运行态
 
-### 服务器
+### 服务接口热插拔
 
-基于actor系统的服务器实现，利用actor的可更新功能，实现插件的热插拔
+基于actor系统的服务器实现，可利用actor的可更新功能，实现插件的热插拔

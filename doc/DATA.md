@@ -12,10 +12,6 @@
 - 启动模型训练，获得模型的评估量度
 - 模型上线，启动模型服务
 
-### 数据常用格式
-
-配合Restful的流行，json被广泛采用
-
 ### 消息定义
 
 /where/who/when/what/how/why
@@ -23,6 +19,21 @@
 
 如何处理第三方数据更新？
 /厂家/业务/商品/行为{添加|更新}/参数
+
+### 数据例子
+
+| user | action1     | action2       | action3     |
+|------|-------------|---------------|-------------|
+|user1 | login:time  | buy:item1     | award:item7 |
+|user2 | login:time  | buy:item3     |   .....     |
+
+| item   | cost  | type  |
+|--------|-------|-------|
+| item1  | cost1 | type3 |
+
+### 数据常用格式
+
+配合Restful的流行，json被广泛采用
 
 ### 消息保存
 
