@@ -10,10 +10,6 @@ SML使用JAVA开发，以满足生产环境正式部署的需求。基于JAVA的
 实际使用。底层计划整合spark, dl4j作为计算引擎，以便和目前流行的深度学习方案&大数据方案
 接轨，为实际应用提供更多的可能性。
 
-# 算法
-
-参考：https://github.com/principality/recsys
-
 # 特性
 
 - 一站式部署方案，简化部署管理
@@ -32,3 +28,7 @@ SML使用JAVA开发，以满足生产环境正式部署的需求。基于JAVA的
 
 - 设置JAVA_HOME, HADOOP_HOME, SPARK_HOME
 - Spark运行设置运行参数-Dspark.master=local {单机单线程运行使用local，单机多线程local[N]}
+
+# 参考资料
+
+参考：https://github.com/principality/recsys

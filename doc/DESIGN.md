@@ -11,12 +11,11 @@
   - 信息收集采用接口方式，便于接入各种第三方系统
   - 考虑为不同的语言和平台，提供SDK
   - http://chenlinux.com/2014/10/18/performance-testing-tunning-for-logstash-inputs-syslog/
-- 入库解析，直接保存到mongodb？
-  - mongodb的分布式部署支持PB级别数据，且部署简单
-  - mongodb的读写性能优越
-  - mongodb和spark都是内存大户？
-  - 是否有比bson性能更好的数据格式？
-- BI层，presto + prestogres + spagoBI ?
+- 入库解析，直接保存到hbase？
+  - hbase的分布式部署支持PB级别数据，且部署简单
+  - hbase的读写性能优越，且支持数据/文档/图像三种常见的文件格式
+  - hbase的二级索引支持：lily，为文本处理增加了极大的可能性
+- BI层，(kylin)/(hbase phoenix) + spagoBI ?
   - 常规的商业智能团队，采用 统计 + 平台实施 的人才组合模式
   - spagoBI，成熟的BI产品？http://www.spagobi.org/homepage/services/documentation/
 - DI层，提供模型查询接口
@@ -34,9 +33,9 @@
 
 ### implementation (*)
 
-- input: logstash, http in, mongodb/kafka out, filter support
-- storage: mongodb, pb level data, log/file, with scale/backup/restore
-- bi: spagobi -> presto with mongodb
+- input: logstash, http in, hbase/kafka out, filter support
+- storage: hbase, pb level data, log/file, with scale/backup/restore
+- bi: spagobi -> hbase with kylin/phoenix
 - di: <- TODO
 
 ### 项目划分
