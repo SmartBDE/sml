@@ -15,7 +15,7 @@
   - hbase的分布式部署支持PB级别数据，且部署简单
   - hbase的读写性能优越，且支持数据/文档/图像三种常见的文件格式
   - hbase的二级索引支持：lily，为文本处理增加了极大的可能性
-- BI层，(kylin)/(hbase phoenix) + spagoBI ?
+- BI层，(kylin)/(hbase phoenix)/(spark sql)/(drill) + spagoBI ?
   - 常规的商业智能团队，采用 统计 + 平台实施 的人才组合模式
   - spagoBI，成熟的BI产品？http://www.spagobi.org/homepage/services/documentation/
 - DI层，提供模型查询接口
