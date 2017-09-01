@@ -45,7 +45,13 @@
 - scratch: sample code for practise
 - sml: (*)
   - core, {algorithm-controller, training-dataset, training-workflow, trained-model}
+    - controller, manage the algorithm {metric, status, before-done, for-train, for-predict...}
+    - dataset, define the strategy of data usage, how many for train, for test, data format verification
+    - workflow, how the core works
+    - model, if model is trained, save it to storage
   - algorithm {for train, for service-such as: adaboost multiple models}
+    - define, interface define of algorithm
+    - ...
 - publisher: service interface, use spring framework
   - http
   - websocket + kafka
