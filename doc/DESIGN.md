@@ -7,10 +7,9 @@
 # 模块
 
 - 负载均衡层，haproxy，提供限流/限入等安全功能
-- 信息收集器，logstash？考虑性能的问题
+- 信息收集器，flume？考虑性能的问题
   - 信息收集采用接口方式，便于接入各种第三方系统
   - 考虑为不同的语言和平台，提供SDK
-  - http://chenlinux.com/2014/10/18/performance-testing-tunning-for-logstash-inputs-syslog/
 - 入库存储，直接保存到mongodb/hbase？
   - mongodb
     - TB级数据支持，且部署简单
@@ -39,7 +38,7 @@
 
 ### implementation (*)
 
-- input: logstash, http in, hbase/kafka out, filter support
+- input: flume, http in, hbase/kafka out, filter support
 - storage: hbase, pb level data, log/file, with scale/backup/restore
 - bi: spagobi -> hbase with kylin/phoenix
 - di: <- TODO
