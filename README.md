@@ -31,4 +31,3 @@ SML使用JAVA开发，以满足生产环境正式部署的需求。基于JAVA的
 
 # 参考资料
 
-参考：https://github.com/principality/recsys
