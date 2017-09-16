@@ -18,16 +18,4 @@ SML使用JAVA开发，以满足生产环境正式部署的需求。基于JAVA的
 - 图形化管理后台
 - PaaS级别的架构设计，具有良好的横向拓展能力
 
-# 安装步骤
-
-### windows
-
-### linux
-
-# 开发环境
-
-- 设置JAVA_HOME, HADOOP_HOME, SPARK_HOME
-- Spark运行设置运行参数-Dspark.master=local {单机单线程运行使用local，单机多线程local[N]}
-
-# 参考资料
 
