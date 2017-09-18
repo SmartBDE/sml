@@ -1,3 +1,10 @@
+
+# Spark with Phoenix
+
+![](spark_phoenix.png)
+
+phoenix提供二次索引，JDBC接口，以及针对spark分布式查询的优化连接器，大幅度提升处理效率
+
 # Spark Architecture
 
 ![](spark.png)
