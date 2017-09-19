@@ -91,6 +91,7 @@
 - 启动服务 sbin/start-dfs.sh
 - 测试服务 bin/hdfs dfs -put xxx /, bin/hdfs dfs -ls /
 - 尝试连续两次sbin/start-dfs.sh后，服务测试成功？
+- Directory /tmp/hadoop-hadoop/dfs/name is in an inconsistent state: storage directory does not exist or is not accessible. 运行：bin/hadoop namenode -format
 
 #### hbase
 
@@ -99,6 +100,7 @@
 - ./bin/start-hbash.sh 注意，需要配置conf/hbase-env.sh中JAVA_HOME和HBASE_CLASSPATH字段
 - 测试是否正常创建目录 hadoop-2.8.1/bin/hadoop fs -ls /hbase
 - 测试命令 ./bin/hbase shell
+- 启动服务 ./bin/start-hbase.sh
 
 #### phoenix
 
@@ -106,5 +108,16 @@
 - 把jar拷贝到hbase/lib下，重启hbase
 - sqlline.py localhost，输入!tables查看是否正常
 
-#### 
+#### zeppelin
+
+- zeppelin for phoenix需要安装: yum install java-1.8.0-openjdk-devel
+- cp ../apache-phoenix-4.11.0-HBase-1.3-bin/*client.jar interpreter/jdbc/
+- cp ../apache-phoenix-4.11.0-HBase-1.3-bin/phoenix-core-4.11.0-HBase-1.3.jar interpreter/jdbc/
+- https://zeppelin.apache.org/docs/0.7.0/interpreter/jdbc.html#thick-client-connection
+- 采用thick client模式进行安装
+- 配置jdbc/hbase，查看是否正确连接
+- 启动服务 ./bin/zeppelin-daemon.sh start
+
+#### flume
+
 
