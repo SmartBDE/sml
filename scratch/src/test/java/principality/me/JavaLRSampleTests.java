@@ -13,7 +13,8 @@ public class JavaLRSampleTests {
                 .master("local")
                 .appName("JavaLRSampleTests")
                 .getOrCreate();
-        lrSample.run(spark, "..\\data\\mllib\\sample_linear_regression_data.txt", 10);
+        double [] result = lrSample.run(spark, "..\\data\\mllib\\sample_linear_regression_data.txt", 10);
+        System.out.println(result);
 
         spark.stop();
     }
