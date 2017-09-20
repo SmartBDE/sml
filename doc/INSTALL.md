@@ -96,11 +96,11 @@ agent.sinks.phoenix-sink.type=org.apache.phoenix.flume.sink.PhoenixSink
 agent.sinks.phoenix-sink.batchSize=100
 agent.sinks.phoenix-sink.table=NETCAT_LOGS
 agent.sinks.phoenix-sink.ddl=CREATE TABLE IF NOT EXISTS NETCAT_LOGS(ts TIMESTAMP,msg VARCHAR,f_host VARCHAR CONSTRAINT pk PRIMARY KEY(ts))
-agent.sinks.phoenix-sink.zookeeperQuorum=localhost
+agent.sinks.phoenix-sink.zookeeperQuorum=localhost:2181
 agent.sinks.phoenix-sink.serializer=REGEX
 agent.sinks.phoenix-sink.serializer.rowkeyType=timestamp
 agent.sinks.phoenix-sink.serializer.regex=(.*) 
-agent.sinks.phoenix-sink.serializer.columns=ts,msg
+agent.sinks.phoenix-sink.serializer.columns=msg
 agent.sinks.phoenix-sink.serializer.headers=f_host
 
 # configurationforbinding
