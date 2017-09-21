@@ -125,6 +125,10 @@ agent.sinks.phoenix-sink.channel=memoryChannel
 - https://github.com/Zhuinden/spring-spark-example 在spring boot中直接调用spark
 - https://deeplearning4j.org/cn/ 官方网站
 
+如何把流入的数据进行实时处理
+
+- http://spark.apache.org/docs/latest/streaming-flume-integration.html
+
 ## windows单机开发环境 (失败，待继续)
 
 ### 安装包准备
