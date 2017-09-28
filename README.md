@@ -27,11 +27,11 @@ SML使用JAVA开发，以满足生产环境正式部署的需求。基于JAVA的
 
 # 每周一博
 
-https://github.com/SmartBDE/sml-rfc/wiki
+https://github.com/SmartBDE/sml/wiki
 
-# 每月版本及里程碑规划
+# 每月版本规划
 
-https://github.com/SmartBDE/sml-rfc/issues
+https://github.com/SmartBDE/sml/issues
 
 # 产品特性管理
 
