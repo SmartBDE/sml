@@ -1,6 +1,54 @@
 # 安装
 
-## linux
+## linux - 1
+
+### 安装包
+
+- hadoop
+- hive (apache-hive-2.3.0-bin.tar.gz)
+- spark
+- sqoop (sqoop-1.99.7-bin-hadoop200.tar.gz)
+- flume
+- saiku/mondrian (*)
+- Azkaban (*)
+
+### 安装步骤
+
+#### hive
+
+需要安装mysql作为metadata-storage
+
+- https://cwiki.apache.org/confluence/display/Hive/GettingStarted
+- http://blog.yidooo.net/archives/apache-hive-installation.html
+
+#### sqoop
+
+- https://sqoop.apache.org/docs/1.99.1/Installation.html
+
+#### saiku/mondrian
+
+- http://saiku-documentation.readthedocs.io/en/latest/installation_guide.html
+- http://lxw1234.com/archives/2016/05/647.htm
+
+#### azkaban
+
+- https://github.com/azkaban/azkaban/wiki
+
+### 工作流程
+
+#### 常规流程
+
+- 准备数据源（可视化界面）
+  - 创建接口任务（可视化），提供数据导入接口
+  - 创建导入的任务，导入必要的数据源
+  - 数据源任务管理/设置
+  - 创建数据源视图，确保数据源正常
+- 新建预测任务
+  - 选择预测模板，如购买推荐预测（推荐预测依赖用户的行为，以及物品库信息）
+  - 选择数据源（用什么数据源，预测什么结果，预测时，输入怎样的上下文）
+  - 对任务进行配置（数据源持续更新规则，模型持续更新规则）
+
+## linux - 2
 
 单机开发环境，单机运行环境
 
@@ -116,7 +164,7 @@ agent.sinks.phoenix-sink.channel=memoryChannel
 - 配置conf/spark-env.sh，运行bin/run-example SparkPi, bin/spark-shell测试是否正常运行
 - sbin/start-master.sh启动运算平台
 
-#### development
+### development
 
 如何开发一个应用
 

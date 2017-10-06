@@ -10,7 +10,7 @@
 - 信息收集器，flume？考虑性能的问题
   - 信息收集采用接口方式，便于接入各种第三方系统
   - 考虑为不同的语言和平台，提供SDK
-- 入库存储，直接保存到mongodb/hbase？
+- 入库存储，直接保存到hadoop/mongodb/hbase？
   - mongodb
     - TB级数据支持，且部署简单
     - 提供schemaless data/document/image的支持
@@ -19,16 +19,16 @@
     - hbase的分布式部署支持PB级别数据
     - hbase的读写性能优越，且支持数据/文档/图像三种常见的文件格式
     - hbase的二级索引支持：lily，为文本处理增加了极大的可能性
-- BI层，(kylin)/(spark sql)/(hbase phoenix)/(drill) + spagoBI ?
+- BI层，kylin/hive/spark sql/hbase phoenix/drill + spagoBI/saiku ?
   - 提供OLAP的JDBC接口，接入各种现成的BI系统，适应常规的商业智能团队，采用 统计 + 平台实施 的人才组合模式
-  - spagoBI，成熟的BI产品？http://www.spagobi.org/homepage/services/documentation/
+  - saiku/spagoBI，成熟的BI产品？http://www.spagobi.org/homepage/services/documentation/
 - DI层，提供模型查询接口
   - 服务层，提供预测结果的调用（需要考虑访问的性能）
     - REST API，完成对后端接口的调用，Websocket+kafka，实现实时消息交互
-    - 模型AB测试支持
+    - 模型AB测试支持，记录多个版本引擎的查询结果，并对比分析
   - 核心数据存储层（保存模型/请求上下文/其他？）
     - 权限控制？数据获取规模控制？
-    - zeppelin？输入SQL，生成报表？方便统计人员调研？
+    - zeppelin？自开发后台？输入SQL，生成报表？方便统计人员调研？
     - 第三方系统支持数据的拉取？导入更多的数据？
     - 支持对计算结果的可视化查看，分析，调优？
     - 记录评估结果，以便和将来发生的真实情况做对比
