@@ -5,7 +5,7 @@
 ### 安装包
 
 - hadoop
-- hive (apache-hive-2.3.0-bin.tar.gz)
+- ignite（apache-ignite-fabric-2.3.0-bin.zip） 
 - spark
 - sqoop (sqoop-1.99.7-bin-hadoop200.tar.gz)
 - flume
@@ -14,12 +14,9 @@
 
 ### 安装步骤
 
-#### hive
+#### ignite
 
-需要安装mysql作为metadata-storage
-
-- https://cwiki.apache.org/confluence/display/Hive/GettingStarted
-- http://blog.yidooo.net/archives/apache-hive-installation.html
+- https://www.zybuluo.com/liyuj/note/904406
 
 #### sqoop
 
