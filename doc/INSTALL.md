@@ -6,11 +6,9 @@
 
 - hadoop
 - ignite（apache-ignite-fabric-2.3.0-bin.zip） 
-- spark
-- sqoop (sqoop-1.99.7-bin-hadoop200.tar.gz)
 - flume
 - saiku/mondrian (*)
-- Azkaban (*)
+- spark
 
 ### 安装步骤
 
@@ -18,18 +16,10 @@
 
 - https://www.zybuluo.com/liyuj/note/904406
 
-#### sqoop
-
-- https://sqoop.apache.org/docs/1.99.1/Installation.html
-
 #### saiku/mondrian
 
 - http://saiku-documentation.readthedocs.io/en/latest/installation_guide.html
 - http://lxw1234.com/archives/2016/05/647.htm
-
-#### azkaban
-
-- https://github.com/azkaban/azkaban/wiki
 
 ### 工作流程
 
