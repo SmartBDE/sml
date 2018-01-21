@@ -14,7 +14,7 @@
         <module>scratch</module>
         <module>pipeline</module>
         <module>publisher</module>
-        <module>moniter</module>
+        <module>monitor</module>
     </modules>
 
     <!-- Inherit defaults from Sprin`g Boot -->

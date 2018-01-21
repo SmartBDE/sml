@@ -10,15 +10,18 @@
 - 信息收集器，flume？考虑性能的问题
   - 信息收集采用接口方式，便于接入各种第三方系统
   - 考虑为不同的语言和平台，提供SDK
-- 入库存储，直接保存到hadoop/mongodb/hbase？
+- 入库存储，直接保存到hadoop/mongodb/HBase/MySQL？
+  - MySQL
+    - 兼容传统的开发框架
+    - 与流行的数据库技术相结合，符合技术的发展趋势
   - mongodb
     - TB级数据支持，且部署简单
-    - 提供schemaless data/document/image的支持
+    - 提供scheme less data/document/image的支持
     - 丰富的接口支持，接入hadoop生态
-  - hbase (scan support?)
-    - hbase的分布式部署支持PB级别数据
-    - hbase的读写性能优越，且支持数据/文档/图像三种常见的文件格式
-    - hbase的二级索引支持：lily，为文本处理增加了极大的可能性
+  - HBase (scan support?)
+    - HBase的分布式部署支持PB级别数据
+    - HBase的读写性能优越，且支持数据/文档/图像三种常见的文件格式
+    - HBase的二级索引支持：lily，为文本处理增加了极大的可能性
 - BI层，kylin/hive/spark sql/hbase phoenix/drill + spagoBI/saiku ?
   - 提供OLAP的JDBC接口，接入各种现成的BI系统，适应常规的商业智能团队，采用 统计 + 平台实施 的人才组合模式
   - saiku/spagoBI，成熟的BI产品？http://www.spagobi.org/homepage/services/documentation/
@@ -45,20 +48,19 @@
 
 ### 项目划分
 
+- spring-test: a demo app to show how to integrate sml with application
 - pipeline: data reader, writer, formatter for storage (*)
-- scratch: sample code for practise
+- scratch: algorithm code for practise
+  - algorithm {for train, for service-such as: adaboost multiple models}
+    - define, interface define of algorithm
+    - ...
 - sml: (*)
   - core, {algorithm-controller, training-dataset, training-workflow, trained-model}
     - controller, manage the algorithm {metric, status, before-done, for-train, for-predict...}
     - dataset, define the strategy of data usage, how many for train, for test, data format verification
     - workflow, how the core works
     - model, if model is trained, save it to storage
-  - algorithm {for train, for service-such as: adaboost multiple models}
-    - define, interface define of algorithm
-    - ...
-- publisher: service interface, use spring framework
-  - http
-  - websocket + kafka
+- publisher: service hook, DSL for configuration
 - admin: (*)
   - dashboard implement
   - logic management
