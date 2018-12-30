@@ -1,41 +1,8 @@
-# 安装
+# 环境搭建笔记
 
-## linux - 1
+搭建大数据的环境是比较麻烦的事情，需要记下来
 
-### 安装包
-
-- hadoop
-- ignite（apache-ignite-fabric-2.3.0-bin.zip） 
-- flume
-- saiku/mondrian (*)
-- spark
-
-### 安装步骤
-
-#### ignite
-
-- https://www.zybuluo.com/liyuj/note/904406
-
-#### saiku/mondrian
-
-- http://saiku-documentation.readthedocs.io/en/latest/installation_guide.html
-- http://lxw1234.com/archives/2016/05/647.htm
-
-### 工作流程
-
-#### 常规流程
-
-- 准备数据源（可视化界面）
-  - 创建接口任务（可视化），提供数据导入接口
-  - 创建导入的任务，导入必要的数据源
-  - 数据源任务管理/设置
-  - 创建数据源视图，确保数据源正常
-- 新建预测任务
-  - 选择预测模板，如购买推荐预测（推荐预测依赖用户的行为，以及物品库信息）
-  - 选择数据源（用什么数据源，预测什么结果，预测时，输入怎样的上下文）
-  - 对任务进行配置（数据源持续更新规则，模型持续更新规则）
-
-## linux - 2
+## linux
 
 单机开发环境，单机运行环境
 
@@ -44,9 +11,13 @@
 - hadoop-2.8.1.tar.gz
 - hbase-1.3.1-bin.tar.gz
 - apache-phoenix-4.11.0-HBase-1.3-bin.tar.gz
-- apache-flume-1.7.0-bin.tar.gz
 - zeppelin-0.7.2-bin-all.tgz
+- apache-flume-1.7.0-bin.tar.gz
 - spark-2.2.0-bin-without-hadoop.tgz
+- ignite（apache-ignite-fabric-2.3.0-bin.zip）
+- sqoop (sqoop-1.99.7-bin-hadoop200.tar.gz)
+- saiku/mondrian (*)
+- Azkaban (*)
 
 ### 安装步骤
 
@@ -151,18 +122,22 @@ agent.sinks.phoenix-sink.channel=memoryChannel
 - 配置conf/spark-env.sh，运行bin/run-example SparkPi, bin/spark-shell测试是否正常运行
 - sbin/start-master.sh启动运算平台
 
-### development
+#### ignite
 
-如何开发一个应用
+- https://www.zybuluo.com/liyuj/note/904406
 
-- https://phoenix.apache.org/phoenix_spark.html spark读取phoenix数据
-- https://docs.spring.io/spring-hadoop/docs/current/reference/html/springandhadoop-spark.html 通过job的方式调用spark
-- https://github.com/Zhuinden/spring-spark-example 在spring boot中直接调用spark
-- https://deeplearning4j.org/cn/ 官方网站
+#### sqoop
 
-如何把流入的数据进行实时处理
+- https://sqoop.apache.org/docs/1.99.1/Installation.html
 
-- http://spark.apache.org/docs/latest/streaming-flume-integration.html
+#### saiku/mondrian
+
+- http://saiku-documentation.readthedocs.io/en/latest/installation_guide.html
+- http://lxw1234.com/archives/2016/05/647.htm
+
+#### azkaban
+
+- https://github.com/azkaban/azkaban/wiki
 
 ## windows单机开发环境 (失败，待继续)
 

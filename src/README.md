@@ -1,0 +1,1 @@
+负责实现对外的接口，把数据写入storage，并转发给spark streaming
