@@ -26,11 +26,11 @@
   - saiku 成熟的BI产品？http://www.spagobi.org/homepage/services/documentation/
 - DI层，提供模型查询接口
   - 服务层，提供预测结果的调用（需要考虑访问的性能）
-    - REST API，完成对后端接口的调用，Websocket+kafka，实现实时消息交互
+    - REST API，完成对后端接口的调用，实现实时消息交互
     - 模型AB测试支持，记录多个版本引擎的查询结果，并对比分析
   - 核心数据存储层（保存模型/请求上下文/其他？）
     - 权限控制？数据获取规模控制？
-    - zeppelin？自开发后台？输入SQL，生成报表？方便统计人员调研？
+    - 自开发后台？输入SQL，生成报表？方便统计人员调研？
     - 第三方系统支持数据的拉取？导入更多的数据？
     - 支持对计算结果的可视化查看，分析，调优？
     - 记录评估结果，以便和将来发生的真实情况做对比
@@ -61,23 +61,10 @@
 
 ### implementation (*)
 
-- input: flume, http in, hbase/kafka out, filter support
-- storage: hbase, pb level data, log/file, with scale/backup/restore
-- bi: spagobi -> hbase with kylin/phoenix
+- input: flume, http in/springboot, streaming out, filter support
+- storage: mongodb light solution/hbase, pb level data
+- bi: zepplin -> spark
 - di: <- TODO
-
-### development
-
-如何开发一个应用
-
-- https://phoenix.apache.org/phoenix_spark.html spark读取phoenix数据
-- https://docs.spring.io/spring-hadoop/docs/current/reference/html/springandhadoop-spark.html 通过job的方式调用spark
-- https://github.com/Zhuinden/spring-spark-example 在spring boot中直接调用spark
-- https://deeplearning4j.org/cn/ 官方网站
-
-如何把流入的数据进行实时处理
-
-- http://spark.apache.org/docs/latest/streaming-flume-integration.html
 
 # 周边
 
@@ -92,3 +79,16 @@
 采用模板方式，组织在平台上的各种功能
 ### 测试工具
 服务压测、评估、监控等
+
+# development notes
+
+如何开发一个应用
+
+- https://phoenix.apache.org/phoenix_spark.html spark读取phoenix数据
+- https://docs.spring.io/spring-hadoop/docs/current/reference/html/springandhadoop-spark.html 通过job的方式调用spark
+- https://github.com/Zhuinden/spring-spark-example 在spring boot中直接调用spark
+- https://deeplearning4j.org/cn/ 官方网站
+
+如何把流入的数据进行实时处理
+
+- http://spark.apache.org/docs/latest/streaming-flume-integration.html
