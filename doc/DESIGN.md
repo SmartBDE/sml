@@ -40,6 +40,7 @@
 
 ### modules
 
+- spring-test: a demo app to show how to integrate sml with application
 - sml: (*)
   - core, {algorithm-controller, training-dataset, training-workflow, trained-model}
     - controller, manage the algorithm {metric, status, before-done, for-train, for-predict...}
@@ -49,9 +50,9 @@
   - algorithm {for train, for service-such as: adaboost multiple models}
     - define, interface define of algorithm
     - ...
-- scratch: code for batch-compute
 - pipeline: data streaming (*)
-- publisher: service interface, use spring framework
+- scratch: code for batch-compute
+- publisher: service hook, DSL for configuration
   - http
   - websocket
 - monitor: (*)
