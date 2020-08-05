@@ -1,4 +1,4 @@
-# 系统
+## 系统
 
 ![](arch.png)
 
@@ -6,7 +6,7 @@
 
 ![](sml.png)
 
-# 模块
+## 模块
 
 - 负载均衡层，haproxy，提供负载均衡、限流/限入等安全功能
 - 信息收集器，考虑采集格式的问题
@@ -51,13 +51,11 @@
     - define, interface define of algorithm
     - ...
 - pipeline: data streaming (*)
-- scratch: code for batch-compute
+- scratch: algorithm code for batch/stream-compute
 - publisher: service hook, DSL for configuration
-  - http
-  - websocket
 - monitor: (*)
   - dashboard implement
-  - logic management
+  - admin management
 
 ### implementation (*)
 
@@ -66,7 +64,7 @@
 - bi: zepplin -> spark
 - di: <- TODO
 
-# 周边
+## 周边
 
 ### 打包工具
 ### 命令行工具

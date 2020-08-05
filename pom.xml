@@ -15,6 +15,8 @@
         <module>pipeline</module>
         <module>publisher</module>
         <module>monitor</module>
+        <module>collector</module>
+        <module>storage</module>
     </modules>
 
     <!-- Inherit defaults from Sprin`g Boot -->
