@@ -6,3 +6,5 @@
 3. output
 
 基于spark实现
+
+- pipeline: data streaming (*)

@@ -7,3 +7,5 @@
 4. JDBC
 
 数据需要以表格方式(DataSet)表示，通过spark对数据源的支持，对数据进行读取
+
+- storage: mongodb light solution/hbase, pb level data

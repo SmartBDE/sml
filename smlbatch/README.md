@@ -15,3 +15,13 @@
 作业的运行需要注意：
 1. 执行任务的先后次序
 2. 集群资源的调度管理
+
+- smlbatch: (*)
+  - core, {algorithm-controller, training-dataset, training-workflow, trained-model}
+    - controller, manage the algorithm {metric, status, before-done, for-train, for-predict...}
+    - dataset, define the strategy of data usage, how many for train, for test, data format verification
+    - workflow, how the core works
+    - model, if model is trained, save it to storage
+  - algorithm {for train, for service-such as: adaboost multiple models}
+    - define, interface define of algorithm
+    - ...

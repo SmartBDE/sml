@@ -12,3 +12,5 @@ publisher是负责内容广播的入口，数据的获取方式有：
 用户可以显式地把需要访问的服务向publisher请求，也可以等待publisher的通知
 
 计划通过Spring integration实现
+
+- publisher: service hook, DSL for configuration

@@ -10,3 +10,5 @@
 5. 启动publisher对外的发布，基于Spring Integration，提供消息发布监听的实现
 6. 启动sml批量作业的调度，实现批量作业的执行与管理
 7. 启动Spark Thrift Server，提供探索性分析服务
+
+- spring-test: a demo app to show how to integrate sml with application

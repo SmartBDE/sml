@@ -24,45 +24,7 @@
 - BI层，spark sql/hbase phoenix + zepplin/saiku ?
   - 接入各种现成的BI系统，适应常规的商业智能团队，采用 统计分析 + 平台实施 的团队组合模式
   - saiku 成熟的BI产品？http://www.spagobi.org/homepage/services/documentation/
-- DI层，提供模型查询接口
-  - 服务层，提供预测结果的调用（需要考虑访问的性能）
-    - REST API，完成对后端接口的调用，实现实时消息交互
-    - 模型AB测试支持，记录多个版本引擎的查询结果，并对比分析
-  - 核心数据存储层（保存模型/请求上下文/其他？）
-    - 权限控制？数据获取规模控制？
-    - 自开发后台？输入SQL，生成报表？方便统计人员调研？
-    - 第三方系统支持数据的拉取？导入更多的数据？
-    - 支持对计算结果的可视化查看，分析，调优？
-    - 记录评估结果，以便和将来发生的真实情况做对比
-  - 离线计算层，负责核心数据的持续运算（对性能敏感，需要较多的服务器资源？）
-    - 模型的评估
-    - 模型的持续演进
-
-### modules
-
-- spring-test: a demo app to show how to integrate sml with application
-- sml: (*)
-  - core, {algorithm-controller, training-dataset, training-workflow, trained-model}
-    - controller, manage the algorithm {metric, status, before-done, for-train, for-predict...}
-    - dataset, define the strategy of data usage, how many for train, for test, data format verification
-    - workflow, how the core works
-    - model, if model is trained, save it to storage
-  - algorithm {for train, for service-such as: adaboost multiple models}
-    - define, interface define of algorithm
-    - ...
-- pipeline: data streaming (*)
-- scratch: algorithm code for batch/stream-compute
-- publisher: service hook, DSL for configuration
-- monitor: (*)
-  - dashboard implement
-  - admin management
-
-### implementation (*)
-
-- input: flume, http in/springboot, streaming out, filter support
-- storage: mongodb light solution/hbase, pb level data
-- bi: zepplin -> spark
-- di: <- TODO
+  - zeppelin -> spark
 
 ## 周边
 
