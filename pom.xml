@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>sml</module>
+        <module>smlbatch</module>
         <module>scratch</module>
         <module>pipeline</module>
         <module>publisher</module>
@@ -83,11 +83,6 @@
             <groupId>org.mongodb.spark</groupId>
             <artifactId>mongo-spark-connector_2.11</artifactId>
             <version>2.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>principality.me</groupId>
-            <artifactId>sml</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
