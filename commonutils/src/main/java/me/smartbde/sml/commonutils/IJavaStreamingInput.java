@@ -5,6 +5,10 @@ import org.apache.spark.rdd.RDD;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
+import org.apache.spark.streaming.StreamingContext;
+import org.apache.spark.streaming.api.java.JavaDStream;
+import org.apache.spark.streaming.api.java.JavaStreamingContext;
+import org.apache.spark.streaming.dstream.DStream;
 
 public interface IJavaStreamingInput<T> extends IPlugin {
     public Dataset<Row> rdd2dataset(SparkSession spark, RDD<T> rdd);

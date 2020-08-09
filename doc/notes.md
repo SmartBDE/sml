@@ -22,7 +22,7 @@ https://github.com/eclipse/deeplearning4j
 https://github.com/intel-analytics/BigDL
 https://github.com/neomatrix369/awesome-ai-ml-dl/blob/master/details/java-jvm.md#java_jvm
 
-## Spring Integration
+## Camel
 
 https://www.slideshare.net/joshlong/dynamic-routing-at-1-million-messages-per-second-with-spring-integration 高性能
 
