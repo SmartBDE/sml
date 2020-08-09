@@ -24,41 +24,4 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>net.alchim31.maven</groupId>
-                <artifactId>scala-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>compile-scala</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>test-compile-scala</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <recompileMode>incremental</recompileMode>
-                    <scalaVersion>${scala.version}</scalaVersion>
-                    <args>
-                        <arg>-deprecation</arg>
-                    </args>
-                    <jvmArgs>
-                        <jvmArgs>-Xmx8192m</jvmArgs>
-                        <jvmArgs>-Xms1024m</jvmArgs>
-                    </jvmArgs>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
