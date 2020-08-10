@@ -3,12 +3,15 @@ package me.smartbde.sml.storage;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+
 public interface IStorage {
     public void init(String repository);
 
-    public void create(String path);
+    public void create(String schema);
 
-    public void drop(String path);
+    public void drop(String schema);
 
     public Dataset<Row> read(String name);
 
@@ -21,4 +24,10 @@ public interface IStorage {
     public void write(String name, Dataset<Row> ds);
 
     public void delete(String name);
+
+    public InputStream readModel(String path);
+
+    public void writeModel(String path, OutputStream modelBinary);
+
+    public void deleteModel(String path);
 }
