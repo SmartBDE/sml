@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
  *
  * Created by win7 on 2017/8/13.
  */
-public class JavaLRSample {
+public class JavaLogisticRegression {
     private static final int D = 10;
     private static final Random rand = new Random(42);
 

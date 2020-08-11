@@ -43,7 +43,7 @@ public class JdbcStorage implements IStorage {
     }
 
     @Override
-    public void writeModel(String path, OutputStream modelBinary) {
+    public void writeModel(String path, OutputStream modelStream) {
 
     }
 

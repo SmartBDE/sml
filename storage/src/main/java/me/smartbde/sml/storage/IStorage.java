@@ -31,7 +31,7 @@ public interface IStorage {
 
     public InputStream readModel(String path);
 
-    public void writeModel(String path, OutputStream modelBinary);
+    public void writeModel(String path, OutputStream modelStream);
 
     public void deleteModel(String path);
 }
