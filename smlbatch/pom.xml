@@ -14,29 +14,8 @@
     <dependencies>
         <dependency>
             <groupId>sml.smartdbe.me</groupId>
-            <artifactId>storage</artifactId>
+            <artifactId>commonutils</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>sml.smartdbe.me</groupId>
-            <artifactId>scratch</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.deeplearning4j</groupId>
-            <artifactId>deeplearning4j-core</artifactId>
-            <version>1.0.0-beta7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.nd4j</groupId>
-            <artifactId>nd4j-native-platform</artifactId>
-            <version>1.0.0-beta7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.nd4j</groupId>
-            <artifactId>nd4j-native</artifactId>
-            <version>1.0.0-beta7</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
