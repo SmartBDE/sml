@@ -8,6 +8,6 @@ import me.smartbde.sml.springtest.domain.model.Person;
  * Created by win7 on 2017/7/23.
  */
 @Repository
-public interface PersonRepository extends MongoRepository<Person, Long> {
+public interface MongoPersonRepository extends MongoRepository<Person, Long> {
     Person findPersonById(Long userId);
 }

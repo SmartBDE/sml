@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import me.smartbde.sml.springtest.domain.repository.PersonRepository;
+import me.smartbde.sml.springtest.domain.repository.MongoPersonRepository;
 import me.smartbde.sml.springtest.domain.model.Person;
 
 /**
@@ -15,9 +15,9 @@ import me.smartbde.sml.springtest.domain.model.Person;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) // MUST
-public class PersonRepositoryTests {
+public class MongoPersonRepositoryTests {
     @Autowired
-    private PersonRepository repository;
+    private MongoPersonRepository repository;
 
     @Before
     public void setUp() {

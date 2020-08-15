@@ -21,11 +21,9 @@ spring-test: a demo app to show how to implement spark application
 1. 以SpringBoot Application启动，可命令行启动
 2. 提供对外的API接口，包括状态监测以及配置设置
 
-
-界面实现技术：
-https://github.com/gwtbootstrap3/gwtbootstrap3
-https://www.jianshu.com/p/f28778a099ee
-https://gwt-maven-plugin.github.io/gwt-maven-plugin/
-https://github.com/tbroyer/gwt-maven-archetypes
-https://github.com/vaadin/vaadin/
-https://blog.csdn.net/dnc8371/article/details/106701787 vaadin教程
+前端/后端实现技术
+https://blog.csdn.net/zwq56693/article/details/107892980 thymeleaf
+https://segmentfault.com/a/1190000019537708 webjars
+https://www.cnblogs.com/okong/p/springboot-eighteen.html webjars
+https://www.cnblogs.com/ityouknow/p/5891443.html jpa
+https://blog.csdn.net/zhangcongyi420/article/details/88087511 jpa

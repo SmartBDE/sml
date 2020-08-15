@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import me.smartbde.sml.springtest.domain.model.Person;
-import me.smartbde.sml.springtest.service.MongoBean;
+import me.smartbde.sml.springtest.domain.repository.MongoRepositoryImpl;
 
 /**
  * Created by win7 on 2017/7/23.
@@ -14,10 +14,10 @@ import me.smartbde.sml.springtest.service.MongoBean;
 @RequestMapping("/person")
 public class PersonController {
 
-    private MongoBean repository;
+    private MongoRepositoryImpl repository;
 
     @Autowired
-    public PersonController(MongoBean repository) {
+    public PersonController(MongoRepositoryImpl repository) {
         this.repository = repository;
     }
 

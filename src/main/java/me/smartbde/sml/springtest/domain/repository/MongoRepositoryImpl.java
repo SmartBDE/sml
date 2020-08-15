@@ -1,4 +1,4 @@
-package me.smartbde.sml.springtest.service;
+package me.smartbde.sml.springtest.domain.repository;
 
 import com.mongodb.*;
 import org.slf4j.Logger;
@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 import me.smartbde.sml.springtest.domain.model.Person;
 
 @Component
-public class MongoBean {
+public class MongoRepositoryImpl {
     private final MongoDbFactory mongo;
-    private static final Logger logger = LoggerFactory.getLogger(MongoBean.class);
+    private static final Logger logger = LoggerFactory.getLogger(MongoRepositoryImpl.class);
 
     @Autowired
-    public MongoBean(MongoDbFactory mongo) {
+    public MongoRepositoryImpl(MongoDbFactory mongo) {
         this.mongo = mongo;
     }
 
@@ -38,6 +38,6 @@ public class MongoBean {
     }
 
     public Person findById(Long id) {
-        return new Person(id, "a");
+        return new Person(id, "Jason");
     }
 }
