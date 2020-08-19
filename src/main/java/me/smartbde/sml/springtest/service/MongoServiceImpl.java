@@ -1,6 +1,7 @@
-package me.smartbde.sml.springtest.domain.repository;
+package me.smartbde.sml.springtest.service;
 
 import com.mongodb.*;
+import me.smartbde.sml.springtest.domain.repository.MongoPersonRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,21 +10,18 @@ import org.springframework.stereotype.Component;
 import me.smartbde.sml.springtest.domain.model.Person;
 
 @Component
-public class MongoRepositoryImpl {
+public class MongoServiceImpl {
+    private MongoPersonRepository mongoPersonRepository;
     private final MongoDbFactory mongo;
-    private static final Logger logger = LoggerFactory.getLogger(MongoRepositoryImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(MongoServiceImpl.class);
 
     @Autowired
-    public MongoRepositoryImpl(MongoDbFactory mongo) {
+    public MongoServiceImpl(MongoDbFactory mongo) {
         this.mongo = mongo;
     }
 
     public void init() {
         DB db = mongo.getDb();
-
-        DBObject person = new BasicDBObject();
-        person.put("id", 4);
-        person.put("name", "hoojo");
 
         //查询所有的聚集集合
         for (String name : db.getCollectionNames()) {
@@ -32,12 +30,20 @@ public class MongoRepositoryImpl {
 
         DBCollection persons = db.getCollection("person");
         DBCursor cur = persons.find(); // 查询所有的数据
-        while (cur.hasNext()) {
-            logger.debug(cur.next().toString());
+
+        if (cur.count() > 0) {
+            while (cur.hasNext()) {
+                logger.debug(cur.next().toString());
+            }
+        } else {
+            DBObject person = new BasicDBObject();
+            person.put("id", 3);
+            person.put("name", "hoojo");
         }
     }
 
     public Person findById(Long id) {
-        return new Person(id, "Jason");
+        init();
+        return mongoPersonRepository.findPersonById(id);
     }
 }

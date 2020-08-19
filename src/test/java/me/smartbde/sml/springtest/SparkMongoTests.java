@@ -28,8 +28,8 @@ public class SparkMongoTests {
         SparkSession spark = SparkSession.builder()
                 .master("local")
                 .appName("SparkMongoTests")
-                .config("spark.mongodb.input.uri", "mongodb://127.0.0.1/stdin.logstash")
-                .config("spark.mongodb.output.uri", "mongodb://127.0.0.1/stdin.logstash")
+                .config("spark.mongodb.input.uri", "mongodb://192.168.0.103/stdin.logstash")
+                .config("spark.mongodb.output.uri", "mongodb://192.168.0.103/stdin.logstash")
                 .getOrCreate();
 
         try (JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext())) {
