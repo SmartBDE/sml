@@ -27,7 +27,7 @@ public class PersonController {
 
     @RequestMapping("/mongo")
     Person mongo() {
-        return mongoService.findById(2L);
+        return mongoService.findById(3L);
     }
 
     @RequestMapping("/hello")

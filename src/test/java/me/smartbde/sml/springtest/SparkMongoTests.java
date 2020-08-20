@@ -12,24 +12,37 @@ import org.apache.spark.sql.SparkSession;
 import org.bson.Document;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
 @RunWith(SpringRunner.class)
 public class SparkMongoTests {
+    @Value("${spring.data.mongodb.uri}")
+    String mongoUrl;
+
     @Test
     public void test() throws Exception {
-
         SparkSession spark = SparkSession.builder()
                 .master("local")
                 .appName("SparkMongoTests")
-                .config("spark.mongodb.input.uri", "mongodb://192.168.0.103/stdin.logstash")
-                .config("spark.mongodb.output.uri", "mongodb://192.168.0.103/stdin.logstash")
+                .config("spark.mongodb.input.uri", mongoUrl + ".logstash")
+                .config("spark.mongodb.output.uri", mongoUrl + ".logstash")
+//                .config("spark.jars.packages", "org.mongodb.spark:mongo-spark-connector_2.11:2.4.2")
                 .getOrCreate();
 
         try (JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext())) {
@@ -45,8 +58,8 @@ public class SparkMongoTests {
                     .map(new ParseDocument());
 
     /*Start Example: Save data from RDD to MongoDB*****************/
-            //MongoSpark.save(documents, writeConfig);
-            //MongoSpark.save(documents);
+            MongoSpark.save(documents, writeConfig);
+            MongoSpark.save(documents);
 
             JavaMongoRDD<Document> rdd = MongoSpark.load(jsc);
             JavaMongoRDD<Document> aggregatedRdd = rdd.withPipeline(
@@ -73,10 +86,32 @@ public class SparkMongoTests {
         spark.stop();
     }
 
+    @Configuration
+    @PropertySource("classpath:application.properties")
+    static class PropertiesWithJavaConfig {
+        @Bean
+        public static PropertySourcesPlaceholderConfigurer
+        propertySourcesPlaceholderConfigurer() {
+            return new PropertySourcesPlaceholderConfigurer();
+        }
+    }
+
     static class ParseDocument implements Function<Integer, Document> {
         @Override
         public Document call(final Integer i) throws Exception {
             return Document.parse("{test: " + i + "}");
         }
+    }
+
+    private String propUtil(String key) {
+        Properties props = new Properties();
+        try {
+            Resource resource = new ClassPathResource("application.properties");
+            props = PropertiesLoaderUtils.loadProperties(resource);
+            return props.getProperty(key);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
