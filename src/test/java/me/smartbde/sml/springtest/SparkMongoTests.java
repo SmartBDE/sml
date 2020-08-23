@@ -20,8 +20,11 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.ResourceUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,9 +34,11 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
 @RunWith(SpringRunner.class)
+//@TestPropertySource("classpath:application.properties")
 public class SparkMongoTests {
+//    String mongoUrl = PropertiesUtil.prop("spring.data.mongodb.uri");
     @Value("${spring.data.mongodb.uri}")
-    String mongoUrl;
+    private String mongoUrl;
 
     @Test
     public void test() throws Exception {
@@ -58,13 +63,14 @@ public class SparkMongoTests {
                     .map(new ParseDocument());
 
     /*Start Example: Save data from RDD to MongoDB*****************/
-            MongoSpark.save(documents, writeConfig);
-            MongoSpark.save(documents);
+//            MongoSpark.save(documents, writeConfig);
+//            MongoSpark.save(documents);
 
             JavaMongoRDD<Document> rdd = MongoSpark.load(jsc);
             JavaMongoRDD<Document> aggregatedRdd = rdd.withPipeline(
                     singletonList(Document.parse("{ $match: { test : { $gt : 5 } } }")));
 
+            System.out.println(rdd.count());
             System.out.println(aggregatedRdd.count());
             if (aggregatedRdd.count() > 0) {
                 System.out.println(aggregatedRdd.first().toJson());
@@ -113,5 +119,17 @@ public class SparkMongoTests {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private String getPath() {
+        try {
+            File path = new File(ResourceUtils.getURL("classpath:").getPath());
+            if (!path.exists()) {
+                path = new File("");
+            }
+            return path.getAbsolutePath();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
