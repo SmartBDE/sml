@@ -1,10 +1,13 @@
 package me.smartbde.sml.springtest.domain.model;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Created by win7 on 2017/7/23.
  */
+@Entity
 public class Person {
     @Id
     private Long id;
@@ -13,6 +16,9 @@ public class Person {
     public Person(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Person() {
     }
 
     public Long getId() {
