@@ -3,6 +3,7 @@ package me.smartbde.sml.springtest;
 import com.mongodb.spark.MongoSpark;
 import com.mongodb.spark.config.WriteConfig;
 import com.mongodb.spark.rdd.api.java.JavaMongoRDD;
+import me.smartbde.sml.springtest.domain.model.Person;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.Function;
@@ -53,14 +54,14 @@ public class SparkMongoTests {
         try (JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext())) {
 
             // Create a custom WriteConfig
-            Map<String, String> writeOverrides = new HashMap<>();
-            writeOverrides.put("collection", "logstash");
-            writeOverrides.put("writeConcern.w", "majority");
-            WriteConfig writeConfig = WriteConfig.create(jsc).withOptions(writeOverrides);
-
-            JavaRDD<Document> documents = jsc
-                    .parallelize(asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11))
-                    .map(new ParseDocument());
+//            Map<String, String> writeOverrides = new HashMap<>();
+//            writeOverrides.put("collection", "logstash");
+//            writeOverrides.put("writeConcern.w", "majority");
+//            WriteConfig writeConfig = WriteConfig.create(jsc).withOptions(writeOverrides);
+//
+//            JavaRDD<Document> documents = jsc
+//                    .parallelize(asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11))
+//                    .map(new ParseDocument());
 
     /*Start Example: Save data from RDD to MongoDB*****************/
 //            MongoSpark.save(documents, writeConfig);
@@ -80,9 +81,9 @@ public class SparkMongoTests {
             implicitDS.printSchema();
             implicitDS.show();
 
-//            Dataset<Character> explicitDS = MongoSpark.load(jsc).toDS(Character.class);
-//            explicitDS.printSchema();
-//            explicitDS.show();
+            Dataset<Person> explicitDS = MongoSpark.load(jsc).toDS(Person.class);
+            explicitDS.printSchema();
+            explicitDS.show();
 
             implicitDS.createOrReplaceTempView("logstash");
             Dataset<Row> centenarians = spark.sql("SELECT test FROM logstash WHERE test >= 8");
@@ -92,6 +93,13 @@ public class SparkMongoTests {
         spark.stop();
     }
 
+    static class ParseDocument implements Function<Integer, Document> {
+        @Override
+        public Document call(final Integer i) throws Exception {
+            return Document.parse("{test: " + i + "}");
+        }
+    }
+
     @Configuration
     @PropertySource("classpath:application.properties")
     static class PropertiesWithJavaConfig {
@@ -99,13 +107,6 @@ public class SparkMongoTests {
         public static PropertySourcesPlaceholderConfigurer
         propertySourcesPlaceholderConfigurer() {
             return new PropertySourcesPlaceholderConfigurer();
-        }
-    }
-
-    static class ParseDocument implements Function<Integer, Document> {
-        @Override
-        public Document call(final Integer i) throws Exception {
-            return Document.parse("{test: " + i + "}");
         }
     }
 
