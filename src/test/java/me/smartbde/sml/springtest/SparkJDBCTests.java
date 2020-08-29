@@ -1,5 +1,6 @@
 package me.smartbde.sml.springtest;
 
+import org.apache.spark.sql.AnalysisException;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
@@ -23,7 +24,7 @@ public class SparkJDBCTests {
     private static String master = "local[*]";
 
     @Test
-    public void test() {
+    public void test() throws AnalysisException {
         SparkSession spark = SparkSession
                 .builder()
                 .appName(appName)
@@ -39,6 +40,9 @@ public class SparkJDBCTests {
                 .load();
 
         df.printSchema();
+
+        df.createTempView("person");
+        spark.sql("select * from person").show();
     }
 }
 
