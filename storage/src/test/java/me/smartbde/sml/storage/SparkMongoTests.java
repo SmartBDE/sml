@@ -3,7 +3,6 @@ package me.smartbde.sml.storage;
 import com.mongodb.spark.MongoSpark;
 import com.mongodb.spark.config.WriteConfig;
 import com.mongodb.spark.rdd.api.java.JavaMongoRDD;
-import me.smartbde.sml.admin.domain.model.Person;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.Function;
@@ -26,6 +25,8 @@ import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import static java.util.Collections.singletonList;
@@ -64,14 +65,14 @@ public class SparkMongoTests {
 //            MongoSpark.save(documents);
 
             JavaMongoRDD<Document> rdd = MongoSpark.load(jsc);
-            JavaMongoRDD<Document> aggregatedRdd = rdd.withPipeline(
-                    singletonList(Document.parse("{ $match: { test : { $gt : 5 } } }")));
+//            JavaMongoRDD<Document> aggregatedRdd = rdd.withPipeline(
+//                    singletonList(Document.parse("{ $match: { test : { $gt : 5 } } }")));
 
             System.out.println(rdd.count());
-            System.out.println(aggregatedRdd.count());
-            if (aggregatedRdd.count() > 0) {
-                System.out.println(aggregatedRdd.first().toJson());
-            }
+//            System.out.println(aggregatedRdd.count());
+//            if (aggregatedRdd.count() > 0) {
+//                System.out.println(aggregatedRdd.first().toJson());
+//            }
 
             Dataset<Row> implicitDS = MongoSpark.load(jsc).toDF();
             implicitDS.printSchema();
@@ -82,7 +83,9 @@ public class SparkMongoTests {
 //            explicitDS.show();
 
             implicitDS.createOrReplaceTempView("logstash");
-            Dataset<Row> centenarians = spark.sql("SELECT test FROM logstash WHERE test >= 8");
+            Dataset<Row> centenarians = spark.sql("SELECT * FROM logstash");
+//            Dataset<Row> centenarians = spark.sql("SELECT test FROM logstash WHERE test >= 8");
+
             centenarians.show();
         }
 

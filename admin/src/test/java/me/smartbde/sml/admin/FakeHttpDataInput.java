@@ -10,21 +10,27 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 
 /**
- * Add http data to local env
+ * Add http data to local env，as a datasource
  */
 @RunWith(SpringRunner.class)
-public class HttpDataInput {
+@TestPropertySource("classpath:application.properties")
+public class FakeHttpDataInput {
+    @Value("${application.fakedata.generationurl.useraction}")
+    private String useractionUrl;
+
     @Test
     public void test() throws Exception {
 
         for (int i = 1; i < 10; i++) {
             try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
-                HttpGet httpget = new HttpGet("http://127.0.0.1:8000/user/" + i);
+                HttpGet httpget = new HttpGet(useractionUrl + i);
 
                 // Create a custom response handler
                 ResponseHandler<String> responseHandler = new ResponseHandler<String>() {

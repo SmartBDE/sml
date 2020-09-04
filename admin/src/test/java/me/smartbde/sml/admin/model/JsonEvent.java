@@ -2,11 +2,11 @@ package me.smartbde.sml.admin.model;
 
 import java.util.HashMap;
 
-public class FlumeEvent {
+public class JsonEvent {
     public HashMap<String, String> headers;
     public String body;
 
-    public FlumeEvent() {
+    public JsonEvent() {
         headers = new HashMap<>();
     }
 }
