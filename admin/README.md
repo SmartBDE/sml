@@ -6,7 +6,7 @@ spring-test: a demo app to show how to implement spark application
 
 包括：
 1. 启动运行的环境，组件包括collector/pipeline/monitor/publisher/smlbatch
-2. 提供各组件的状态监控及参数配置界面
+2. 提供各组件的状态监控及参数配置界面(TipDM)
    - 提供pipeline插件的管理配置界面
    - 提供smlbatch作业的管理配置界面
 3. 启动collector对外的接口，基于Camel，我们先假设数据都是从kafka过来
@@ -14,8 +14,8 @@ spring-test: a demo app to show how to implement spark application
 5. 启动publisher对外的发布，基于Camel，提供消息发布监听的实现
 6. 启动smlbatch批量作业的调度，实现批量作业的执行与管理
 7. 启动monitor，查看pipeline/smlbatch的实际运行效果，并提供分析工具
-7. 启动Spark Thrift Server，提供探索性分析服务
-
+8. 启动Spark Thrift Server，提供探索性分析服务
+9. 增加辅助功能，如模拟输入，如数据初始化
 
 各组件的接入规范：
 1. 以SpringBoot Application启动，可命令行启动
