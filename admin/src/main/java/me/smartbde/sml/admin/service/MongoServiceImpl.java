@@ -39,6 +39,8 @@ public class MongoServiceImpl {
             DBObject person = new BasicDBObject();
             person.put("id", 3);
             person.put("name", "hoojo");
+
+            persons.save(person);
         }
     }
 
