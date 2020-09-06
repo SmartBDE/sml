@@ -146,9 +146,9 @@ private[streaming] class HttpStreamServer(httpServletPath: String, httpPort: Int
 		withActionsHandler(new MemoryBufferAsReceiver());
 	}
 
-	def withKafka(bootstrapServers: String): KafkaAsReceiver = {
-		withActionsHandler(new KafkaAsReceiver(bootstrapServers));
-	}
+//	def withKafka(bootstrapServers: String): KafkaAsReceiver = {
+//		withActionsHandler(new KafkaAsReceiver(bootstrapServers));
+//	}
 
 	def stop() = {
 		httpStreamServlet.destroy();

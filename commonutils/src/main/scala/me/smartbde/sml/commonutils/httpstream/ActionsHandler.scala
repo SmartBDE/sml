@@ -2,8 +2,6 @@ package org.apache.spark.sql.execution.streaming.http
 
 import java.util.Properties
 import scala.collection.mutable.ArrayBuffer
-import org.apache.kafka.clients.producer.KafkaProducer
-import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.spark.internal.Logging
 import org.apache.spark.sql.Row
 import java.sql.Timestamp

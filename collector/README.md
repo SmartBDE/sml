@@ -3,5 +3,5 @@
 - input: flume, http in/springboot, streaming out, filter support
 
 接入的数据主要做两个处理：
-1. 发送到spark streaming
+1. 发送到spark streaming(以http的方式)
 2. 按需写入到存储中

@@ -2,15 +2,6 @@
 
 计划使用gwt bootstrap/chart实现
 
-界面实现技术：
-https://github.com/gwtbootstrap3/gwtbootstrap3
-https://github.com/pepstock-org/Charba
-https://www.jianshu.com/p/f28778a099ee
-https://gwt-maven-plugin.github.io/gwt-maven-plugin/
-https://github.com/tbroyer/gwt-maven-archetypes
-https://github.com/vaadin/vaadin/
-https://blog.csdn.net/dnc8371/article/details/106701787 vaadin教程
-
 batch/stream运行的统计信息，主要功能列表：
 1. 运行耗时
 2. 运行结果

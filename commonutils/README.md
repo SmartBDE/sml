@@ -24,6 +24,18 @@
    - 输出目标
    - 输出参数
 
+配置的格式
+| section      |  key   | value |
+|  -----       | -----  | ----- |
+| spark        |  key   | value |
+| input.socket |  key   | value |
+| filter.f1    |  pri   | 1     |
+| filter.f1    |  key   | value |
+| filter.f2    |  pri   | 2     |
+| filter.f2    |  key   | value |
+| output.log   |  src   | table |
+| output.log   |  src.t | t.name|
+
 ## 插件机制
 
 1. 可扩展的机制(系统级，考虑动态载入)

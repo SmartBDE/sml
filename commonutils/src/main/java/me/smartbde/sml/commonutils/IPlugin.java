@@ -1,18 +1,18 @@
 package me.smartbde.sml.commonutils;
 
 import javafx.util.Pair;
-import org.apache.commons.configuration2.YAMLConfiguration;
+import org.apache.commons.configuration2.Configuration;
 import org.apache.spark.sql.SparkSession;
 
 public interface IPlugin {
     /**
-     * Set Config.
+     * Set Config. Configuration的实现类包含YAMLConfiguration，DatabaseConfiguration等
      * */
-    public void setConfig(YAMLConfiguration config);
+    public void setConfig(Configuration config);
     /**
      * Get Config.
      * */
-    public YAMLConfiguration getConfig();
+    public Configuration getConfig();
 
     /**
      *  Return true and empty string if config is valid, return false and error message if config is invalid.
