@@ -31,6 +31,11 @@
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-dev</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.vaadin.polymer</groupId>
+      <artifactId>vaadin-gwt-polymer-elements</artifactId>
+      <version>1.9.3.1</version>
+    </dependency>
   </dependencies>
 
   <build>

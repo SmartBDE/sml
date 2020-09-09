@@ -54,3 +54,4 @@ https://gwt-maven-plugin.github.io/gwt-maven-plugin/
 https://github.com/tbroyer/gwt-maven-archetypes
 https://github.com/vaadin/vaadin/
 https://blog.csdn.net/dnc8371/article/details/106701787 vaadin教程
+https://github.com/manolo/gwt-polymer-elements Material Design specification
