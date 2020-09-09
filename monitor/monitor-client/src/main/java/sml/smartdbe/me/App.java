@@ -2,12 +2,14 @@ package sml.smartdbe.me;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.RunAsyncCallback;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -16,6 +18,13 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import org.pepstock.charba.client.colors.HtmlColor;
+import org.pepstock.charba.client.data.BarDataset;
+import org.pepstock.charba.client.gwt.widgets.BarChartWidget;
+import org.pepstock.charba.client.resources.DeferredResources;
+import org.pepstock.charba.client.resources.EmbeddedResources;
+import org.pepstock.charba.client.resources.EntryPointStarter;
+import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -39,6 +48,50 @@ public class App implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+		// sets resource type
+		ResourcesType.setClientBundle(EmbeddedResources.INSTANCE);
+
+		// for GWT widget
+		BarChartWidget chart = new BarChartWidget();
+
+		chart.getOptions().setResponsive(true);
+		chart.getOptions().getTitle().setText("My first chart");
+
+		BarDataset dataset = chart.newDataset();
+		dataset.setLabel("dataset 1");
+
+		dataset.setBackgroundColor(HtmlColor.CORNFLOWER_BLUE.alpha(0.2));
+		dataset.setBorderColor(HtmlColor.CORNFLOWER_BLUE);
+		dataset.setBorderWidth(1);
+		dataset.setData(20, 5, 40, 35, 50, 70, 80);
+
+		chart.getData().setLabels("January", "February", "March", "April", "May", "June", "July");
+		chart.getData().setDatasets(dataset);
+
+		RootPanel.get("chartContainer").add(chart);
+
+		GWT.runAsync(new RunAsyncCallback() {
+			@Override
+			public void onFailure(Throwable throwable) {
+				Window.alert("Code download failed");
+			}
+
+			@Override
+			public void onSuccess() {
+				// MOMENT
+				EntryPointStarter.run(DeferredResources.INSTANCE, new Runnable() {
+					// LUXON
+					// EntryPointStarter.run(LuxonDeferredResources.INSTANCE, new Runnable() {
+					// Datefns
+					// EntryPointStarter.run(DatefnsDeferredResources.INSTANCE, new Runnable() {
+
+					@Override
+					public void run() {
+					}
+				});
+			}
+		});
+
 		final Button sendButton = new Button("Send");
 		final TextBox nameField = new TextBox();
 		nameField.setText("GWT User");
