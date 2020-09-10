@@ -39,6 +39,24 @@ public class SparkMongoTests {
     private String mongoUrl;
 
     @Test
+    public void testConfig() throws Exception {
+        SparkSession spark = SparkSession.builder()
+                .master("local")
+                .appName("SparkMongoTests")
+//                .config("spark.mongodb.input.uri", mongoUrl + ".logstash")
+//                .config("spark.mongodb.output.uri", mongoUrl + ".logstash")
+                .getOrCreate();
+
+        Dataset<Row> implicitDS = spark.read()
+                .format("com.mongodb.spark.sql.DefaultSource")
+                .option("uri", mongoUrl + "." + "logstash")
+                .load()
+                .toDF();
+
+        implicitDS.printSchema();
+    }
+
+    @Test
     public void test() throws Exception {
         SparkSession spark = SparkSession.builder()
                 .master("local")
@@ -68,7 +86,9 @@ public class SparkMongoTests {
 //            JavaMongoRDD<Document> aggregatedRdd = rdd.withPipeline(
 //                    singletonList(Document.parse("{ $match: { test : { $gt : 5 } } }")));
 
+            System.out.println("====================");
             System.out.println(rdd.count());
+            System.out.println("====================");
 //            System.out.println(aggregatedRdd.count());
 //            if (aggregatedRdd.count() > 0) {
 //                System.out.println(aggregatedRdd.first().toJson());

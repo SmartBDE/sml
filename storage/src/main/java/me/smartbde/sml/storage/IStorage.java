@@ -2,6 +2,7 @@ package me.smartbde.sml.storage;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SparkSession;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -11,7 +12,7 @@ import java.io.OutputStream;
  * 由spark底层实现支持基于分布式集群的读写，支持多数据源管理
  */
 public interface IStorage {
-    public void init(String repository);
+    public void init(SparkSession spark, String repository);
 
     public void create(String schema);
 
@@ -29,9 +30,5 @@ public interface IStorage {
 
     public void delete(String name);
 
-    public InputStream readModel(String path);
 
-    public void writeModel(String path, OutputStream modelStream);
-
-    public void deleteModel(String path);
 }

@@ -55,3 +55,10 @@ https://github.com/tbroyer/gwt-maven-archetypes
 https://github.com/vaadin/vaadin/
 https://blog.csdn.net/dnc8371/article/details/106701787 vaadin教程
 https://github.com/manolo/gwt-polymer-elements Material Design specification
+
+关于gwt-maven-archetypes
+- 可以用，但是教程不够详细，可用的操作步骤如下
+- 使用maven compile后，把*-server下面的war包解压后，放到*下的target/gwt/devmode/war下
+- 运行*的gwt:devmode，打开http://127.0.0.1:8888
+- 不太方便，可能还不是正确的使用方法，待进一步分析研究
+- 用jetty直接运行monitor-server-version.war是最简化的方式
