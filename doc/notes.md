@@ -6,6 +6,10 @@ https://www.slideshare.net/joshlong/dynamic-routing-at-1-million-messages-per-se
 https://www.cnblogs.com/luqinghua/p/12740445.html MuleSoft
 https://camel.apache.org/components/latest/jetty-component.html camel http service支持
 
+## 插件机制相关
+
+https://blog.csdn.net/somilong/article/details/78750904 GROOVY动态脚本加载与运行
+
 ## 如何开发一个spark应用
 
 https://phoenix.apache.org/phoenix_spark.html spark读取phoenix数据
@@ -45,7 +49,7 @@ https://blog.csdn.net/Android_xue/article/details/102825672 spark row
 https://blog.csdn.net/xiuaiba/article/details/107770529 JPA 读写分离
 https://blog.csdn.net/zhuyu19911016520/article/details/88777844 mongo读写文件
 
-## 界面实现技术
+## 前端/后端实现技术
 
 https://github.com/gwtbootstrap3/gwtbootstrap3
 https://github.com/pepstock-org/Charba
@@ -55,6 +59,11 @@ https://github.com/tbroyer/gwt-maven-archetypes
 https://github.com/vaadin/vaadin/
 https://blog.csdn.net/dnc8371/article/details/106701787 vaadin教程
 https://github.com/manolo/gwt-polymer-elements Material Design specification
+https://blog.csdn.net/zwq56693/article/details/107892980 thymeleaf
+https://segmentfault.com/a/1190000019537708 webjars
+https://www.cnblogs.com/okong/p/springboot-eighteen.html webjars
+https://www.cnblogs.com/ityouknow/p/5891443.html jpa
+https://blog.csdn.net/zhangcongyi420/article/details/88087511 jpa
 
 关于gwt-maven-archetypes
 - 可以用，但是教程不够详细，可用的操作步骤如下

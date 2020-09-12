@@ -7,8 +7,8 @@ storage: mongodb light solution/hbase heavy level data
 计划支持的几种存储类型(支持水平扩展，支持实时更新，支持统计分析，可以选择的存储引擎不多)：
 1. MongoDB
 2. JDBC(分布式数据库)
-3. HBase
-4. ElasticSearch
+3. ElasticSearch
+4. HBase
 5. Kudu
 6. ...
 
