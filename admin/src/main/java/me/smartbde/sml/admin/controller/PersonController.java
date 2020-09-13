@@ -15,25 +15,28 @@ import me.smartbde.sml.admin.service.MongoServiceImpl;
 @Controller
 @RequestMapping("/person")
 public class PersonController {
-
     @Autowired
     private MySQLPersonRepository mysqlRepository;
     @Autowired
     private MongoServiceImpl mongoService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Person getPerson() {
-        return mysqlRepository.findPersonById(1L);
+    public String getPerson(Model model) {
+        String msg = mysqlRepository.findPersonById(1L).toString();
+        model.addAttribute("msg", msg);
+        return "person/hello";
     }
 
     @RequestMapping("/mongo")
-    Person mongo() {
-        return mongoService.findById(3L);
+    String mongo(Model model) {
+        String msg = mongoService.findById(3L).toString();
+        model.addAttribute("msg", msg);
+        return "person/hello";
     }
 
     @RequestMapping("/hello")
     String hello(Model model) {
         model.addAttribute("msg", "Hello Thymeleaf!");
-        return "hello";
+        return "person/hello";
     }
 }

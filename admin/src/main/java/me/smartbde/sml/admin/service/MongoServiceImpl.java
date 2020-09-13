@@ -20,7 +20,7 @@ public class MongoServiceImpl {
         this.mongo = mongo;
     }
 
-    public void init() {
+    public void init(Long id) {
         DB db = mongo.getDb();
 
         //查询所有的聚集集合
@@ -31,13 +31,19 @@ public class MongoServiceImpl {
         DBCollection persons = db.getCollection("person");
         DBCursor cur = persons.find(); // 查询所有的数据
 
+        boolean found = false;
         if (cur.count() > 0) {
             while (cur.hasNext()) {
-                logger.debug(cur.next().toString());
+                DBObject p = cur.next();
+                logger.debug(p.toString());
+                if (Integer.parseInt(p.get("_id").toString()) == id) {
+                    found = true;
+                }
             }
-        } else {
+        }
+        if (!found) {
             DBObject person = new BasicDBObject();
-            person.put("id", 3);
+            person.put("id", id);
             person.put("name", "hoojo");
 
             persons.save(person);
@@ -45,7 +51,7 @@ public class MongoServiceImpl {
     }
 
     public Person findById(Long id) {
-        init();
+        init(id);
         return mongoPersonRepository.findPersonById(id);
     }
 }

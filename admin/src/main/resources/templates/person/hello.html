@@ -7,6 +7,9 @@
     <script src="/webjars/bootstrap/3.4.1/js/bootstrap.min.js"/>
 </head>
 <body>
+<div>
+<header th:replace="person/topheader::header"></header>
+</div>
 <div class="container">
     <div class="alert alert-success">
         <h1 th:text="${msg}">欢迎您!</h1>
