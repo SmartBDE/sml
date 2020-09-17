@@ -1,4 +1,4 @@
-package me.smartbde.sml.admin.model;
+package me.smartbde.sml.admin.domain.model;
 
 import java.util.HashMap;
 

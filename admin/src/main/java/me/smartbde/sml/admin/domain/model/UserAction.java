@@ -1,4 +1,4 @@
-package me.smartbde.sml.admin.model;
+package me.smartbde.sml.admin.domain.model;
 
 public class UserAction {
     public String user;

@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8"></meta>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
-    <title>AdminLTE 2 | Starter</title>
+    <title>流批一体平台</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"></meta>
     <link rel="stylesheet" href="/webjars/bootstrap/3.4.1/css/bootstrap.min.css"></link>
@@ -54,11 +54,11 @@ desired effect
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="#" class="logo">
+        <a href="/" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>LT</span>
+            <span class="logo-mini"><b>流批一体平台</b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>LTE</span>
+            <span class="logo-lg"><b>流批一体平台</b></span>
         </a>
 
     </header>
@@ -70,19 +70,64 @@ desired effect
 
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">HEADER</li>
+                <li class="header"></li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-                <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+                <li class="active">
+                    <a href="/entry/index"><i class="fa fa-link"></i>
+                        <span>系统组件</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/collector/index"><i class="fa fa-link"></i>
+                        <span>收集器</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/publisher/index"><i class="fa fa-link"></i>
+                        <span>发布器</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/plugins/index"><i class="fa fa-link"></i>
+                        <span>插件配置</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/scratch/index"><i class="fa fa-link"></i>
+                        <span>算法配置</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/pipeline/index"><i class="fa fa-link"></i>
+                        <span>流式任务处理器</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/scheduler/index"><i class="fa fa-link"></i>
+                        <span>批量任务处理器</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/monitor/index"><i class="fa fa-link"></i>
+                        <span>任务分析</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bi/index"><i class="fa fa-link"></i>
+                        <span>即席查询</span>
+                    </a>
+                </li>
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+                    <a href="/utility/index">
+                        <i class="fa fa-link"></i>
+                        <span>辅助功能</span>
                         <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#">Link in level 2</a></li>
-                        <li><a href="#">Link in level 2</a></li>
+                        <li><a href="/utility/fakeinput">输入模拟器</a></li>
+                        <li><a href="/utility/userinput">用户行为模拟生成</a></li>
                     </ul>
                 </li>
             </ul>

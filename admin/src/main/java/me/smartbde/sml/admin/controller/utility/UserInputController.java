@@ -1,9 +1,6 @@
-package me.smartbde.sml.admin;
+package me.smartbde.sml.admin.controller.utility;
 
 import com.google.gson.Gson;
-import junit.framework.TestCase;
-import me.smartbde.sml.admin.model.JsonEvent;
-import me.smartbde.sml.admin.model.UserAction;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -14,25 +11,25 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.test.context.TestPropertySource;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-@TestPropertySource("classpath:application.properties")
-public class FakeUserDataGenerator extends TestCase {
-    @Value("${application.fakedata.generationurl.userdata}")
-    private String userdataUrl;
+import me.smartbde.sml.admin.domain.model.JsonEvent;
+import me.smartbde.sml.admin.domain.model.UserAction;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-//    public void setUp() throws Exception {
-//    }
-//
-//    public void tearDown() throws Exception {
-//    }
+@Controller
+@RequestMapping("/utility")
+public class UserInputController {
+    @Value("${application.utility.userinput.generationurl}")
+    private String generationUrl;
 
-    public void testAdd() {
+    @RequestMapping("/userinput")
+    public String userInput() {
         /*
         StringEntity requestEntity = new StringEntity(
                 JSON_STRING,
@@ -46,7 +43,7 @@ public class FakeUserDataGenerator extends TestCase {
         UserAction userAction = new UserAction("me", "buy", "item1", "test");
         JsonEvent event = new JsonEvent();
         event.body = userAction.toString();
-//        event.headers.put("a", "b");
+        event.headers.put("a", "b");
 
         List<JsonEvent> events = new ArrayList<>(1);
         events.add(event);
@@ -61,7 +58,7 @@ public class FakeUserDataGenerator extends TestCase {
         */
 
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
-            HttpPost post = new HttpPost(userdataUrl);
+            HttpPost post = new HttpPost(generationUrl);
             post.setHeader("Content-type", "application/json; charset=utf-8");
 
             StringEntity entity = new StringEntity(jsonObj.toString(), Charset.forName("UTF-8"));
@@ -87,5 +84,6 @@ public class FakeUserDataGenerator extends TestCase {
         } catch (Exception e) {
             System.out.println(e.toString());
         }
+        return "utility/userinput";
     }
 }
