@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
 <head>
-    <meta charset="UTF-8"></meta>
-    <title>Title</title>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
 </head>
-<body>
-
+<body class="hold-transition skin-blue sidebar-mini">
+<div layout:fragment="contentWrapper">
+    <!-- Main content -->
+    <section class="content container-fluid">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">组件列表</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table class="table table-condensed">
+                    <tbody>
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>组件名</th>
+                        <th>运行时长</th>
+                        <th style="width: 40px">状态</th>
+                    </tr>
+                    <tr th:each="component : ${components}">
+                        <td th:text="${component.id}">1</td>
+                        <td th:text="${component.name}">Componet</td>
+                        <td th:text="${component.duration}">1h</td>
+                        <td><span class="badge bg-green" th:text="${component.status}">active</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
 </body>
 </html>

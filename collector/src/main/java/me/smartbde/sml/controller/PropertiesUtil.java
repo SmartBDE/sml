@@ -1,4 +1,4 @@
-package me.smartbde.sml.admin;
+package me.smartbde.sml.controller;
 
 import java.io.FileInputStream;
 import java.io.IOException;
