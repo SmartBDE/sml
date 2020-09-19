@@ -6,24 +6,21 @@ import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Description;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
-
-import java.util.Arrays;
 
 //@ImportResource(locations={"classpath:application-bean.xml"})
 @SpringBootApplication
 //@SpringBootApplication(exclude={DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @EnableJpaRepositories("me.smartbde.sml.admin.domain.repository") // 必须，JPA Repository 路径
 //@Configuration // 不需要，SpringBootApplication已经包含
-public class Application {
+public class AdminApplication {
     @Autowired
     SpringResourceTemplateResolver defaultTemplateResolver;
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(AdminApplication.class, args);
     }
 
 //    @Bean

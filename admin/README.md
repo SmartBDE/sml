@@ -42,7 +42,7 @@ spring-test: a demo app to show how to implement spark application
   - 插件编辑界面
 ### 算法配置 scratch
 - 算法列表
-  - 算法信息
+  - 算法配置信息
 ### 处理器配置 pipeline
 - 处理器列表
   - 处理器配置编辑界面

@@ -1,4 +1,4 @@
-package me.smartbde.sml.controller;
+package me.smartbde.sml.publisher;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import org.apache.camel.CamelContext;
@@ -25,7 +25,7 @@ public class Application {
                 "cname",
                 "ckey",
                 "cvalue",
-                "collector");
+                "publisher");
 
         String protocol = config.getString("from.protocol");
         String host = config.getString("from.host");
@@ -40,20 +40,20 @@ public class Application {
         camelContext.addRoutes(new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                String fromUrl = String.format("%s://%s:%s/collector", protocol, host, port);
-                String toUrl = String.format("%s://%s:%s", toProtocol, toHost, toPort);
+                String fromUrl = String.format("%s://%s:%s/publisher", protocol, host, port);
+                String toUrl = String.format("%s://%s:%s/publisher", toProtocol, toHost, toPort);
                 from(fromUrl).process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
                         // TODO fixme
-                        System.out.println("collector...");
+                        System.out.println("publisher...");
                     }
-                }).to(toUrl);
+//                }).to(toUrl); // TODO fixme
+                });
             }
         });
 
         synchronized (Application.class) {
             Application.class.wait();
         }
-    }
-}
+    }}

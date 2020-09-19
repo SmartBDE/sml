@@ -35,5 +35,10 @@
             <artifactId>camel-jetty9</artifactId>
             <version>${camel.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-netty</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
     </dependencies>
 </project>

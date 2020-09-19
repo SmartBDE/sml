@@ -44,7 +44,8 @@ public class DatabaseConfigurationTests {
         config.setConfigurationNameColumn("cname");
         config.setConfigurationName("collector");
 
-        config.addProperty("host", "127.0.0.1");
-        config.addProperty("port", "8000");
+        config.addProperty("from.host", "127.0.0.1");
+        config.addProperty("from.port", "8000");
+        config.addProperty("from.protocol", "jetty:http");
     }
 }

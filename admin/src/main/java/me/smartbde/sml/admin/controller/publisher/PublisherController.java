@@ -1,6 +1,5 @@
-package me.smartbde.sml.admin.controller.collector;
+package me.smartbde.sml.admin.controller.publisher;
 
-import me.smartbde.sml.admin.domain.model.Component;
 import me.smartbde.sml.admin.domain.model.Endpoint;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/collector")
-public class CollectorController {
+@RequestMapping("/publisher")
+public class PublisherController {
     @RequestMapping("/index")
     public String getIndex(Model model) {
         List endpoints = new ArrayList<Endpoint>();
@@ -21,6 +20,6 @@ public class CollectorController {
         endpoint.setPort("18000");
         endpoints.add(endpoint);
         model.addAttribute("endpoints", endpoints);
-        return "collector/index";
+        return "publisher/index";
     }
 }

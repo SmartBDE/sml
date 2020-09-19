@@ -1,8 +1,5 @@
 package me.smartbde.sml.admin.domain.model;
 
-/**
- * Created by win7 on 2017/8/3.
- */
 public class Message {
     private String value;
 

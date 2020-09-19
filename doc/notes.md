@@ -20,6 +20,7 @@ http://commons.apache.org/proper/commons-configuration/apidocs/org/apache/common
 https://www.jianshu.com/p/69687a505845 spark streaming + sql
 https://developer.aliyun.com/article/60419 Spark Streaming + Spark SQL 实现配置化ETL流程
 https://developer.aliyun.com/article/680259 udf、udaf实现
+https://gitee.com/EA89B45B220E/Spark-Streaming-Framework spark streaming框架例子
 
 ## algorithm & streaming
 
