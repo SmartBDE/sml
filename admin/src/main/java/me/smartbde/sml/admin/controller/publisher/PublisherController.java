@@ -14,10 +14,13 @@ public class PublisherController {
     @RequestMapping("/index")
     public String getIndex(Model model) {
         List endpoints = new ArrayList<Endpoint>();
+
         Endpoint endpoint = new Endpoint();
+        endpoint.setType("to");
         endpoint.setProtocol("jetty:http");
         endpoint.setHost("127.0.0.1");
         endpoint.setPort("18000");
+
         endpoints.add(endpoint);
         model.addAttribute("endpoints", endpoints);
         return "publisher/index";

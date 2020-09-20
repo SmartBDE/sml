@@ -13,5 +13,5 @@ package me.smartbde.sml.pipeline;
  *    a. 按顺序执行
  *    b. 按需触发下一个任务
  */
-public class Application {
+public class StreamApplication {
 }

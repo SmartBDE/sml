@@ -3,6 +3,7 @@ package me.smartbde.sml.scratch;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.Function2;
+import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.SparkSession;
 
 import java.io.Serializable;
@@ -27,13 +28,20 @@ public class JavaLogisticRegression {
     private static final int D = 10;
     private static final Random rand = new Random(42);
 
-    /**
-     * run <file> <iters>
-     * @param spark SparkSession
-     * @param file
-     */
-    public double[] run(SparkSession spark, String file, int count) {
-        JavaRDD<String> lines = spark.read().textFile(file).javaRDD();
+    public double predict(double[] weights, double[] x) {
+        double value = 0;
+        for (int i = 0; i < D; i++) {
+            value += weights[i] * x[i];
+        }
+        return value;
+    }
+
+    public Dataset<String> readFile(SparkSession spark, String file) {
+        return spark.read().textFile(file);
+    }
+
+    public double[] run(SparkSession spark, Dataset<String> rawLines, int count) {
+        JavaRDD<String> lines = rawLines.javaRDD();
         JavaRDD<DataPoint> points = lines.map(new ParsePoint()).cache();
         int ITERATIONS = count;
 
@@ -47,7 +55,7 @@ public class JavaLogisticRegression {
         System.out.println(Arrays.toString(w));
 
         for (int i = 1; i <= ITERATIONS; i++) {
-            System.out.println("On iteration " + i + ", job: " + (i - 1));
+//            System.out.println("On iteration " + i + ", job: " + (i - 1));
 
             double[] gradient = points.map(
                     new ComputeGradient(w) // 把梯度计算分布到节点上，考虑参数很多的情况，数据量很大的情况
