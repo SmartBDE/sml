@@ -19,14 +19,16 @@
                 <table class="table table-condensed">
                     <tbody>
                     <tr>
+                        <th>类型</th>
                         <th>协议</th>
                         <th>地址</th>
                         <th>端口</th>
                     </tr>
                     <tr th:each="endpoint : ${endpoints}">
+                        <td th:text="${endpoint.type}">from</td>
                         <td th:text="${endpoint.protocol}">http</td>
                         <td th:text="${endpoint.host}">127.0.0.1</td>
-                        <td th:text="${endpoint.port}">8080</td>
+                        <td th:text="${endpoint.port}">18080</td>
                     </tr>
                     </tbody>
                 </table>

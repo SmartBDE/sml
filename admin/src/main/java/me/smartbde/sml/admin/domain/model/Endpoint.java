@@ -7,6 +7,15 @@ public class Endpoint {
     private String protocol;
     private String host;
     private String port;
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getProtocol() {
         return protocol;

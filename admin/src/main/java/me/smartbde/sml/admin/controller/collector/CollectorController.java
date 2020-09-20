@@ -15,11 +15,21 @@ public class CollectorController {
     @RequestMapping("/index")
     public String getIndex(Model model) {
         List endpoints = new ArrayList<Endpoint>();
+
         Endpoint endpoint = new Endpoint();
         endpoint.setProtocol("jetty:http");
         endpoint.setHost("127.0.0.1");
         endpoint.setPort("18000");
+        endpoint.setType("from");
         endpoints.add(endpoint);
+
+        Endpoint endpoint1 = new Endpoint();
+        endpoint1.setProtocol("netty:tcp");
+        endpoint1.setHost("127.0.0.1");
+        endpoint1.setPort("19000");
+        endpoint1.setType("to");
+        endpoints.add(endpoint1);
+
         model.addAttribute("endpoints", endpoints);
         return "collector/index";
     }
