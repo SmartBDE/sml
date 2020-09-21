@@ -1,6 +1,7 @@
 package me.smartbde.sml.publisher;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import me.smartbde.sml.utils.PropertiesUtil;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;

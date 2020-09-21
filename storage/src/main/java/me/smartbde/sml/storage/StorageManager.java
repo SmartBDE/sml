@@ -21,8 +21,8 @@ public class StorageManager {
         this.modelStorage = modelStorage;
     }
 
-    public void init(SparkSession spark, String repository) {
-        datasetStorage.init(spark, repository);
+    public void init(SparkSession spark) {
+        datasetStorage.init(spark);
     }
 
     public void create(String schema) {

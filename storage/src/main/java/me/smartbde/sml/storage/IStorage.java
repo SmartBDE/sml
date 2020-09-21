@@ -12,7 +12,7 @@ import java.io.OutputStream;
  * 由spark底层实现支持基于分布式集群的读写，支持多数据源管理
  */
 public interface IStorage {
-    public void init(SparkSession spark, String repository);
+    public void init(SparkSession spark);
 
     public void create(String schema);
 
@@ -21,8 +21,6 @@ public interface IStorage {
     public Dataset<Row> read(String name);
 
     /**
-     * 批量写入，采用truncate的模式
-     *
      * @param name 目标的名字
      * @param ds 数据
      */

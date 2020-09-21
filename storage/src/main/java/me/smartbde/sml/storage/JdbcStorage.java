@@ -14,12 +14,15 @@ public class JdbcStorage implements IStorage {
     private String repoUser;
     private String repoPassword;
 
+    public JdbcStorage(String url, String user, String password) {
+        this.repoUrl = url;
+        this.repoUser = user;
+        this.repoPassword = password;
+    }
+
     @Override
-    public void init(SparkSession spark, String repository) {
+    public void init(SparkSession spark) {
         this.spark = spark;
-        this.repoUrl = RepositoryParser.parseUrl(repository);
-        this.repoUser = RepositoryParser.parseUser(repository);
-        this.repoPassword = RepositoryParser.parsePassword(repository);
     }
 
     @Override

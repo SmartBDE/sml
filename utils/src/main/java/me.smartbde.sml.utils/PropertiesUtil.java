@@ -1,4 +1,4 @@
-package me.smartbde.sml.publisher;
+package me.smartbde.sml.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;

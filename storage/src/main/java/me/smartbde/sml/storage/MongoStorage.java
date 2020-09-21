@@ -15,9 +15,8 @@ public class MongoStorage implements IStorage {
     private String repository;
 
     @Override
-    public void init(SparkSession spark, String repository) {
+    public void init(SparkSession spark) {
         this.spark = spark;
-        this.repository = repository;
     }
 
     @Override

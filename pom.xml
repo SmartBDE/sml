@@ -18,6 +18,7 @@
         <module>storage</module>
         <module>commonutils</module>
         <module>admin</module>
+        <module>utils</module>
     </modules>
     <packaging>pom</packaging>
 
