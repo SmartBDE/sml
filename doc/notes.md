@@ -65,6 +65,7 @@ https://segmentfault.com/a/1190000019537708 webjars
 https://www.cnblogs.com/okong/p/springboot-eighteen.html webjars
 https://www.cnblogs.com/ityouknow/p/5891443.html jpa
 https://blog.csdn.net/zhangcongyi420/article/details/88087511 jpa
+https://www.cnblogs.com/zhouguanglin/p/7517784.html jpa自定义查询
 https://www.jianshu.com/p/db16d4d8d9c7 thymeleaf layout例子 引入一些公用的模板的方法
 https://ultraq.github.io/thymeleaf-layout-dialect/Examples.html thymeleaf-layout-dialect 把不同内容按一个特定的布局模板渲染后输出的技术
 https://www.jianshu.com/p/011288f418c3 adminlte与thymeleaf

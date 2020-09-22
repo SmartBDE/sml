@@ -1,8 +1,8 @@
 package me.smartbde.sml.admin.domain.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
-//@Entity
 public class Endpoint {
     private String protocol;
     private String host;

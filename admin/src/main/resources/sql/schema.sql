@@ -10,6 +10,18 @@ create table person (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -----------------------------------------
+-- 组件状态表
+-----------------------------------------
+drop table if exists systems;
+
+create table systems (
+    name varchar(100),
+    http varchar(100),
+    start datetime,
+    CONSTRAINT sys_pk_systems PRIMARY KEY (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-----------------------------------------
 -- 系统配置表
 -----------------------------------------
 drop table if exists configs;
