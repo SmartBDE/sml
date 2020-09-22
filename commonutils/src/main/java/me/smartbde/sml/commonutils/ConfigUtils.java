@@ -6,11 +6,11 @@ import org.apache.commons.configuration.DatabaseConfiguration;
 import javax.sql.DataSource;
 
 public class ConfigUtils {
-    //创建 SingleObject 的一个对象
+    private static MysqlDataSource dataSource = null;
+
     private static class ConfigUtilsHolder {
         public static ConfigUtils instance = new ConfigUtils();
     }
-    private static MysqlDataSource dataSource = null;
 
     //让构造函数为 private，这样该类就不会被实例化
     private ConfigUtils() {
@@ -21,7 +21,7 @@ public class ConfigUtils {
         return ConfigUtilsHolder.instance;
     }
 
-    public DataSource dataSource(String url, String user, String pass) {
+    public static DataSource dataSource(String url, String user, String pass) {
         if (dataSource == null) {
             dataSource = new MysqlDataSource();
             dataSource.setURL(url);

@@ -2,6 +2,7 @@ package me.smartbde.sml.commonutils.plugins;
 
 import javafx.util.Pair;
 import me.smartbde.sml.commonutils.ISQLFilter;
+import me.smartbde.sml.scratch.JavaLogisticRegression;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -9,7 +10,7 @@ import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.expressions.UserDefinedAggregateFunction;
 import org.apache.spark.sql.expressions.UserDefinedFunction;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * 增加udf函数predict
@@ -19,6 +20,8 @@ import java.util.List;
  *   select predict(x1,x2,x3....) from table
  */
 public class LogisticRegressionPredict implements ISQLFilter {
+    private Configuration configuration;
+    private JavaLogisticRegression javaLogisticRegression;
     /**
      * Allow to register user defined UDFs
      *
@@ -26,7 +29,9 @@ public class LogisticRegressionPredict implements ISQLFilter {
      */
     @Override
     public List<Pair<String, UserDefinedFunction>> getUdfList() {
-        return null;
+        List<Pair<String, UserDefinedFunction>> list = new ArrayList<Pair<String, UserDefinedFunction>>();
+        // 这里增加predict函数
+        return list;
     }
 
     /**
@@ -36,7 +41,7 @@ public class LogisticRegressionPredict implements ISQLFilter {
      */
     @Override
     public List<Pair<String, UserDefinedAggregateFunction>> getUdafList() {
-        return null;
+        return new ArrayList<Pair<String, UserDefinedAggregateFunction>>();
     }
 
     @Override
@@ -51,7 +56,7 @@ public class LogisticRegressionPredict implements ISQLFilter {
      */
     @Override
     public void setConfig(Configuration config) {
-
+        configuration = config;
     }
 
     /**
@@ -59,7 +64,7 @@ public class LogisticRegressionPredict implements ISQLFilter {
      */
     @Override
     public Configuration getConfig() {
-        return null;
+        return configuration;
     }
 
     /**
@@ -75,7 +80,7 @@ public class LogisticRegressionPredict implements ISQLFilter {
      */
     @Override
     public String getName() {
-        return null;
+        return "LogisticRegressionPredict";
     }
 
     /**
@@ -85,6 +90,6 @@ public class LogisticRegressionPredict implements ISQLFilter {
      */
     @Override
     public void prepare(SparkSession spark) {
-
+        javaLogisticRegression = new JavaLogisticRegression();
     }
 }

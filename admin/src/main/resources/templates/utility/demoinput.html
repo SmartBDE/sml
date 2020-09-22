@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div layout:fragment="contentWrapper">
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+    </div>
+
+    <!-- Main content -->
+    <div class="content container-fluid">
+        <div class="box box-primary">
+            <!-- form start -->
+            <form role="form" action="#" th:action="@{/utility/demoinput/submit}">
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <i class="fa fa-text-width"></i>
+                        <h3 class="box-title">功能说明</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <blockquote>
+                            <p>模拟生成若干条用户行为数据，并发送到数据采集器中，激发数据采集器的流式处理.</p>
+                        </blockquote>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer" align="right">
+                        <button type="submit" class="btn btn-primary">提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /.content -->
+</div>
+</body>
+</html>

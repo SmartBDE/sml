@@ -63,9 +63,10 @@ spring-test: a demo app to show how to implement spark application
 
 ## 页面风格简单约定
 
-- 字体大小 <small>
-- 标题 <h4>
+- 标题 <h3>
 - 按钮 右下方
 - 表单
   - 放在box中
   - 表单操作 右上方
+
+https://adminlte.io/themes/AdminLTE/pages/forms/general.html

@@ -23,15 +23,15 @@ create table configs (
 
 -----------------------------------------
 -- 插件配置表
--- LogisticRegressionTrainInstance1  LogisticRegressionTrain
--- LogisticRegressionPredict
+-- LogisticRegressionTrainV1 LogisticRegressionTrain 训练次数 300
+-- LogisticRegressionTrainV1 LogisticRegressionTrain 维度 10
+-- LogisticRegressionPredictV1 LogisticRegressionPredict path ../../../模型文件名
+-- LogisticRegressionPredictV1 LogisticRegressionPredict 维度 10
 -- FileInstance1 FileStorage file path ../../../
 -- FileInstance2 FileStorage file path ../../../
 -- LineParserInstance1 LineParser 分隔符 " "
 -- LineParserInstance1 LineParser 字段名 "a b c"
 -- sqlConvertInstance1 sqlConvert sql "select int(a), int(b) from table"
--- LogisticRegressionTrainV1 LogisticRegressionTrain 训练次数 300
--- LogisticRegressionTrainV1 LogisticRegressionTrain 维度 10
 -----------------------------------------
 drop table if exists plugins;
 

@@ -1,6 +1,8 @@
 package me.smartbde.sml.admin.controller.utility;
 
 import com.google.gson.Gson;
+import me.smartbde.sml.admin.domain.model.Message;
+import me.smartbde.sml.admin.domain.model.UserInput;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -20,70 +22,25 @@ import java.util.List;
 import me.smartbde.sml.admin.domain.model.JsonEvent;
 import me.smartbde.sml.admin.domain.model.UserAction;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/utility")
 public class UserInputController {
-    @Value("${application.utility.userinput.generationurl}")
-    private String generationUrl;
-
     @RequestMapping("/userinput")
-    public String userInput() {
-        /*
-        StringEntity requestEntity = new StringEntity(
-                JSON_STRING,
-                ContentType.APPLICATION_JSON);
-
-        HttpPost postMethod = new HttpPost("http://example.com/action");
-        postMethod.setEntity(requestEntity);
-
-        HttpResponse rawResponse = httpclient.execute(postMethod);
-        */
-        UserAction userAction = new UserAction("me", "buy", "item1", "test");
-        JsonEvent event = new JsonEvent();
-        event.body = userAction.toString();
-        event.headers.put("a", "b");
-
-        List<JsonEvent> events = new ArrayList<>(1);
-        events.add(event);
-
-        Gson g = new Gson();
-        String jsonObj = (g.toJson(events));
-        System.out.println(jsonObj);
-
-        /*
-        Person person = g.fromJson("{\"name\": \"John\"}", Person.class);
-        System.out.println(person.name); //John
-        */
-
-        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
-            HttpPost post = new HttpPost(generationUrl);
-            post.setHeader("Content-type", "application/json; charset=utf-8");
-
-            StringEntity entity = new StringEntity(jsonObj.toString(), Charset.forName("UTF-8"));
-//            entity.setContentEncoding("UTF-8");
-//            entity.setContentType("application/json");
-            post.setEntity(entity);
-
-            // Create a custom response handler
-            ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
-                @Override
-                public String handleResponse(final HttpResponse response) throws ClientProtocolException, IOException {
-                    int status = response.getStatusLine().getStatusCode();
-                    if (status >= 200 && status < 300) {
-                        HttpEntity entity = response.getEntity();
-                        return entity != null ? EntityUtils.toString(entity) : null;
-                    } else {
-                        throw new ClientProtocolException("Unexpected response status: " + status);
-                    }
-                }
-            };
-            String responseBody = httpclient.execute(post, responseHandler);
-            System.out.println(responseBody);
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
+    public String userInput(Model model) {
+        UserInput userInput = new UserInput();
+        model.addAttribute("userinput", userInput);
         return "utility/userinput";
+    }
+
+    @RequestMapping("/userinput/submit")
+    public String userInputSubmit(@ModelAttribute(value="userinput") UserInput userInput, Model model) {
+        model.addAttribute("head", "执行结果");
+        model.addAttribute("msg", "成功");
+        model.addAttribute("url", "/utility/userinput");
+        return "info";
     }
 }
