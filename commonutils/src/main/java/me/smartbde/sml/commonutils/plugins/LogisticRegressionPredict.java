@@ -22,6 +22,8 @@ import java.util.*;
 public class LogisticRegressionPredict implements ISQLFilter {
     private Configuration configuration;
     private JavaLogisticRegression javaLogisticRegression;
+    private int count;
+
     /**
      * Allow to register user defined UDFs
      *
@@ -46,6 +48,7 @@ public class LogisticRegressionPredict implements ISQLFilter {
 
     @Override
     public Dataset<Row> process(SparkSession spark, Dataset<Row> df) {
+
         return null;
     }
 
@@ -90,6 +93,10 @@ public class LogisticRegressionPredict implements ISQLFilter {
      */
     @Override
     public void prepare(SparkSession spark) {
-        javaLogisticRegression = new JavaLogisticRegression();
+        if (configuration == null) {
+            throw new RuntimeException("configuration not set");
+        }
+        javaLogisticRegression = new JavaLogisticRegression(10, 47);
+        count = Integer.parseInt(configuration.getProperty("").toString());
     }
 }

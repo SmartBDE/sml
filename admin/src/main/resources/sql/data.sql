@@ -8,3 +8,7 @@ insert into configs(cname, ckey, cvalue) values ('collector', 'from.protocol', '
 insert into configs(cname, ckey, cvalue) values ('collector', 'to.host', '127.0.0.1');
 insert into configs(cname, ckey, cvalue) values ('collector', 'to.port', '19000');
 insert into configs(cname, ckey, cvalue) values ('collector', 'to.protocol', 'netty:tcp');
+
+insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionPredict.V1', '', '');
+insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionPredict.V1', '', '');
+insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionPredict.V1', '', '');

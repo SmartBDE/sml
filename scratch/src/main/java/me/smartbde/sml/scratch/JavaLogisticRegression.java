@@ -25,8 +25,13 @@ import java.util.regex.Pattern;
  * Created by win7 on 2017/8/13.
  */
 public class JavaLogisticRegression {
-    private static final int D = 10;
-    private static final Random rand = new Random(42);
+    private static int D;
+    private static Random rand;
+
+    public JavaLogisticRegression(int dim, int seed) {
+        this.D = dim;
+        this.rand = new Random(seed);
+    }
 
     public double predict(double[] weights, double[] x) {
         double value = 0;
