@@ -20,15 +20,17 @@
                     <tbody>
                     <tr>
                         <th>任务</th>
-                        <th>记录器</th>
-                        <th>键定义</th>
-                        <th>键值</th>
+                        <th>触发时间</th>
+                        <th>结束时间</th>
+                        <th>输入</th>
+                        <th>输出</th>
                     </tr>
-                    <tr th:each="joblogger : ${jobloggers}">
-                        <td th:text="${joblogger.jobName}">LogisticRegressionTrainJob</td>
-                        <td th:text="${joblogger.plugin}">StartLogger</td>
-                        <td th:text="${joblogger.ckey}">key</td>
-                        <td th:text="${joblogger.cvalue}">value</td>
+                    <tr th:each="stat : ${stats}">
+                        <td th:text="${stat.job}">job</td>
+                        <td th:text="${stat.startTime}">start</td>
+                        <td th:text="${stat.stopTime}">stop</td>
+                        <td th:text="${stat.input}">input</td>
+                        <td th:text="${stat.output}">output</td>
                     </tr>
                     </tbody>
                 </table>
