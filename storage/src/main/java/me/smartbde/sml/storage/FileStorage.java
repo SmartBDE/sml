@@ -60,8 +60,8 @@ public class FileStorage implements IStorage {
      */
     @Override
     public void write(String name, Dataset<Row> ds) {
-        Dataset<String> df = ds.map((Function1<Row, String>) row -> row.mkString(), Encoders.STRING());
-        df.write().text(name);
+//        Dataset<String> df = ds.map((Function1<Row, String>) row -> row.mkString(), Encoders.STRING());
+//        df.write().text(name);
         //ds.write().text(name);
     }
 

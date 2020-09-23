@@ -7,7 +7,7 @@ import org.junit.Test;
 public class JavaLogisticRegressionTests {
     @Test
     public void test() throws Exception {
-        JavaLogisticRegression lrSample = new JavaLogisticRegression();
+        JavaLogisticRegression lrSample = new JavaLogisticRegression(10, 47);
 
 //        System.out.println(System.getProperty("os.name"));
 //        System.out.println(System.getProperty("file.separator"));

@@ -83,3 +83,17 @@ create table jobs (
     plugin varchar(100),
     CONSTRAINT sys_pk_jobs PRIMARY KEY (name, type, plugin)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-----------------------------------------
+-- 任务定时配置表
+-- DemoLogisticRegressionTrain 定时模式 秒/分/时
+-- DemoLogisticRegressionTrain 定时模式 秒/分/时
+-- 定时模式：0 一次 1 每天
+-----------------------------------------
+drop table is exists schedules;
+
+create table schedules (
+    jobname varchar(100),
+    type int,
+    runat varchar(100)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
