@@ -46,11 +46,8 @@ public class Application {
                 from(fromUrl).process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
-                        // TODO fixme
-                        System.out.println("publisher...");
                     }
-//                }).to(toUrl); // TODO fixme
-                });
+                }).to(toUrl); // TODO fixme
             }
         });
 

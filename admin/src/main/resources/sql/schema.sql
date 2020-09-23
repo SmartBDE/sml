@@ -88,9 +88,9 @@ create table jobs (
 -- 任务定时配置表
 -- DemoLogisticRegressionTrain 定时模式 秒/分/时
 -- DemoLogisticRegressionTrain 定时模式 秒/分/时
--- 定时模式：0 一次 1 每天
+-- 定时模式：-1 立刻执行 0 一次 1 每天
 -----------------------------------------
-drop table is exists schedules;
+drop table if exists schedules;
 
 create table schedules (
     jobname varchar(100),

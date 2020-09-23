@@ -53,7 +53,7 @@ spring-test: a demo app to show how to implement spark application
 - 激活监控的处理器/定时任务列表
   - 展示filter列表，在插件配置中，有哪些已经添加的监控filter
     - 展示filter信息
-  - 展示filter和处理器/定时任务的关系
+    - 展示filter和处理器/定时任务的关系
   - 展示monitor的配置信息，并跳转到monitor页面
   - 展示统计的原始信息(列表信息)
 ### 辅助功能 utility

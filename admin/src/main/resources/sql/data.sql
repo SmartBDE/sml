@@ -16,3 +16,5 @@ insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionPredict.V1'
 insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionPredict.V1', 'dimension', '10');
 
 insert into algorithms(cname, ckey, cvalue) values ('LogisticRegression', 'seed', '47');
+
+insert into schedules(jobname, type, runat) values ('DemoLogisticRegressionTrain', -1, '');

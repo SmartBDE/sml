@@ -46,8 +46,6 @@ public class Application {
                 from(fromUrl).process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
-                        // TODO fixme
-                        System.out.println("collector...");
                     }
                 }).to(toUrl);
             }
