@@ -1,4 +1,4 @@
-package me.smartbde.sml.commonutils.plugins;
+package me.smartbde.sml.commonutils.plugins.filter;
 
 import javafx.util.Pair;
 import me.smartbde.sml.commonutils.IFilter;
@@ -62,6 +62,6 @@ public class LogisticRegressionTrain implements IFilter {
      */
     @Override
     public void prepare(SparkSession spark) {
-        javaLogisticRegression = new JavaLogisticRegression();
+        javaLogisticRegression = new JavaLogisticRegression(10, 47);
     }
 }

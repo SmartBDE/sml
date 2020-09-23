@@ -1,4 +1,4 @@
-package me.smartbde.sml.commonutils.plugins;
+package me.smartbde.sml.commonutils.plugins.filter;
 
 import javafx.util.Pair;
 import me.smartbde.sml.commonutils.ISQLFilter;
