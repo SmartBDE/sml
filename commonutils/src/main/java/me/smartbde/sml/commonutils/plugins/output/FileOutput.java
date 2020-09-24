@@ -7,6 +7,8 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
+import java.util.Map;
+
 public class FileOutput implements IOutput {
     @Override
     public void process(Dataset<Row> df) {
@@ -19,7 +21,7 @@ public class FileOutput implements IOutput {
      * @param config
      */
     @Override
-    public void setConfig(Configuration config) {
+    public void setConfig(Map<String, String> config) {
 
     }
 
@@ -27,7 +29,7 @@ public class FileOutput implements IOutput {
      * Get Config.
      */
     @Override
-    public Configuration getConfig() {
+    public Map<String, String> getConfig() {
         return null;
     }
 

@@ -15,8 +15,10 @@ create table person (
 drop table if exists textfile;
 
 create table textfile (
+    id int unsigned auto_increment,
     name varchar(100),
-    text varchar(4000)
+    text varchar(4000),
+    PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -----------------------------------------
@@ -100,14 +102,17 @@ create table jobs (
 -- 任务定时配置表
 -- DemoLogisticRegressionTrain 定时模式 秒/分/时
 -- DemoLogisticRegressionTrain 定时模式 秒/分/时
--- 定时模式：-1 立刻执行 0 一次 1 每天
+-- 定时模式：-2->不执行 -1->立刻执行 0->一次 1->每天
 -----------------------------------------
 drop table if exists schedules;
 
 create table schedules (
+    id int unsigned auto_increment,
     jobname varchar(100),
     type int,
-    runat varchar(100)
+    runat varchar(100),
+    nextId int,
+    PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -----------------------------------------

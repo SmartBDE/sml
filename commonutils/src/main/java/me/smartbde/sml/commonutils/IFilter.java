@@ -17,5 +17,5 @@ import java.util.List;
  */
 public interface IFilter extends IPlugin {
 
-    public Dataset<Row> process(SparkSession spark, Dataset<Row> df);
+    public Dataset<Row> process(SparkSession spark, Dataset<Row> df, ISession session);
 }

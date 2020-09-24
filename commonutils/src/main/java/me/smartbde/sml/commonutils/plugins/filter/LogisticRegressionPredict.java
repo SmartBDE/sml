@@ -2,6 +2,7 @@ package me.smartbde.sml.commonutils.plugins.filter;
 
 import javafx.util.Pair;
 import me.smartbde.sml.commonutils.ISQLFilter;
+import me.smartbde.sml.commonutils.ISession;
 import me.smartbde.sml.scratch.JavaLogisticRegression;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.spark.sql.Dataset;
@@ -20,7 +21,7 @@ import java.util.*;
  *   select predict(x1,x2,x3....) from table
  */
 public class LogisticRegressionPredict implements ISQLFilter {
-    private Configuration configuration;
+    private Map<String, String> configuration;
     private JavaLogisticRegression javaLogisticRegression;
     private int count;
 
@@ -47,7 +48,7 @@ public class LogisticRegressionPredict implements ISQLFilter {
     }
 
     @Override
-    public Dataset<Row> process(SparkSession spark, Dataset<Row> df) {
+    public Dataset<Row> process(SparkSession spark, Dataset<Row> df, ISession session) {
 
         return null;
     }
@@ -58,7 +59,7 @@ public class LogisticRegressionPredict implements ISQLFilter {
      * @param config
      */
     @Override
-    public void setConfig(Configuration config) {
+    public void setConfig(Map<String, String> config) {
         configuration = config;
     }
 
@@ -66,7 +67,7 @@ public class LogisticRegressionPredict implements ISQLFilter {
      * Get Config.
      */
     @Override
-    public Configuration getConfig() {
+    public Map<String, String> getConfig() {
         return configuration;
     }
 
@@ -97,6 +98,6 @@ public class LogisticRegressionPredict implements ISQLFilter {
             throw new RuntimeException("configuration not set");
         }
         javaLogisticRegression = new JavaLogisticRegression(10, 47);
-        count = Integer.parseInt(configuration.getProperty("").toString());
+        count = Integer.parseInt(configuration.get(""));
     }
 }

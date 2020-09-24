@@ -6,9 +6,11 @@ import javax.persistence.Id;
 @Entity
 public class Schedules {
     @Id
+    Integer id;
     String jobname;
     Integer type;
     String runat;
+    Integer nextId;
 
     public String getJobname() {
         return jobname;
@@ -32,5 +34,21 @@ public class Schedules {
 
     public void setRunat(String runat) {
         this.runat = runat;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getNextId() {
+        return nextId;
+    }
+
+    public void setNextId(Integer nextId) {
+        this.nextId = nextId;
     }
 }

@@ -18,7 +18,7 @@ public class SparkStreamingUtilTests implements Serializable {
                 .appName("SparkStreamingUtilTests.testUdf")
                 .getOrCreate();
 
-        spark.udf().register("strLen", new UDF1<String, Integer>() {
+        spark.udf().register("s_strLen", new UDF1<String, Integer>() {
             @Override
             public Integer call(String s) throws Exception {
                 return s.length();
@@ -39,7 +39,7 @@ public class SparkStreamingUtilTests implements Serializable {
 
         ds.registerTempTable("person");
 
-        Dataset<Row> r = ds.sqlContext().sql("select strLen(name), name from person");
+        Dataset<Row> r = ds.sqlContext().sql("select s_strLen(name), name from person");
         r.show();
 
         spark.stop();

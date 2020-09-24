@@ -57,7 +57,7 @@ insert into jobs(name, type, plugin) values ('DemoLogisticRegressionTrain', 'fil
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict2', 'input', 'JdbcInput.V1');
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict2', 'output', 'FileOutput.V1');
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict2', 'filter', 'StartLogger.V1');
-insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict2', 'filter', 'LogisticRegressionPredict.V1');
+insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict2', 'sqlFilter', 'LogisticRegressionPredict.V1');
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict2', 'filter', 'StopLogger.V1');
 
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'spark.host', '127.0.0.1');
@@ -65,12 +65,13 @@ insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 's
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'input', 'TcpStreamingInput.V1');
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'output', 'Stdout.V1');
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'filter', 'StartLogger.V1');
-insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'filter', 'LogisticRegressionPredict.V1');
+insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'sqlFilter', 'LogisticRegressionPredict.V1');
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'filter', 'StopLogger.V1');
 
 ----------------------------------------
 -- 激活的任务
 ----------------------------------------
-insert into schedules(jobname, type, runat) values ('DemoLogisticRegressionTrain', -1, '');
+insert into schedules(jobname, type, runat, nextId) values ('DemoLogisticRegressionTrain', -1, '', 3);
 insert into schedules(jobname, type, runat) values ('DemoLogisticRegressionPredict2', -1, '');
+insert into schedules(jobname, type, runat) values ('DemoLogisticRegressionPredict2', -2, '');
 insert into streamings(jobname) values ('DemoLogisticRegressionPredict');
