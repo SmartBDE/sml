@@ -42,7 +42,7 @@ public class Application {
             @Override
             public void configure() throws Exception {
                 String fromUrl = String.format("%s://%s:%s/publisher", protocol, host, port);
-                String toUrl = String.format("%s://%s:%s/publisher", toProtocol, toHost, toPort);
+                String toUrl = String.format("%s://%s", toProtocol, toHost);
                 from(fromUrl).process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {

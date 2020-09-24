@@ -10,13 +10,23 @@ create table person (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -----------------------------------------
+-- 用于从指定的文本文件中导入数据
+-----------------------------------------
+drop table if exists textfile;
+
+create table textfile (
+    name varchar(100),
+    text varchar(4000)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-----------------------------------------
 -- 组件状态表
 -----------------------------------------
 drop table if exists systems;
 
 create table systems (
     name varchar(100),
-    http varchar(100),
+    address varchar(100),
     start datetime,
     CONSTRAINT sys_pk_systems PRIMARY KEY (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -96,4 +106,13 @@ create table schedules (
     jobname varchar(100),
     type int,
     runat varchar(100)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-----------------------------------------
+-- 流式任务配置表
+-----------------------------------------
+drop table if exists streamings;
+
+create table streamings (
+    jobname varchar(100)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
