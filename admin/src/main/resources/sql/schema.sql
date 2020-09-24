@@ -88,10 +88,12 @@ create table algorithms (
 drop table if exists jobs;
 
 create table jobs (
+    id int unsigned auto_increment,
     name varchar(100),
     type varchar(10),
     plugin varchar(100),
-    CONSTRAINT sys_pk_jobs PRIMARY KEY (name, type, plugin)
+    CONSTRAINT sys_pk_jobs UNIQUE KEY (name, type, plugin),
+    PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -----------------------------------------

@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
 <head>
-    <meta charset="UTF-8"></meta>
-    <title>Title</title>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
 </head>
-<body>
-
+<body class="hold-transition skin-blue sidebar-mini">
+<div layout:fragment="contentWrapper">
+    <!-- Main content -->
+    <section class="content container-fluid">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">任务配置</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table class="table table-condensed">
+                    <tbody>
+                    <tr>
+                        <th>任务</th>
+                        <th>类型</th>
+                        <th>插件</th>
+                    </tr>
+                    <tr th:each="job : ${jobs}">
+                        <td th:text="${job.name}">name</td>
+                        <td th:text="${job.type}">type</td>
+                        <td th:text="${job.plugin}">plugin</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
 </body>
 </html>

@@ -52,6 +52,7 @@ public class AppBean implements ApplicationRunner {
 
     private void runBatchJob(SparkSession spark, Schedules schedules)  {
         Logger logger = LoggerFactory.getLogger(AppBean.class);
+        logger.debug(schedules.getJobname());
 
         // 从配置中装载插件并初始化
 

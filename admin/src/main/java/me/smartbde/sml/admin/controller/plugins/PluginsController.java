@@ -18,7 +18,7 @@ public class PluginsController {
 
     @RequestMapping("/index")
     public String getIndex(Model model) {
-        List<PluginInfo> plugins = mySQLPluginsRepository.findByPluginLike("LogisticRegressionPredict%");
+        List<PluginInfo> plugins = mySQLPluginsRepository.findAll();
 
         model.addAttribute("plugins", plugins);
         return "plugins/index";

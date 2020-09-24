@@ -35,12 +35,9 @@ public class EntryController {
 
             Date current = new Date();
 
-            Calendar c1 = Calendar.getInstance();
-            c1.setTime(sys.getStart());
-            Calendar c2 = Calendar.getInstance();
-            c2.setTime(current);
-
-            int mins = c2.get(Calendar.MINUTE) - c1.get(Calendar.MINUTE);
+            long start = sys.getStart().getTime();
+            long stop = current.getTime();
+            int mins = (int) ((stop - start)/(1000 * 60));
 
             component.setDuration(String.format("%dm", mins));
             components.add(component);
