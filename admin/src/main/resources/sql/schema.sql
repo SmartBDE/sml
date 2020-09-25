@@ -135,3 +135,15 @@ create table pluginclass (
     clazz varchar(300),
     CONSTRAINT sys_pk_pluginclass PRIMARY KEY (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-----------------------------------------
+-- 日志记录表
+-----------------------------------------
+drop table if exists logs;
+
+create table logs (
+    plugin varchar(100),
+    sessionid varchar(100),
+    act varchar(100),
+    acttime datetime
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

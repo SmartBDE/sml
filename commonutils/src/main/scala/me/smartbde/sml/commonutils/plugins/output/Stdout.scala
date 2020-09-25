@@ -6,6 +6,9 @@ import javafx.util.Pair
 import me.smartbde.sml.commonutils.IOutput
 import org.apache.spark.sql.{Dataset, Row, SparkSession}
 
+/**
+ * 格式输入要求：行格式
+ */
 class Stdout extends IOutput {
   override def process(df: Dataset[Row]): Unit = ???
 
@@ -27,7 +30,7 @@ class Stdout extends IOutput {
   /**
    * Get Plugin Name.
    */
-  override def getName: String = ???
+  override def getName = "Stdout"
 
   /**
    * Prepare before running, do things like set config default value, add broadcast variable, accumulator.

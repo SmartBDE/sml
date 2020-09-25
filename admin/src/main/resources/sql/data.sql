@@ -42,8 +42,8 @@ insert into plugins(plugin, ckey, cvalue) values ('JdbcInput.V1', 'table', 'text
 
 insert into plugins(plugin, ckey, cvalue) values ('FileOutput.V1', 'path', '../data/model/LogisticRegressionV1.model');
 
-insert into plugins(plugin, ckey, cvalue) values ('StartLogger.V1', 'path', '../data/model/LogisticRegressionV1.model');
-insert into plugins(plugin, ckey, cvalue) values ('StopLogger.V1', 'path', '../data/model/LogisticRegressionV1.model');
+insert into plugins(plugin, ckey, cvalue) values ('StartLogger.V1', 'table', 'logs');
+insert into plugins(plugin, ckey, cvalue) values ('StopLogger.V1', 'table', 'logs');
 
 ----------------------------------------
 -- 插件对应类
@@ -63,6 +63,8 @@ insert into pluginclass(name, type, clazz) values ('TcpStreamingInput', 'streamI
 insert into pluginclass(name, type, clazz) values ('FileOutput', 'output', 'me.smartbde.sml.commonutils.plugins.output.FileOutput');
 insert into pluginclass(name, type, clazz) values ('JdbcOutput', 'output', 'me.smartbde.sml.commonutils.plugins.output.JdbcOutput');
 
+insert into pluginclass(name, type, clazz) values ('MaskFilter', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.MaskFilter');
+insert into pluginclass(name, type, clazz) values ('Stdout', 'output', 'me.smartbde.sml.commonutils.plugins.output.Stdout');
 
 ----------------------------------------
 -- 任务列表

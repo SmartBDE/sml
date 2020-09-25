@@ -3,13 +3,15 @@ package me.smartbde.sml.commonutils.plugins.filter;
 import javafx.util.Pair;
 import me.smartbde.sml.commonutils.IFilter;
 import me.smartbde.sml.commonutils.ISession;
-import org.apache.commons.configuration2.Configuration;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
 import java.util.Map;
 
+/**
+ * 格式输入要求：无
+ */
 public class StartLogger implements IFilter {
     @Override
     public Dataset<Row> process(SparkSession spark, Dataset<Row> df, ISession session) {
@@ -18,7 +20,6 @@ public class StartLogger implements IFilter {
 
     @Override
     public void setConfig(Map<String, String> config) {
-
     }
 
     @Override

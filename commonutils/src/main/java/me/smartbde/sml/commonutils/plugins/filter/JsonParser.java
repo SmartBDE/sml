@@ -9,6 +9,9 @@ import org.apache.spark.sql.SparkSession;
 
 import java.util.Map;
 
+/**
+ * 格式输入要求：Dataset<Row>.toJSON
+ */
 public class JsonParser implements IFilter {
     @Override
     public Dataset<Row> process(SparkSession spark, Dataset<Row> df, ISession session) {
@@ -32,7 +35,7 @@ public class JsonParser implements IFilter {
 
     @Override
     public String getName() {
-        return null;
+        return "JsonParser";
     }
 
     @Override

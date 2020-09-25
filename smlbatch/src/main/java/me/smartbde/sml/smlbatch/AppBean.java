@@ -13,6 +13,8 @@ import me.smartbde.sml.commonutils.*;
 import me.smartbde.sml.utils.PropertiesUtil;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.spark.SparkConf;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -118,11 +120,11 @@ public class AppBean implements ApplicationRunner {
 
                 IPlugin plugin = (IPlugin) PluginUtils.newClazz(pluginClass.getClazz());
                 if (pluginClass.getType().equals("filter") || pluginClass.getType().equals("sqlFilter")) {
-
+                    filters.add((IFilter) plugin);
                 } else if (pluginClass.getType().equals("batchInput") || pluginClass.getType().equals("streamInput")) {
-
+                    inputs.add((IInput) plugin);
                 } else if (pluginClass.getType().equals("output")) {
-
+                    outputs.add((IOutput) plugin);
                 }
                 // 然后把配置传给plugin
                 List<PluginInfo> pluginInfos = mySQLPluginsRepository.findByPlugin(job.getPlugin());
@@ -147,7 +149,16 @@ public class AppBean implements ApplicationRunner {
         }
 
         // 从配置中装载input，调用filter，执行output
+        for (IInput input : inputs) {
+            Dataset<Row> ds = input.getDataset(spark);
+            for (IFilter filter : filters) {
+                ds = filter.process(spark, ds, session);
+            }
 
+            for (IOutput output : outputs) {
+                output.process(ds);
+            }
+        }
 
         // 看是否有触发下一步的执行
         if (schedules.getNextid() != null) {

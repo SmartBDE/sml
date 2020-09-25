@@ -2,10 +2,8 @@ package me.smartbde.sml.commonutils.plugins.filter;
 
 import javafx.util.Pair;
 import me.smartbde.sml.commonutils.IFilter;
-import me.smartbde.sml.commonutils.IPlugin;
 import me.smartbde.sml.commonutils.ISession;
 import me.smartbde.sml.scratch.JavaLogisticRegression;
-import org.apache.commons.configuration2.Configuration;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
@@ -13,7 +11,8 @@ import org.apache.spark.sql.SparkSession;
 import java.util.Map;
 
 /**
- * 预测训练函数，属于批量操作的处理器
+ * 功能说明：预测训练函数，属于批量操作的处理器
+ * 格式输入要求：训练算法所需格式
  */
 public class LogisticRegressionTrain implements IFilter {
     private Map<String, String> configuration;

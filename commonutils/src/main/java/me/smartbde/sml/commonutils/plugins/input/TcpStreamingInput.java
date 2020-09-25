@@ -2,7 +2,6 @@ package me.smartbde.sml.commonutils.plugins.input;
 
 import javafx.util.Pair;
 import me.smartbde.sml.commonutils.IStreamingInput;
-import org.apache.commons.configuration2.Configuration;
 import org.apache.spark.rdd.RDD;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -12,6 +11,9 @@ import org.apache.spark.streaming.dstream.DStream;
 
 import java.util.Map;
 
+/**
+ * 格式输入要求：无
+ */
 public class TcpStreamingInput implements IStreamingInput {
     @Override
     public Dataset<Row> rdd2dataset(SparkSession spark, RDD rdd) {

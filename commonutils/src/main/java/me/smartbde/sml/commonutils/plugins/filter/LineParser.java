@@ -9,6 +9,9 @@ import org.apache.spark.sql.SparkSession;
 
 import java.util.Map;
 
+/**
+ * 格式输入要求：Row是行格式
+ */
 public class LineParser implements IFilter {
     @Override
     public Dataset<Row> process(SparkSession spark, Dataset<Row> df, ISession session) {
