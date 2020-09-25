@@ -138,11 +138,9 @@ public class AppBean implements ApplicationRunner {
                 Pair<Boolean, String> r = plugin.checkConfig();
                 if (r.getKey()) {
                     plugin.prepare(spark);
-
                 } else {
                     logger.info("can not pass config:" + r.getValue());
                 }
-
             } catch (Exception e) {
                 logger.info(e.toString());
             }

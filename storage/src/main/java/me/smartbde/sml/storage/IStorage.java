@@ -2,10 +2,8 @@ package me.smartbde.sml.storage;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SaveMode;
 import org.apache.spark.sql.SparkSession;
-
-import java.io.InputStream;
-import java.io.OutputStream;
 
 /**
  * 这是基于spark实现的存储系统，提供了数据访问及写入的抽象接口，
@@ -24,7 +22,7 @@ public interface IStorage {
      * @param name 目标的名字
      * @param ds 数据
      */
-    public void write(String name, Dataset<Row> ds);
+    public void write(String name, Dataset<Row> ds, SaveMode mode);
 
     public void delete(String name);
 

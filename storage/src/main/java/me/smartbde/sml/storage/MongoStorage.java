@@ -4,6 +4,7 @@ import com.mongodb.spark.MongoSpark;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SaveMode;
 import org.apache.spark.sql.SparkSession;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -38,9 +39,10 @@ public class MongoStorage implements IStorage {
     }
 
     @Override
-    public void write(String name, Dataset<Row> ds) {
+    public void write(String name, Dataset<Row> ds, SaveMode mode) {
         ds.write()
                 .format("com.mongodb.spark.sql.DefaultSource")
+                .mode(mode)
                 .option("uri", repository + "." + name)
                 .save();
     }

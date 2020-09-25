@@ -2,6 +2,7 @@ package me.smartbde.sml.storage;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SaveMode;
 import org.apache.spark.sql.SparkSession;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -47,9 +48,10 @@ public class JdbcStorage implements IStorage {
     }
 
     @Override
-    public void write(String name, Dataset<Row> ds) {
+    public void write(String name, Dataset<Row> ds, SaveMode mode) {
         ds.write()
                 .format("jdbc")
+                .mode(mode)
                 .option("url", repoUrl)
                 .option("dbtable", name)
                 .option("user", repoUser)

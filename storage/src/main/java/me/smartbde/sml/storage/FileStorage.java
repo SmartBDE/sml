@@ -1,9 +1,6 @@
 package me.smartbde.sml.storage;
 
-import org.apache.spark.sql.Dataset;
-import org.apache.spark.sql.Encoders;
-import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SparkSession;
+import org.apache.spark.sql.*;
 import org.apache.spark.sql.catalyst.expressions.GenericRow;
 import org.apache.spark.sql.catalyst.expressions.GenericRowWithSchema;
 import org.apache.spark.sql.types.DataTypes;
@@ -59,7 +56,7 @@ public class FileStorage implements IStorage {
      * @param ds   数据
      */
     @Override
-    public void write(String name, Dataset<Row> ds) {
+    public void write(String name, Dataset<Row> ds, SaveMode mode) {
 //        Dataset<String> df = ds.map((Function1<Row, String>) row -> row.mkString(), Encoders.STRING());
 //        df.write().text(name);
         //ds.write().text(name);

@@ -1,5 +1,6 @@
 package me.smartbde.sml.commonutils;
 
+import me.smartbde.sml.commonutils.plugins.filter.StartLogger;
 import me.smartbde.sml.utils.PropertiesUtil;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -9,16 +10,17 @@ import org.apache.spark.sql.types.DataTypes;
 import org.junit.Test;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 public class SparkStreamingUtilTests implements Serializable {
+    SparkSession spark = SparkSession.builder()
+            .master("local")
+            .appName("SparkStreamingUtilTests.testUdf")
+            .getOrCreate();
+
     @Test
     public void testUdf() {
-        SparkSession spark = SparkSession.builder()
-                .master("local")
-                .appName("SparkStreamingUtilTests.testUdf")
-                .getOrCreate();
-
         spark.udf().register("s_strLen", new UDF1<String, Integer>() {
             @Override
             public Integer call(String s) throws Exception {
@@ -53,5 +55,19 @@ public class SparkStreamingUtilTests implements Serializable {
         if (filter instanceof ISQLFilter) {
             System.out.println(filter.toString() + "is SQLFilter");
         }
+    }
+
+    @Test
+    public void testLogger() {
+        FilterSession sess = new FilterSession("testLogger");
+        StartLogger logger = new StartLogger();
+        HashMap map = new HashMap();
+        map.put("table", "logs");
+        map.put("user", "springtest");
+        map.put("pwd", "123456");
+        map.put("url", "jdbc:mysql://127.0.0.1:33061/springtest?useUnicode=true&characterEncoding=utf-8&useSSL=false");
+        logger.setConfig(map);
+        logger.prepare(spark);
+        logger.process(spark, null, sess);
     }
 }

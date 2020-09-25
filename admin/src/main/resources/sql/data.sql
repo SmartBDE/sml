@@ -42,7 +42,14 @@ insert into plugins(plugin, ckey, cvalue) values ('JdbcInput.V1', 'table', 'text
 
 insert into plugins(plugin, ckey, cvalue) values ('FileOutput.V1', 'path', '../data/model/LogisticRegressionV1.model');
 
+insert into plugins(plugin, ckey, cvalue) values ('StartLogger.V1', 'url', 'jdbc:mysql://127.0.0.1:33061/springtest?useUnicode=true&characterEncoding=utf-8&useSSL=false');
+insert into plugins(plugin, ckey, cvalue) values ('StartLogger.V1', 'user', 'springtest');
+insert into plugins(plugin, ckey, cvalue) values ('StartLogger.V1', 'pwd', '123456');
 insert into plugins(plugin, ckey, cvalue) values ('StartLogger.V1', 'table', 'logs');
+
+insert into plugins(plugin, ckey, cvalue) values ('StopLogger.V1', 'url', 'jdbc:mysql://127.0.0.1:33061/springtest?useUnicode=true&characterEncoding=utf-8&useSSL=false');
+insert into plugins(plugin, ckey, cvalue) values ('StopLogger.V1', 'user', 'springtest');
+insert into plugins(plugin, ckey, cvalue) values ('StopLogger.V1', 'pwd', '123456');
 insert into plugins(plugin, ckey, cvalue) values ('StopLogger.V1', 'table', 'logs');
 
 ----------------------------------------

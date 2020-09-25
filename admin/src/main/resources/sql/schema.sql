@@ -142,7 +142,7 @@ create table pluginclass (
 drop table if exists logs;
 
 create table logs (
-    plugin varchar(100),
+    jobname varchar(100),
     sessionid varchar(100),
     act varchar(100),
     acttime datetime

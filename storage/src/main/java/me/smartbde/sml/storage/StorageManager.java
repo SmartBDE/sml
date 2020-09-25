@@ -2,6 +2,7 @@ package me.smartbde.sml.storage;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SaveMode;
 import org.apache.spark.sql.SparkSession;
 
 import java.io.InputStream;
@@ -37,8 +38,8 @@ public class StorageManager {
         return datasetStorage.read(name);
     }
 
-    public void write(String name, Dataset<Row> ds) {
-        datasetStorage.write(name, ds);
+    public void write(String name, Dataset<Row> ds, SaveMode mode) {
+        datasetStorage.write(name, ds, mode);
     }
 
     public void delete(String name) {

@@ -14,6 +14,7 @@ public class FilterSession implements ISession {
         attributes = new HashMap<>();
     }
 
+    @Override
     public String getJobName() {
         return jobName;
     }
