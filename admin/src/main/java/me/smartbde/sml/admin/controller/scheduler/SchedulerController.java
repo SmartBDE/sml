@@ -24,6 +24,13 @@ public class SchedulerController {
     public String getIndex(Model model) {
         List<Schedules> schedules = mySQLSchedulesRepository.findAll();
 
+        model.addAttribute("schedules", schedules);
+        return "scheduler/index";
+    }
+    @RequestMapping("/list")
+    public String getList(Model model) {
+        List<Schedules> schedules = mySQLSchedulesRepository.findAll();
+
         List<Jobs> jobs = new ArrayList<>();
         for (Schedules schedule : schedules) {
             List<Jobs> jobList = mySQLJobsRepository.findByName(schedule.getJobname());
@@ -31,6 +38,6 @@ public class SchedulerController {
         }
 
         model.addAttribute("jobs", jobs);
-        return "scheduler/index";
+        return "scheduler/list";
     }
 }

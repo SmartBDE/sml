@@ -1,29 +1,28 @@
 package me.smartbde.sml.commonutils.plugins.filter
 
-import java.lang
+import java.{lang, util}
+import javafx.util.Pair
 
-import javafx.util
-import me.smartbde.sml.commonutils.IFilter
-import org.apache.commons.configuration2.Configuration
+import me.smartbde.sml.commonutils.{IFilter, ISession}
 import org.apache.spark.sql.{Dataset, Row, SparkSession}
 
 class MaskFilter extends IFilter {
-  override def process(spark: SparkSession, df: Dataset[Row]): Dataset[Row] = ???
+  override def process(spark: SparkSession, df: Dataset[Row], session: ISession): Dataset[Row] = ???
 
   /**
    * Set Config. Configuration的实现类包含YAMLConfiguration，DatabaseConfiguration等
    **/
-  override def setConfig(config: Configuration): Unit = ???
+  override def setConfig(config: util.Map[String, String]): Unit = ???
 
   /**
    * Get Config.
    **/
-  override def getConfig: Configuration = ???
+  override def getConfig: util.Map[String, String] = ???
 
   /**
    * Return true and empty string if config is valid, return false and error message if config is invalid.
    */
-  override def checkConfig(): util.Pair[lang.Boolean, String] = ???
+  override def checkConfig(): Pair[lang.Boolean, String] = ???
 
   /**
    * Get Plugin Name.

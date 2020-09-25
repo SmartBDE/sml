@@ -10,6 +10,8 @@ import org.apache.spark.sql.SparkSession;
 import org.apache.spark.streaming.StreamingContext;
 import org.apache.spark.streaming.dstream.DStream;
 
+import java.util.Map;
+
 public class TcpStreamingInput implements IStreamingInput {
     @Override
     public Dataset<Row> rdd2dataset(SparkSession spark, RDD rdd) {
@@ -27,12 +29,12 @@ public class TcpStreamingInput implements IStreamingInput {
     }
 
     @Override
-    public void setConfig(Configuration config) {
+    public void setConfig(Map<String, String> config) {
 
     }
 
     @Override
-    public Configuration getConfig() {
+    public Map<String, String> getConfig() {
         return null;
     }
 

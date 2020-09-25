@@ -7,6 +7,8 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
+import java.util.Map;
+
 public class JdbcOutput implements IOutput {
     @Override
     public void process(Dataset<Row> df) {
@@ -14,12 +16,12 @@ public class JdbcOutput implements IOutput {
     }
 
     @Override
-    public void setConfig(Configuration config) {
+    public void setConfig(Map<String, String> config) {
 
     }
 
     @Override
-    public Configuration getConfig() {
+    public Map<String, String> getConfig() {
         return null;
     }
 

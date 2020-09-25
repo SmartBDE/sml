@@ -1,7 +1,6 @@
 package me.smartbde.sml.commonutils;
 
 import javafx.util.Pair;
-import org.apache.commons.configuration2.Configuration;
 import org.apache.spark.sql.SparkSession;
 
 import java.util.Map;

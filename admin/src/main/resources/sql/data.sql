@@ -46,6 +46,25 @@ insert into plugins(plugin, ckey, cvalue) values ('StartLogger.V1', 'path', '../
 insert into plugins(plugin, ckey, cvalue) values ('StopLogger.V1', 'path', '../data/model/LogisticRegressionV1.model');
 
 ----------------------------------------
+-- 插件对应类
+----------------------------------------
+insert into pluginclass(name, type, clazz) values ('GroovyScript', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.GroovyScript');
+insert into pluginclass(name, type, clazz) values ('JsonParser', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.JsonParser');
+insert into pluginclass(name, type, clazz) values ('LineParser', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.LineParser');
+insert into pluginclass(name, type, clazz) values ('LogisticRegressionPredict', 'sqlFilter', 'me.smartbde.sml.commonutils.plugins.filter.LogisticRegressionPredict');
+insert into pluginclass(name, type, clazz) values ('LogisticRegressionTrain', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.LogisticRegressionTrain');
+insert into pluginclass(name, type, clazz) values ('SqlFilter', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.SqlFilter');
+insert into pluginclass(name, type, clazz) values ('StartLogger', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.StartLogger');
+insert into pluginclass(name, type, clazz) values ('StopLogger', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.StopLogger');
+
+insert into pluginclass(name, type, clazz) values ('JdbcInput', 'batchInput', 'me.smartbde.sml.commonutils.plugins.input.JdbcInput');
+insert into pluginclass(name, type, clazz) values ('TcpStreamingInput', 'streamInput', 'me.smartbde.sml.commonutils.plugins.input.TcpStreamingInput');
+
+insert into pluginclass(name, type, clazz) values ('FileOutput', 'output', 'me.smartbde.sml.commonutils.plugins.output.FileOutput');
+insert into pluginclass(name, type, clazz) values ('JdbcOutput', 'output', 'me.smartbde.sml.commonutils.plugins.output.JdbcOutput');
+
+
+----------------------------------------
 -- 任务列表
 ----------------------------------------
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionTrain', 'input', 'JdbcInput.V1');
@@ -71,7 +90,7 @@ insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'f
 ----------------------------------------
 -- 激活的任务
 ----------------------------------------
-insert into schedules(jobname, type, runat, nextId) values ('DemoLogisticRegressionTrain', -1, '', 3);
+insert into schedules(jobname, type, runat, nextid) values ('DemoLogisticRegressionTrain', -1, '', 3);
 insert into schedules(jobname, type, runat) values ('DemoLogisticRegressionPredict2', -1, '');
 insert into schedules(jobname, type, runat) values ('DemoLogisticRegressionPredict2', -2, '');
 insert into streamings(jobname) values ('DemoLogisticRegressionPredict');

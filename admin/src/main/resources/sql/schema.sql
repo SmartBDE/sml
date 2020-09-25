@@ -111,7 +111,7 @@ create table schedules (
     jobname varchar(100),
     type int,
     runat varchar(100),
-    nextId int,
+    nextid int,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -122,4 +122,16 @@ drop table if exists streamings;
 
 create table streamings (
     jobname varchar(100)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-----------------------------------------
+-- 插件装载路径
+-----------------------------------------
+drop table if exists pluginclass;
+
+create table pluginclass (
+    name varchar(100),
+    type varchar(100),
+    clazz varchar(300),
+    CONSTRAINT sys_pk_pluginclass PRIMARY KEY (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

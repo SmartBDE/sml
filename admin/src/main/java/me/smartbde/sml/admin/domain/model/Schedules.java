@@ -10,7 +10,7 @@ public class Schedules {
     String jobname;
     Integer type;
     String runat;
-    Integer nextId;
+    Integer nextid;
 
     public String getJobname() {
         return jobname;
@@ -44,11 +44,11 @@ public class Schedules {
         this.id = id;
     }
 
-    public Integer getNextId() {
-        return nextId;
+    public Integer getNextid() {
+        return nextid;
     }
 
-    public void setNextId(Integer nextId) {
-        this.nextId = nextId;
+    public void setNextid(Integer nextid) {
+        this.nextid = nextid;
     }
 }

@@ -1,12 +1,17 @@
 package me.smartbde.sml.smlbatch;
 
+import javafx.util.Pair;
 import me.smartbde.sml.admin.domain.model.Jobs;
+import me.smartbde.sml.admin.domain.model.PluginClass;
+import me.smartbde.sml.admin.domain.model.PluginInfo;
 import me.smartbde.sml.admin.domain.model.Schedules;
 import me.smartbde.sml.admin.domain.repository.MySQLJobsRepository;
+import me.smartbde.sml.admin.domain.repository.MySQLPluginClassRepository;
 import me.smartbde.sml.admin.domain.repository.MySQLPluginsRepository;
 import me.smartbde.sml.admin.domain.repository.MySQLSchedulesRepository;
 import me.smartbde.sml.commonutils.*;
 import me.smartbde.sml.utils.PropertiesUtil;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.spark.SparkConf;
 import org.apache.spark.sql.SparkSession;
 import org.slf4j.Logger;
@@ -16,10 +21,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -36,6 +38,8 @@ public class AppBean implements ApplicationRunner {
     private MySQLJobsRepository mySQLJobsRepository;
     @Autowired
     private MySQLPluginsRepository mySQLPluginsRepository;
+    @Autowired
+    private MySQLPluginClassRepository mySQLPluginClassRepository;
     private String appName = "BatchApplication.AppBean";
     private String master = "local[*]";
     private SparkConf sparkConf = new SparkConf().setMaster(master).setAppName(appName);
@@ -107,19 +111,47 @@ public class AppBean implements ApplicationRunner {
         List<IOutput> outputs = new ArrayList<>();
 
         for (Jobs job : jobs) {
-            // 首先要创建plugin，采用扫描目录获取名字的方式动态加载
+            try {
+                String clazz = job.getPlugin().split(".")[0];
+                // 首先要创建plugin，采用录获取名字的方式动态加载
+                PluginClass pluginClass = mySQLPluginClassRepository.findOne(clazz);
 
-            // 然后把配置传给plugin
+                IPlugin plugin = (IPlugin) PluginUtils.newClazz(pluginClass.getClazz());
+                if (pluginClass.getType().equals("filter") || pluginClass.getType().equals("sqlFilter")) {
 
-            // 然后调用plugin的prepare
+                } else if (pluginClass.getType().equals("batchInput") || pluginClass.getType().equals("streamInput")) {
+
+                } else if (pluginClass.getType().equals("output")) {
+
+                }
+                // 然后把配置传给plugin
+                List<PluginInfo> pluginInfos = mySQLPluginsRepository.findByPlugin(job.getPlugin());
+                Map<String, String> map = new HashedMap();
+                for (PluginInfo info : pluginInfos) {
+                    map.put(info.getCkey(), info.getCvalue());
+                }
+                plugin.setConfig(map);
+
+                // 然后调用plugin的prepare
+                Pair<Boolean, String> r = plugin.checkConfig();
+                if (r.getKey()) {
+                    plugin.prepare(spark);
+
+                } else {
+                    logger.info("can not pass config:" + r.getValue());
+                }
+
+            } catch (Exception e) {
+                logger.info(e.toString());
+            }
         }
 
         // 从配置中装载input，调用filter，执行output
 
 
         // 看是否有触发下一步的执行
-        if (schedules.getNextId() != null) {
-            Schedules next = mySQLSchedulesRepository.findOne(schedules.getNextId());
+        if (schedules.getNextid() != null) {
+            Schedules next = mySQLSchedulesRepository.findOne(schedules.getNextid());
             runBatchJob(spark, next);
         }
     }

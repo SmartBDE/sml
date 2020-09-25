@@ -9,6 +9,7 @@ import org.apache.spark.sql.types.DataTypes;
 import org.junit.Test;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class SparkStreamingUtilTests implements Serializable {
     @Test
@@ -43,5 +44,14 @@ public class SparkStreamingUtilTests implements Serializable {
         r.show();
 
         spark.stop();
+    }
+
+    @Test
+    public void testLoader() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        IFilter filter = (IFilter) PluginUtils.newClazz("me.smartbde.sml.commonutils.plugins.filter.LogisticRegressionPredict");
+        System.out.println(filter.toString());
+        if (filter instanceof ISQLFilter) {
+            System.out.println(filter.toString() + "is SQLFilter");
+        }
     }
 }
