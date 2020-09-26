@@ -1,6 +1,7 @@
 package me.smartbde.sml.commonutils.plugins.filter;
 
 import javafx.util.Pair;
+import me.smartbde.sml.commonutils.AbstractPlugin;
 import me.smartbde.sml.commonutils.ISQLFilter;
 import me.smartbde.sml.commonutils.ISession;
 import me.smartbde.sml.scratch.JavaLogisticRegression;
@@ -22,10 +23,8 @@ import java.util.*;
  *   select predict(x1,x2,x3....), x1, x2, x3... from table
  *   select predict(x1,x2,x3....) from table
  */
-public class LogisticRegressionPredict implements ISQLFilter {
-    private Map<String, String> configuration;
+public class LogisticRegressionPredict extends AbstractPlugin implements ISQLFilter {
     private JavaLogisticRegression javaLogisticRegression;
-    private int count;
 
     /**
      * Allow to register user defined UDFs
@@ -56,29 +55,21 @@ public class LogisticRegressionPredict implements ISQLFilter {
     }
 
     /**
-     * Set Config. Configuration的实现类包含YAMLConfiguration，DatabaseConfiguration等
-     *
-     * @param config
-     */
-    @Override
-    public void setConfig(Map<String, String> config) {
-        configuration = config;
-    }
-
-    /**
-     * Get Config.
-     */
-    @Override
-    public Map<String, String> getConfig() {
-        return configuration;
-    }
-
-    /**
      * Return true and empty string if config is valid, return false and error message if config is invalid.
      */
     @Override
     public Pair<Boolean, String> checkConfig() {
-        return null;
+        if (properties == null) {
+            return new Pair<>(false, "missing config");
+        }
+
+        if (properties.get("dimension") != null
+                && properties.get("seed") != null
+                && properties.get("modelpath") != null) {
+            return new Pair<>(true, "");
+        }
+
+        return new Pair<>(false, "missing config");
     }
 
     /**
@@ -96,11 +87,12 @@ public class LogisticRegressionPredict implements ISQLFilter {
      */
     @Override
     public boolean prepare(SparkSession spark) {
-        if (configuration == null) {
+        if (properties == null) {
             return false;
         }
-        javaLogisticRegression = new JavaLogisticRegression(10, 47);
-        count = Integer.parseInt(configuration.get(""));
+        javaLogisticRegression = new JavaLogisticRegression(
+                Integer.parseInt(properties.get("dimension")),
+                Integer.parseInt(properties.get("seed")));
         return true;
     }
 }

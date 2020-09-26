@@ -1,7 +1,7 @@
 package me.smartbde.sml.commonutils.plugins.filter;
 
 import javafx.util.Pair;
-import me.smartbde.sml.commonutils.AbstractFilter;
+import me.smartbde.sml.commonutils.AbstractPlugin;
 import me.smartbde.sml.commonutils.ISession;
 import me.smartbde.sml.storage.JdbcStorage;
 import org.apache.spark.sql.*;
@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Logger extends AbstractFilter {
+public class Logger extends AbstractPlugin {
     protected JdbcStorage jdbcStorage = null;
     protected String loggerFlag = null;
 

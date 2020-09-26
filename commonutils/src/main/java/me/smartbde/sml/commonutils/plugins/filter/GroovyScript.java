@@ -1,14 +1,11 @@
 package me.smartbde.sml.commonutils.plugins.filter;
 
 import javafx.util.Pair;
-import me.smartbde.sml.commonutils.AbstractFilter;
-import me.smartbde.sml.commonutils.IFilter;
+import me.smartbde.sml.commonutils.AbstractPlugin;
 import me.smartbde.sml.commonutils.ISession;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
-
-import java.util.Map;
 
 /**
  * 功能说明：对Dataset<Row>中的信息，用脚本进行处理，通常这发生在Dataset<Row>.map中
@@ -16,7 +13,7 @@ import java.util.Map;
  *
  * 可以热加载的脚本，以及编译后不错的速度，是groovy的一大亮点
  */
-public class GroovyScript extends AbstractFilter {
+public class GroovyScript extends AbstractPlugin {
     @Override
     public Dataset<Row> process(SparkSession spark, Dataset<Row> df, ISession session) {
         return null;

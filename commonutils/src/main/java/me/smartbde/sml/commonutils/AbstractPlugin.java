@@ -2,7 +2,7 @@ package me.smartbde.sml.commonutils;
 
 import java.util.Map;
 
-public abstract class AbstractFilter implements IFilter {
+public abstract class AbstractPlugin implements IPlugin {
     protected Map<String, String> properties = null;
 
     /**

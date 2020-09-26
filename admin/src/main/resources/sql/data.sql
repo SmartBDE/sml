@@ -35,12 +35,26 @@ insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionPredict.V1'
 insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionPredict.V1', 'dimension', '10');
 insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionPredict.V1', 'seed', '47');
 
+insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionTrain.V1', 'dimension', '10');
+insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionTrain.V1', 'seed', '47');
+
 insert into plugins(plugin, ckey, cvalue) values ('JdbcInput.V1', 'url', 'jdbc:mysql://127.0.0.1:33061/springtest?useUnicode=true&characterEncoding=utf-8&useSSL=false');
 insert into plugins(plugin, ckey, cvalue) values ('JdbcInput.V1', 'user', 'springtest');
 insert into plugins(plugin, ckey, cvalue) values ('JdbcInput.V1', 'pwd', '123456');
 insert into plugins(plugin, ckey, cvalue) values ('JdbcInput.V1', 'table', 'textfile');
 
+insert into plugins(plugin, ckey, cvalue) values ('JdbcOutput.V1', 'url', 'jdbc:mysql://127.0.0.1:33061/springtest?useUnicode=true&characterEncoding=utf-8&useSSL=false');
+insert into plugins(plugin, ckey, cvalue) values ('JdbcOutput.V1', 'user', 'springtest');
+insert into plugins(plugin, ckey, cvalue) values ('JdbcOutput.V1', 'pwd', '123456');
+insert into plugins(plugin, ckey, cvalue) values ('JdbcOutput.V1', 'table', 'lr_predict_result');
+
 insert into plugins(plugin, ckey, cvalue) values ('FileOutput.V1', 'path', '../data/model/LogisticRegressionV1.model');
+
+insert into plugins(plugin, ckey, cvalue) values ('HttpOutput.V1', 'host', '127.0.0.1');
+insert into plugins(plugin, ckey, cvalue) values ('HttpOutput.V1', 'port', '20000');
+
+insert into plugins(plugin, ckey, cvalue) values ('TcpStreamingInput.V1', 'host', '127.0.0.1');
+insert into plugins(plugin, ckey, cvalue) values ('TcpStreamingInput.V1', 'port', '19000');
 
 insert into plugins(plugin, ckey, cvalue) values ('StartLogger.V1', 'url', 'jdbc:mysql://127.0.0.1:33061/springtest?useUnicode=true&characterEncoding=utf-8&useSSL=false');
 insert into plugins(plugin, ckey, cvalue) values ('StartLogger.V1', 'user', 'springtest');
@@ -83,15 +97,13 @@ insert into jobs(name, type, plugin) values ('DemoLogisticRegressionTrain', 'fil
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionTrain', 'filter', 'StopLogger.V1');
 
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict2', 'input', 'JdbcInput.V1');
-insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict2', 'output', 'FileOutput.V1');
+insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict2', 'output', 'JdbcOutput.V1');
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict2', 'filter', 'StartLogger.V1');
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict2', 'sqlFilter', 'LogisticRegressionPredict.V1');
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict2', 'filter', 'StopLogger.V1');
 
-insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'spark.host', '127.0.0.1');
-insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'spark.port', '19000');
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'input', 'TcpStreamingInput.V1');
-insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'output', 'Stdout.V1');
+insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'output', 'HttpOutput.V1');
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'filter', 'StartLogger.V1');
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'sqlFilter', 'LogisticRegressionPredict.V1');
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'filter', 'StopLogger.V1');
@@ -102,4 +114,5 @@ insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'f
 insert into schedules(jobname, type, runat, nextid) values ('DemoLogisticRegressionTrain', -1, '', 3);
 insert into schedules(jobname, type, runat) values ('DemoLogisticRegressionPredict2', -1, '');
 insert into schedules(jobname, type, runat) values ('DemoLogisticRegressionPredict2', -2, '');
+
 insert into streamings(jobname) values ('DemoLogisticRegressionPredict');
