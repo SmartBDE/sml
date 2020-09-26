@@ -28,5 +28,5 @@ public interface IPlugin {
     /**
      * Prepare before running, do things like set config default value, add broadcast variable, accumulator.
      */
-    public void prepare(SparkSession spark);
+    public boolean prepare(SparkSession spark);
 }

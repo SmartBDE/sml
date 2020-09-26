@@ -38,7 +38,7 @@ public class JdbcInput implements IInput {
     }
 
     @Override
-    public void prepare(SparkSession spark) {
-
+    public boolean prepare(SparkSession spark) {
+        return false;
     }
 }

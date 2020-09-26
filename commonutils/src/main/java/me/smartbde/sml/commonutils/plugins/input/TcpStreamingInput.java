@@ -51,7 +51,7 @@ public class TcpStreamingInput implements IStreamingInput {
     }
 
     @Override
-    public void prepare(SparkSession spark) {
-
+    public boolean prepare(SparkSession spark) {
+        return false;
     }
 }

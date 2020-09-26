@@ -1,57 +1,20 @@
 package me.smartbde.sml.commonutils.plugins.filter;
 
 import javafx.util.Pair;
-import me.smartbde.sml.commonutils.IFilter;
-import me.smartbde.sml.commonutils.ISession;
 import me.smartbde.sml.storage.JdbcStorage;
-import org.apache.spark.sql.*;
-import org.apache.spark.sql.types.DataTypes;
-import org.apache.spark.sql.types.Metadata;
-import org.apache.spark.sql.types.StructField;
-import org.apache.spark.sql.types.StructType;
-
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.sql.Date;
-import java.util.List;
-import java.util.Map;
+import org.apache.spark.sql.SparkSession;
 
 /**
+ * 功能说明：前置在任务执行前，对任务执行前的信息进行日志保存
  * 格式输入要求：无
  */
-public class StartLogger implements IFilter {
-    private Map<String, String> properties;
-    private JdbcStorage jdbcStorage;
-
-    @Override
-    public Dataset<Row> process(SparkSession spark, Dataset<Row> df, ISession session) {
-        Row row = RowFactory.create(session.getJobName(),
-                session.getId(), "start", new Timestamp(new java.util.Date().getTime()));
-        List<Row> list = new ArrayList<>();
-        list.add(row);
-        StructType schema = DataTypes.createStructType(new StructField[] {
-                new StructField("jobname", DataTypes.StringType, false, Metadata.empty()),
-                new StructField("sessionid", DataTypes.StringType, false, Metadata.empty()),
-                new StructField("act", DataTypes.StringType, false, Metadata.empty()),
-                new StructField("acttime", DataTypes.TimestampType, false, Metadata.empty())
-        });
-        Dataset<Row> ds = spark.createDataFrame(list, schema);
-        jdbcStorage.write(properties.get("table"), ds, SaveMode.Append);
-        return df;
-    }
-
-    @Override
-    public void setConfig(Map<String, String> config) {
-        properties = config;
-    }
-
-    @Override
-    public Map<String, String> getConfig() {
-        return properties;
-    }
-
+public class StartLogger extends Logger {
     @Override
     public Pair<Boolean, String> checkConfig() {
+        if (properties == null) {
+            return new Pair<>(false, "missing config");
+        }
+
         if (properties.get("url") != null
                 && properties.get("user") != null
                 && properties.get("pwd") != null
@@ -63,14 +26,12 @@ public class StartLogger implements IFilter {
     }
 
     @Override
-    public String getName() {
-        return "StartLogger";
-    }
-
-    @Override
-    public void prepare(SparkSession spark) {
+    public boolean prepare(SparkSession spark) {
         if (properties != null && checkConfig().getKey()) {
             jdbcStorage = new JdbcStorage(properties.get("url"), properties.get("user"), properties.get("pwd"));
+            loggerFlag = "start";
+            return true;
         }
+        return false;
     }
 }

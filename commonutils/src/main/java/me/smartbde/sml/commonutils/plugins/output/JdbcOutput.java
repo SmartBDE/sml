@@ -38,7 +38,7 @@ public class JdbcOutput implements IOutput {
     }
 
     @Override
-    public void prepare(SparkSession spark) {
-
+    public boolean prepare(SparkSession spark) {
+        return false;
     }
 }

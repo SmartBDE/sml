@@ -20,17 +20,15 @@
                     <tbody>
                     <tr>
                         <th>任务</th>
-                        <th>触发时间</th>
-                        <th>结束时间</th>
-                        <th>输入</th>
-                        <th>输出</th>
+                        <th>会话</th>
+                        <th>行为</th>
+                        <th>时间</th>
                     </tr>
                     <tr th:each="stat : ${stats}">
-                        <td th:text="${stat.job}">job</td>
-                        <td th:text="${stat.startTime}">start</td>
-                        <td th:text="${stat.stopTime}">stop</td>
-                        <td th:text="${stat.input}">input</td>
-                        <td th:text="${stat.output}">output</td>
+                        <td th:text="${stat.jobname}">任务</td>
+                        <td th:text="${stat.sessionid}">会话</td>
+                        <td th:text="${stat.act}">行为</td>
+                        <td th:text="${stat.acttime}">时间</td>
                     </tr>
                     </tbody>
                 </table>

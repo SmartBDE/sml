@@ -35,5 +35,5 @@ class Stdout extends IOutput {
   /**
    * Prepare before running, do things like set config default value, add broadcast variable, accumulator.
    */
-  override def prepare(spark: SparkSession): Unit = ???
+  override def prepare(spark: SparkSession): Boolean = ???
 }

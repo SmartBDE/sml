@@ -13,12 +13,12 @@ import org.apache.spark.sql.expressions.UserDefinedFunction;
 import java.util.*;
 
 /**
- * 功能说明：预测训练函数，属于批量操作的处理器
- * 格式输入要求：训练算法所需格式
+ * 功能说明：线性回归预测函数，利用训练好的线性回归模型对输入进行预测
+ * 格式输入要求：Dataset<Row>中以算法输入所需格式对信息进行保存
  *
- * 增加udf函数predict
+ * 增加udf函数LogisticRegression_predict
  *
- * 处理函数
+ * 处理实现
  *   select predict(x1,x2,x3....), x1, x2, x3... from table
  *   select predict(x1,x2,x3....) from table
  */
@@ -95,11 +95,12 @@ public class LogisticRegressionPredict implements ISQLFilter {
      * @param spark
      */
     @Override
-    public void prepare(SparkSession spark) {
+    public boolean prepare(SparkSession spark) {
         if (configuration == null) {
-            throw new RuntimeException("configuration not set");
+            return false;
         }
         javaLogisticRegression = new JavaLogisticRegression(10, 47);
         count = Integer.parseInt(configuration.get(""));
+        return true;
     }
 }

@@ -2,24 +2,18 @@ package me.smartbde.sml.commonutils.plugins.filter;
 
 import javafx.util.Pair;
 import me.smartbde.sml.commonutils.AbstractFilter;
-import me.smartbde.sml.commonutils.IFilter;
 import me.smartbde.sml.commonutils.ISession;
-import me.smartbde.sml.scratch.JavaLogisticRegression;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
-import java.util.Map;
-
 /**
- * 功能说明：线性回归预测模型训练函数，属于批量操作的处理器
- * 格式输入要求：训练算法所需格式
+ * 功能说明：对保存在session中内存对象进行持久化，并保存到文件系统中
+ * 格式输入要求：无
  *
- * 训练的结果，可以由本插件直接持久化到文件系统中
+ * 这是一个特殊的插件，用于实现一些特别的保存操作
  */
-public class LogisticRegressionTrain extends AbstractFilter {
-    private JavaLogisticRegression javaLogisticRegression;
-
+public class FileSaver extends AbstractFilter {
     @Override
     public Dataset<Row> process(SparkSession spark, Dataset<Row> df, ISession session) {
         return null;
@@ -38,7 +32,7 @@ public class LogisticRegressionTrain extends AbstractFilter {
      */
     @Override
     public String getName() {
-        return "LogisticRegressionTrain";
+        return null;
     }
 
     /**
@@ -48,7 +42,6 @@ public class LogisticRegressionTrain extends AbstractFilter {
      */
     @Override
     public boolean prepare(SparkSession spark) {
-        javaLogisticRegression = new JavaLogisticRegression(10, 47);
-        return true;
+        return false;
     }
 }

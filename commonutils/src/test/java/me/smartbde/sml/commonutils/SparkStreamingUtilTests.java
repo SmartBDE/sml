@@ -1,6 +1,7 @@
 package me.smartbde.sml.commonutils;
 
 import me.smartbde.sml.commonutils.plugins.filter.StartLogger;
+import me.smartbde.sml.commonutils.plugins.filter.StopLogger;
 import me.smartbde.sml.utils.PropertiesUtil;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -40,7 +41,7 @@ public class SparkStreamingUtilTests implements Serializable {
                 .option("pass" + "word", passwd)
                 .load();
 
-        ds.registerTempTable("person");
+        ds.createOrReplaceTempView("person");
 
         Dataset<Row> r = ds.sqlContext().sql("select s_strLen(name), name from person");
         r.show();
@@ -60,14 +61,20 @@ public class SparkStreamingUtilTests implements Serializable {
     @Test
     public void testLogger() {
         FilterSession sess = new FilterSession("testLogger");
-        StartLogger logger = new StartLogger();
         HashMap map = new HashMap();
         map.put("table", "logs");
         map.put("user", "springtest");
         map.put("pwd", "123456");
         map.put("url", "jdbc:mysql://127.0.0.1:33061/springtest?useUnicode=true&characterEncoding=utf-8&useSSL=false");
-        logger.setConfig(map);
-        logger.prepare(spark);
-        logger.process(spark, null, sess);
+
+        StartLogger startLogger = new StartLogger();
+        startLogger.setConfig(map);
+        startLogger.prepare(spark);
+        startLogger.process(spark, null, sess);
+
+        StopLogger stopLogger = new StopLogger();
+        stopLogger.setConfig(map);
+        stopLogger.prepare(spark);
+        stopLogger.process(spark, null, sess);
     }
 }

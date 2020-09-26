@@ -1,6 +1,7 @@
 package me.smartbde.sml.commonutils.plugins.filter;
 
 import javafx.util.Pair;
+import me.smartbde.sml.commonutils.AbstractFilter;
 import me.smartbde.sml.commonutils.IFilter;
 import me.smartbde.sml.commonutils.ISession;
 import org.apache.spark.sql.Dataset;
@@ -10,21 +11,15 @@ import org.apache.spark.sql.SparkSession;
 import java.util.Map;
 
 /**
- * 格式输入要求：Row是行格式
+ * 功能说明：将用户输入的行文本解析为带格式的Dataset<Row>
+ * 格式输入要求：以行为格式输入的文本信息，以字符串格式保存在Row中，可以用分隔符切割
+ *
+ * 用户的输入是多行的文本，系统会需要从行文本中，按特定的格式，对信息进行提取，
+ * 提取的信息保存为Dataset<Row>格式，从而实现对信息的SQL操作能力
  */
-public class LineParser implements IFilter {
+public class LineParser extends AbstractFilter {
     @Override
     public Dataset<Row> process(SparkSession spark, Dataset<Row> df, ISession session) {
-        return null;
-    }
-
-    @Override
-    public void setConfig(Map<String, String> config) {
-
-    }
-
-    @Override
-    public Map<String, String> getConfig() {
         return null;
     }
 
@@ -39,7 +34,7 @@ public class LineParser implements IFilter {
     }
 
     @Override
-    public void prepare(SparkSession spark) {
-
+    public boolean prepare(SparkSession spark) {
+        return false;
     }
 }

@@ -57,7 +57,7 @@ public class FileOutput implements IOutput {
      * @param spark
      */
     @Override
-    public void prepare(SparkSession spark) {
-
+    public boolean prepare(SparkSession spark) {
+        return false;
     }
 }

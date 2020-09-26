@@ -142,8 +142,10 @@ create table pluginclass (
 drop table if exists logs;
 
 create table logs (
+    id int unsigned auto_increment,
     jobname varchar(100),
     sessionid varchar(100),
     act varchar(100),
-    acttime datetime
+    acttime datetime,
+    PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
