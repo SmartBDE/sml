@@ -3,7 +3,6 @@ package me.smartbde.sml.commonutils.plugins.input;
 import javafx.util.Pair;
 import me.smartbde.sml.commonutils.AbstractPlugin;
 import me.smartbde.sml.commonutils.IInput;
-import me.smartbde.sml.commonutils.IOutput;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;

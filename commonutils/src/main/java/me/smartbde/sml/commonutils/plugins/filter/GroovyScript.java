@@ -2,6 +2,7 @@ package me.smartbde.sml.commonutils.plugins.filter;
 
 import javafx.util.Pair;
 import me.smartbde.sml.commonutils.AbstractPlugin;
+import me.smartbde.sml.commonutils.IFilter;
 import me.smartbde.sml.commonutils.ISession;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -13,7 +14,7 @@ import org.apache.spark.sql.SparkSession;
  *
  * 可以热加载的脚本，以及编译后不错的速度，是groovy的一大亮点
  */
-public class GroovyScript extends AbstractPlugin {
+public class GroovyScript extends AbstractPlugin implements IFilter {
     @Override
     public Dataset<Row> process(SparkSession spark, Dataset<Row> df, ISession session) {
         return null;

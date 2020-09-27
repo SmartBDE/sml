@@ -28,7 +28,16 @@ public class LogisticRegressionTrain extends AbstractPlugin implements IFilter {
      */
     @Override
     public Pair<Boolean, String> checkConfig() {
-        return null;
+        if (properties == null) {
+            return new Pair<>(false, "missing config");
+        }
+
+        if (properties.get("dimension") != null
+                && properties.get("seed") != null) {
+            return new Pair<>(true, "");
+        }
+
+        return new Pair<>(false, "missing config");
     }
 
     /**
@@ -46,7 +55,12 @@ public class LogisticRegressionTrain extends AbstractPlugin implements IFilter {
      */
     @Override
     public boolean prepare(SparkSession spark) {
-        javaLogisticRegression = new JavaLogisticRegression(10, 47);
+        if (properties == null) {
+            return false;
+        }
+        javaLogisticRegression = new JavaLogisticRegression(
+                Integer.parseInt(properties.get("dimension")),
+                Integer.parseInt(properties.get("seed")));
         return true;
     }
 }

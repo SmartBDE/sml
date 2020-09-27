@@ -33,7 +33,7 @@ public class JavaLogisticRegression {
         this.rand = new Random(seed);
     }
 
-    public double predict(double[] weights, double[] x) {
+    public Double predict(Double[] weights, Double[] x) {
         double value = 0;
         for (int i = 0; i < D; i++) {
             value += weights[i] * x[i];
@@ -56,8 +56,8 @@ public class JavaLogisticRegression {
             w[i] = 2 * rand.nextDouble() - 1;
         }
 
-        System.out.print("Init w: ");
-        System.out.println(Arrays.toString(w));
+//        System.out.print("Init w: ");
+//        System.out.println(Arrays.toString(w));
 
         for (int i = 1; i <= ITERATIONS; i++) {
 //            System.out.println("On iteration " + i + ", job: " + (i - 1));
@@ -71,8 +71,8 @@ public class JavaLogisticRegression {
             }
         }
 
-        System.out.print("Final w: ");
-        System.out.println(Arrays.toString(w));
+//        System.out.print("Final w: ");
+//        System.out.println(Arrays.toString(w));
 
         return w;
     }

@@ -4,14 +4,21 @@ import javafx.util.Pair;
 import me.smartbde.sml.commonutils.AbstractPlugin;
 import me.smartbde.sml.commonutils.ISQLFilter;
 import me.smartbde.sml.commonutils.ISession;
+import me.smartbde.sml.commonutils.UdfRegister;
 import me.smartbde.sml.scratch.JavaLogisticRegression;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
+import org.apache.spark.sql.api.java.UDF2;
 import org.apache.spark.sql.expressions.UserDefinedAggregateFunction;
 import org.apache.spark.sql.expressions.UserDefinedFunction;
+import org.apache.spark.sql.types.DataType;
+import org.apache.spark.sql.types.DataTypes;
 
 import java.util.*;
+import scala.Option;
+import scala.Some;
+import scala.collection.Seq;
 
 /**
  * 功能说明：线性回归预测函数，利用训练好的线性回归模型对输入进行预测
@@ -33,8 +40,20 @@ public class LogisticRegressionPredict extends AbstractPlugin implements ISQLFil
      */
     @Override
     public List<Pair<String, UserDefinedFunction>> getUdfList() {
+        List<DataType> types = new ArrayList<DataType>();
+        types.add(DataTypes.createArrayType(DataTypes.DoubleType));
+        types.add(DataTypes.createArrayType(DataTypes.DoubleType));
+        Option<Seq<DataType>> option = (Option<Seq<DataType>>) new Some<List<DataType>>(types);
+
         List<Pair<String, UserDefinedFunction>> list = new ArrayList<Pair<String, UserDefinedFunction>>();
-        // 这里增加predict函数
+        list.add(new Pair<String, UserDefinedFunction>("LogisticRegressionPredict_V1",
+                new UserDefinedFunction(new UDF2<Double[], Double[], Double>() {
+                    @Override
+                    public Double call(Double[] doubles1, Double[] doubles2) throws Exception {
+                        return javaLogisticRegression.predict(doubles1, doubles2);
+                    }
+                }, DataTypes.DoubleType, option)));
+
         return list;
     }
 
@@ -50,8 +69,7 @@ public class LogisticRegressionPredict extends AbstractPlugin implements ISQLFil
 
     @Override
     public Dataset<Row> process(SparkSession spark, Dataset<Row> df, ISession session) {
-
-        return null;
+        return df.sqlContext().sql("");
     }
 
     /**
@@ -93,6 +111,8 @@ public class LogisticRegressionPredict extends AbstractPlugin implements ISQLFil
         javaLogisticRegression = new JavaLogisticRegression(
                 Integer.parseInt(properties.get("dimension")),
                 Integer.parseInt(properties.get("seed")));
+
+        UdfRegister.findAndRegisterUdfs(spark, this);
         return true;
     }
 }

@@ -21,14 +21,10 @@
                     <tr>
                         <th>任务</th>
                         <th>记录器</th>
-                        <th>键定义</th>
-                        <th>键值</th>
                     </tr>
                     <tr th:each="joblogger : ${jobloggers}">
                         <td th:text="${joblogger.jobName}">LogisticRegressionTrainJob</td>
                         <td th:text="${joblogger.plugin}">StartLogger</td>
-                        <td th:text="${joblogger.ckey}">key</td>
-                        <td th:text="${joblogger.cvalue}">value</td>
                     </tr>
                     </tbody>
                 </table>

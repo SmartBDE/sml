@@ -2,6 +2,7 @@ package me.smartbde.sml.commonutils.plugins.filter;
 
 import javafx.util.Pair;
 import me.smartbde.sml.commonutils.AbstractPlugin;
+import me.smartbde.sml.commonutils.IFilter;
 import me.smartbde.sml.commonutils.ISession;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -13,7 +14,7 @@ import org.apache.spark.sql.SparkSession;
  *
  * 这是一个特殊的插件，用于实现一些特别的保存操作
  */
-public class FileSaver extends AbstractPlugin {
+public class FileSaver extends AbstractPlugin implements IFilter {
     @Override
     public Dataset<Row> process(SparkSession spark, Dataset<Row> df, ISession session) {
         df.write().text(properties.get("path"));

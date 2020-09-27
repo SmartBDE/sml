@@ -1,7 +1,9 @@
 package me.smartbde.sml.admin.controller.monitor;
 
 import me.smartbde.sml.admin.domain.model.JobLogger;
+import me.smartbde.sml.admin.domain.model.Jobs;
 import me.smartbde.sml.admin.domain.model.StatInfo;
+import me.smartbde.sml.admin.domain.repository.MySQLJobsRepository;
 import me.smartbde.sml.admin.domain.repository.MySQLStatInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,11 +22,22 @@ import java.util.List;
 @RequestMapping("/monitor")
 public class MonitorController {
     @Autowired
+    MySQLJobsRepository mySQLJobsRepository;
+    @Autowired
     MySQLStatInfoRepository mySQLStatInfoRepository;
 
     @RequestMapping("/index")
     public String getIndex(Model model) {
         List<JobLogger> jobloggers = new ArrayList<JobLogger>();
+        
+        List<Jobs> jobs = mySQLJobsRepository.findByPluginLike("%Logger%");
+        for (Jobs job : jobs) {
+            JobLogger jlogger = new JobLogger();
+            jlogger.setJobName(job.getName());
+            jlogger.setPlugin(job.getPlugin());
+            jobloggers.add(jlogger);
+        }
+
         model.addAttribute("jobloggers", jobloggers);
         return "monitor/index";
     }

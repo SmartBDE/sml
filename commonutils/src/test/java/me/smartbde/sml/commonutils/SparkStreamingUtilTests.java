@@ -1,5 +1,6 @@
 package me.smartbde.sml.commonutils;
 
+import me.smartbde.sml.commonutils.plugins.filter.LogisticRegressionPredict;
 import me.smartbde.sml.commonutils.plugins.filter.StartLogger;
 import me.smartbde.sml.commonutils.plugins.filter.StopLogger;
 import me.smartbde.sml.utils.PropertiesUtil;
@@ -76,5 +77,21 @@ public class SparkStreamingUtilTests implements Serializable {
         stopLogger.setConfig(map);
         stopLogger.prepare(spark);
         stopLogger.process(spark, null, sess);
+    }
+
+    @Test
+    public void testLRPredict() {
+        FilterSession sess = new FilterSession("testLRPredict");
+        HashMap map = new HashMap();
+        map.put("dimension", "10");
+        map.put("seed", "47");
+        map.put("modelpath", "../data/model/LogisticRegressionV1.model");
+
+        LogisticRegressionPredict predict = new LogisticRegressionPredict();
+        predict.setConfig(map);
+
+        if (predict.prepare(spark)) {
+            predict.process(spark, null, sess);
+        }
     }
 }

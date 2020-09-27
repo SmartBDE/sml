@@ -2,6 +2,7 @@ package me.smartbde.sml.commonutils.plugins.filter;
 
 import javafx.util.Pair;
 import me.smartbde.sml.commonutils.AbstractPlugin;
+import me.smartbde.sml.commonutils.IFilter;
 import me.smartbde.sml.commonutils.ISession;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -14,7 +15,7 @@ import org.apache.spark.sql.SparkSession;
  * 用户的输入是多行的文本，系统会需要从行文本中，按特定的格式，对信息进行提取，
  * 提取的信息保存为Dataset<Row>格式，从而实现对信息的SQL操作能力
  */
-public class LineParser extends AbstractPlugin {
+public class LineParser extends AbstractPlugin implements IFilter {
     @Override
     public Dataset<Row> process(SparkSession spark, Dataset<Row> df, ISession session) {
         return null;
