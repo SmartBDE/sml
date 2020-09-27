@@ -37,6 +37,7 @@ insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionPredict.V1'
 
 insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionTrain.V1', 'dimension', '10');
 insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionTrain.V1', 'seed', '47');
+insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionTrain.V1', 'count', '500');
 
 insert into plugins(plugin, ckey, cvalue) values ('JdbcInput.V1', 'url', 'jdbc:mysql://127.0.0.1:33061/springtest?useUnicode=true&characterEncoding=utf-8&useSSL=false');
 insert into plugins(plugin, ckey, cvalue) values ('JdbcInput.V1', 'user', 'springtest');

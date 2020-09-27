@@ -112,6 +112,7 @@ public class AppBean implements ApplicationRunner {
         List<IFilter> filters = new ArrayList<>();
         List<IOutput> outputs = new ArrayList<>();
 
+        boolean okFlag = true;
         for (Jobs job : jobs) {
             try {
                 String clazz = job.getPlugin().split(".")[0];
@@ -126,7 +127,7 @@ public class AppBean implements ApplicationRunner {
                 } else if (pluginClass.getType().equals("output")) {
                     outputs.add((IOutput) plugin);
                 }
-                // 然后把配置传给plugin
+                // 然后把配置传给plugin，并对配置进行检查
                 List<PluginInfo> pluginInfos = mySQLPluginsRepository.findByPlugin(job.getPlugin());
                 Map<String, String> map = new HashedMap();
                 for (PluginInfo info : pluginInfos) {
@@ -139,29 +140,33 @@ public class AppBean implements ApplicationRunner {
                 if (r.getKey()) {
                     plugin.prepare(spark);
                 } else {
-                    logger.info("can not pass config:" + r.getValue());
+                    logger.info("can not pass config:" + plugin.getName());
+                    okFlag = false;
                 }
             } catch (Exception e) {
                 logger.info(e.toString());
             }
         }
 
-        // 从配置中装载input，调用filter，执行output
-        for (IInput input : inputs) {
-            Dataset<Row> ds = input.getDataset(spark);
-            for (IFilter filter : filters) {
-                ds = filter.process(spark, ds, session);
+        // 只要有一个配置不通过，就不继续执行了
+        if (okFlag) {
+            // 从配置中装载input，调用filter，执行output
+            for (IInput input : inputs) {
+                Dataset<Row> ds = input.getDataset(spark);
+                for (IFilter filter : filters) {
+                    ds = filter.process(spark, ds, session);
+                }
+
+                for (IOutput output : outputs) {
+                    output.process(ds);
+                }
             }
 
-            for (IOutput output : outputs) {
-                output.process(ds);
+            // 看是否有触发下一步的执行
+            if (schedules.getNextid() != null) {
+                Schedules next = mySQLSchedulesRepository.findOne(schedules.getNextid());
+                runBatchJob(spark, next);
             }
-        }
-
-        // 看是否有触发下一步的执行
-        if (schedules.getNextid() != null) {
-            Schedules next = mySQLSchedulesRepository.findOne(schedules.getNextid());
-            runBatchJob(spark, next);
         }
     }
 }

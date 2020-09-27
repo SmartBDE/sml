@@ -5,9 +5,15 @@ import me.smartbde.sml.commonutils.AbstractPlugin;
 import me.smartbde.sml.commonutils.IFilter;
 import me.smartbde.sml.commonutils.ISession;
 import me.smartbde.sml.scratch.JavaLogisticRegression;
-import org.apache.spark.sql.Dataset;
-import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SparkSession;
+import org.apache.spark.api.java.function.MapFunction;
+import org.apache.spark.sql.*;
+import org.apache.spark.sql.types.DataTypes;
+import org.apache.spark.sql.types.Metadata;
+import org.apache.spark.sql.types.StructField;
+import org.apache.spark.sql.types.StructType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 功能说明：线性回归预测模型训练函数，属于批量操作的处理器
@@ -20,7 +26,30 @@ public class LogisticRegressionTrain extends AbstractPlugin implements IFilter {
 
     @Override
     public Dataset<Row> process(SparkSession spark, Dataset<Row> df, ISession session) {
-        return null;
+        int count = Integer.parseInt(properties.get("count"));
+        Dataset<String> ds = df.map(new MapFunction<Row, String>() {
+            @Override
+            public String call(Row row) {
+                return row.getString(0);
+            }
+        }, Encoders.STRING());
+        double[] weights = javaLogisticRegression.run(spark, ds, count);
+
+        List<Double> list = new ArrayList<Double>();
+        for (double d : weights) {
+            list.add(d);
+        }
+
+        List<Row> list2 = new ArrayList<Row>();
+        list2.add(RowFactory.create(list.toString()));
+
+        StructType schema = new StructType(new StructField[] {
+                new StructField("weights", DataTypes.StringType, false, Metadata.empty())
+        });
+
+        // 把数组转换为Dataset<Row>
+        Dataset<Row> r = spark.createDataFrame(list2, schema);
+        return r;
     }
 
     /**
@@ -33,7 +62,8 @@ public class LogisticRegressionTrain extends AbstractPlugin implements IFilter {
         }
 
         if (properties.get("dimension") != null
-                && properties.get("seed") != null) {
+                && properties.get("seed") != null
+                && properties.get("count") != null) {
             return new Pair<>(true, "");
         }
 

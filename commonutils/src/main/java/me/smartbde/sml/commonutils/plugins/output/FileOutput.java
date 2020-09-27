@@ -15,7 +15,7 @@ import java.util.Map;
 public class FileOutput extends AbstractPlugin implements IOutput {
     @Override
     public void process(Dataset<Row> df) {
-
+        df.write().text(properties.get("path"));
     }
 
     /**
@@ -23,7 +23,15 @@ public class FileOutput extends AbstractPlugin implements IOutput {
      */
     @Override
     public Pair<Boolean, String> checkConfig() {
-        return null;
+        if (properties == null) {
+            return new Pair<>(false, "missing config");
+        }
+
+        if (properties.get("path") != null) {
+            return new Pair<>(true, "");
+        }
+
+        return new Pair<>(false, "missing config");
     }
 
     /**
@@ -31,7 +39,7 @@ public class FileOutput extends AbstractPlugin implements IOutput {
      */
     @Override
     public String getName() {
-        return null;
+        return "FileOutput";
     }
 
     /**
@@ -41,6 +49,9 @@ public class FileOutput extends AbstractPlugin implements IOutput {
      */
     @Override
     public boolean prepare(SparkSession spark) {
+        if (properties != null && checkConfig().getKey()) {
+            return true;
+        }
         return false;
     }
 }
