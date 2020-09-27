@@ -19,6 +19,7 @@ import java.util.*;
 import scala.Option;
 import scala.Some;
 import scala.collection.Seq;
+import scala.collection.mutable.ArraySeq;
 
 /**
  * 功能说明：线性回归预测函数，利用训练好的线性回归模型对输入进行预测
@@ -40,10 +41,14 @@ public class LogisticRegressionPredict extends AbstractPlugin implements ISQLFil
      */
     @Override
     public List<Pair<String, UserDefinedFunction>> getUdfList() {
-        List<DataType> types = new ArrayList<DataType>();
-        types.add(DataTypes.createArrayType(DataTypes.DoubleType));
-        types.add(DataTypes.createArrayType(DataTypes.DoubleType));
-        Option<Seq<DataType>> option = (Option<Seq<DataType>>) new Some<List<DataType>>(types);
+        ArraySeq<DataType> types = new ArraySeq<DataType>(2);
+        types.update(0, DataTypes.createArrayType(DataTypes.DoubleType));
+        types.update(1, DataTypes.createArrayType(DataTypes.DoubleType));
+//        Seq<DataType> seq = (Seq<DataType>) types;
+        Option<Seq<DataType>> option = new Some<Seq<DataType>>(types);
+
+//        Seq<String> s = new ArraySeq<String>(2);
+//        Option<Seq<String>> option1 = new Some<Seq<String>>(s);
 
         List<Pair<String, UserDefinedFunction>> list = new ArrayList<Pair<String, UserDefinedFunction>>();
         list.add(new Pair<String, UserDefinedFunction>("LogisticRegressionPredict_V1",
