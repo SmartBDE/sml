@@ -30,9 +30,10 @@ public class LogisticRegressionTrain extends AbstractPlugin implements IFilter {
         Dataset<String> ds = df.map(new MapFunction<Row, String>() {
             @Override
             public String call(Row row) {
-                return row.getString(0);
+                return row.getString(row.fieldIndex("text"));
             }
         }, Encoders.STRING());
+        ds.show();
         double[] weights = javaLogisticRegression.run(spark, ds, count);
 
         List<Double> list = new ArrayList<Double>();

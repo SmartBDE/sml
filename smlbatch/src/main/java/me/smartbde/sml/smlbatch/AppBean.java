@@ -1,14 +1,14 @@
 package me.smartbde.sml.smlbatch;
 
 import javafx.util.Pair;
-import me.smartbde.sml.admin.domain.model.Jobs;
-import me.smartbde.sml.admin.domain.model.PluginClass;
-import me.smartbde.sml.admin.domain.model.PluginInfo;
-import me.smartbde.sml.admin.domain.model.Schedules;
-import me.smartbde.sml.admin.domain.repository.MySQLJobsRepository;
-import me.smartbde.sml.admin.domain.repository.MySQLPluginClassRepository;
-import me.smartbde.sml.admin.domain.repository.MySQLPluginsRepository;
-import me.smartbde.sml.admin.domain.repository.MySQLSchedulesRepository;
+import me.smartbde.sml.smlbatch.domain.model.Jobs;
+import me.smartbde.sml.smlbatch.domain.model.PluginClass;
+import me.smartbde.sml.smlbatch.domain.model.PluginInfo;
+import me.smartbde.sml.smlbatch.domain.model.Schedules;
+import me.smartbde.sml.smlbatch.domain.repository.MySQLJobsRepository;
+import me.smartbde.sml.smlbatch.domain.repository.MySQLPluginClassRepository;
+import me.smartbde.sml.smlbatch.domain.repository.MySQLPluginsRepository;
+import me.smartbde.sml.smlbatch.domain.repository.MySQLSchedulesRepository;
 import me.smartbde.sml.commonutils.*;
 import me.smartbde.sml.utils.PropertiesUtil;
 import org.apache.commons.collections.map.HashedMap;
@@ -42,7 +42,7 @@ public class AppBean implements ApplicationRunner {
     private MySQLPluginsRepository mySQLPluginsRepository;
     @Autowired
     private MySQLPluginClassRepository mySQLPluginClassRepository;
-    private String appName = "BatchApplication.AppBean";
+    private String appName = "BatchApplication";
     private String master = "local[*]";
     private SparkConf sparkConf = new SparkConf().setMaster(master).setAppName(appName);
     private SparkSession spark = SparkSession.builder().config(sparkConf).getOrCreate();
@@ -106,7 +106,7 @@ public class AppBean implements ApplicationRunner {
         FilterSession session = new FilterSession(schedules.getJobname());
 
         // 从配置中装载插件并初始化
-        List<Jobs> jobs = mySQLJobsRepository.findByName(session.getJobName());
+        List<Jobs> jobs = mySQLJobsRepository.findByNameOrderById(session.getJobName());
 
         List<IInput> inputs = new ArrayList<>();
         List<IFilter> filters = new ArrayList<>();
@@ -115,7 +115,7 @@ public class AppBean implements ApplicationRunner {
         boolean okFlag = true;
         for (Jobs job : jobs) {
             try {
-                String clazz = job.getPlugin().split(".")[0];
+                String clazz = job.getPlugin().split("\\.")[0];
                 // 首先要创建plugin，采用录获取名字的方式动态加载
                 PluginClass pluginClass = mySQLPluginClassRepository.findOne(clazz);
 

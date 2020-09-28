@@ -18,6 +18,7 @@ public class JdbcInput extends AbstractPlugin implements IInput {
 
     @Override
     public Dataset<Row> getDataset(SparkSession spark) {
+        jdbcStorage.init(spark);
         return jdbcStorage.read(properties.get("table"));
     }
 
@@ -30,8 +31,7 @@ public class JdbcInput extends AbstractPlugin implements IInput {
         if (properties.get("url") != null
                 && properties.get("user") != null
                 && properties.get("pwd") != null
-                && properties.get("table") != null
-                && properties.get("flag") != null) {
+                && properties.get("table") != null) {
             return new Pair<>(true, "");
         }
 
