@@ -12,6 +12,7 @@ import org.apache.spark.sql.types.Metadata;
 import org.apache.spark.sql.types.StructField;
 import org.apache.spark.sql.types.StructType;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +21,9 @@ import java.util.List;
  * 格式输入要求：训练算法所需格式
  *
  * 训练的结果，可以由本插件直接持久化到文件系统中
+ * 注意：调用基于spark实现的分布式算法，插件需要实现序列化接口
  */
-public class LogisticRegressionTrain extends AbstractPlugin implements IFilter {
+public class LogisticRegressionTrain extends AbstractPlugin implements IFilter, Serializable {
     private JavaLogisticRegression javaLogisticRegression;
 
     @Override
@@ -33,7 +35,6 @@ public class LogisticRegressionTrain extends AbstractPlugin implements IFilter {
                 return row.getString(row.fieldIndex("text"));
             }
         }, Encoders.STRING());
-        ds.show();
         double[] weights = javaLogisticRegression.run(spark, ds, count);
 
         List<Double> list = new ArrayList<Double>();

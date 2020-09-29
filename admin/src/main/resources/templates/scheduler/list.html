@@ -22,11 +22,13 @@
                         <th>任务</th>
                         <th>类型</th>
                         <th>插件</th>
+                        <th>优先级</th>
                     </tr>
                     <tr th:each="job : ${jobs}">
                         <td th:text="${job.name}">name</td>
                         <td th:text="${job.type}">type</td>
                         <td th:text="${job.plugin}">plugin</td>
+                        <td th:text="${job.priority}">priority</td>
                     </tr>
                     </tbody>
                 </table>

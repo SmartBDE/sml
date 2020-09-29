@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
  *
  * Created by win7 on 2017/8/13.
  */
-public class JavaLogisticRegression {
+public class JavaLogisticRegression implements Serializable {
     private static int D;
     private static Random rand;
 

@@ -9,8 +9,8 @@ import java.util.List;
 @Repository
 public interface MySQLJobsRepository extends JpaRepository<Jobs, Integer> {
     List<Jobs> findByName(String name);
-    List<Jobs> findByNameOrderById(String name);
     List<Jobs> findByNameLike(String name);
     List<Jobs> findByPluginLike(String plugin);
+    List<Jobs> findByNameOrderByPriorityAsc(String name);
 }
 

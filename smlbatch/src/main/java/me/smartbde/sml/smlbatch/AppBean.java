@@ -106,7 +106,7 @@ public class AppBean implements ApplicationRunner {
         FilterSession session = new FilterSession(schedules.getJobname());
 
         // 从配置中装载插件并初始化
-        List<Jobs> jobs = mySQLJobsRepository.findByNameOrderById(session.getJobName());
+        List<Jobs> jobs = mySQLJobsRepository.findByNameOrderByPriorityAsc(session.getJobName());
 
         List<IInput> inputs = new ArrayList<>();
         List<IFilter> filters = new ArrayList<>();

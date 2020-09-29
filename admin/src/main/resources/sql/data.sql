@@ -31,7 +31,7 @@ insert into configs(cname, ckey, cvalue) values ('publisher', 'to.protocol', 'fi
 ----------------------------------------
 -- 插件列表
 ----------------------------------------
-insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionPredict.V1', 'modelpath', '../data/model/LogisticRegressionV1.model');
+insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionPredict.V1', 'modelpath', '/Volumes/Transcend/github/sml/data/model/LogisticRegressionV1.model');
 insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionPredict.V1', 'dimension', '10');
 insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionPredict.V1', 'seed', '47');
 
@@ -49,7 +49,7 @@ insert into plugins(plugin, ckey, cvalue) values ('JdbcOutput.V1', 'user', 'spri
 insert into plugins(plugin, ckey, cvalue) values ('JdbcOutput.V1', 'pwd', '123456');
 insert into plugins(plugin, ckey, cvalue) values ('JdbcOutput.V1', 'table', 'lr_predict_result');
 
-insert into plugins(plugin, ckey, cvalue) values ('FileOutput.V1', 'path', '../data/model/LogisticRegressionV1.model');
+insert into plugins(plugin, ckey, cvalue) values ('FileOutput.V1', 'path', '/Volumes/Transcend/github/sml/data/model/LogisticRegressionV1.model');
 
 insert into plugins(plugin, ckey, cvalue) values ('HttpOutput.V1', 'host', '127.0.0.1');
 insert into plugins(plugin, ckey, cvalue) values ('HttpOutput.V1', 'port', '20000');
@@ -93,21 +93,21 @@ insert into pluginclass(name, type, clazz) values ('Stdout', 'output', 'me.smart
 ----------------------------------------
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionTrain', 'input', 'JdbcInput.V1');
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionTrain', 'output', 'FileOutput.V1');
-insert into jobs(name, type, plugin) values ('DemoLogisticRegressionTrain', 'filter', 'StartLogger.V1');
-insert into jobs(name, type, plugin) values ('DemoLogisticRegressionTrain', 'filter', 'LogisticRegressionTrain.V1');
-insert into jobs(name, type, plugin) values ('DemoLogisticRegressionTrain', 'filter', 'StopLogger.V1');
+insert into jobs(name, type, plugin, priority) values ('DemoLogisticRegressionTrain', 'filter', 'StartLogger.V1', 1);
+insert into jobs(name, type, plugin, priority) values ('DemoLogisticRegressionTrain', 'filter', 'LogisticRegressionTrain.V1', 2);
+insert into jobs(name, type, plugin, priority) values ('DemoLogisticRegressionTrain', 'filter', 'StopLogger.V1', 3);
 
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict2', 'input', 'JdbcInput.V1');
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict2', 'output', 'JdbcOutput.V1');
-insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict2', 'filter', 'StartLogger.V1');
-insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict2', 'sqlFilter', 'LogisticRegressionPredict.V1');
-insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict2', 'filter', 'StopLogger.V1');
+insert into jobs(name, type, plugin, priority) values ('DemoLogisticRegressionPredict2', 'filter', 'StartLogger.V1', 1);
+insert into jobs(name, type, plugin, priority) values ('DemoLogisticRegressionPredict2', 'sqlFilter', 'LogisticRegressionPredict.V1', 2);
+insert into jobs(name, type, plugin, priority) values ('DemoLogisticRegressionPredict2', 'filter', 'StopLogger.V1', 3);
 
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'input', 'TcpStreamingInput.V1');
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'output', 'HttpOutput.V1');
-insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'filter', 'StartLogger.V1');
-insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'sqlFilter', 'LogisticRegressionPredict.V1');
-insert into jobs(name, type, plugin) values ('DemoLogisticRegressionPredict', 'filter', 'StopLogger.V1');
+insert into jobs(name, type, plugin, priority) values ('DemoLogisticRegressionPredict', 'filter', 'StartLogger.V1', 1);
+insert into jobs(name, type, plugin, priority) values ('DemoLogisticRegressionPredict', 'sqlFilter', 'LogisticRegressionPredict.V1', 2);
+insert into jobs(name, type, plugin, priority) values ('DemoLogisticRegressionPredict', 'filter', 'StopLogger.V1', 3);
 
 ----------------------------------------
 -- 激活的任务

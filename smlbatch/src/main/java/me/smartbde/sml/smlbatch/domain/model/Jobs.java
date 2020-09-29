@@ -10,6 +10,7 @@ public class Jobs {
     String name;
     String type;
     String plugin;
+    Integer priority;
 
     public String getName() {
         return name;
@@ -33,5 +34,21 @@ public class Jobs {
 
     public void setPlugin(String plugin) {
         this.plugin = plugin;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
     }
 }

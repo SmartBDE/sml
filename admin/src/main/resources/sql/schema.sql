@@ -83,9 +83,9 @@ create table algorithms (
 -- 任务配置表
 -- DemoLogisticRegressionTrain input FileInstance1
 -- DemoLogisticRegressionTrain output FileInstance2
--- DemoLogisticRegressionTrain filter LineParserInstance1
--- DemoLogisticRegressionTrain filter sqlConvertInstance1
--- DemoLogisticRegressionTrain filter LogisticRegressionTrainV1
+-- DemoLogisticRegressionTrain filter LineParserInstance1 1
+-- DemoLogisticRegressionTrain filter sqlConvertInstance1 2
+-- DemoLogisticRegressionTrain filter LogisticRegressionTrainV1 3
 -----------------------------------------
 drop table if exists jobs;
 
@@ -94,6 +94,7 @@ create table jobs (
     name varchar(100),
     type varchar(10),
     plugin varchar(100),
+    priority int,
     CONSTRAINT sys_pk_jobs UNIQUE KEY (name, type, plugin),
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
