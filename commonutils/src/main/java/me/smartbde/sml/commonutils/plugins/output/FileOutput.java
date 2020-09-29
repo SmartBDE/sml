@@ -5,6 +5,7 @@ import me.smartbde.sml.commonutils.AbstractPlugin;
 import me.smartbde.sml.commonutils.IOutput;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SaveMode;
 import org.apache.spark.sql.SparkSession;
 
 /**
@@ -13,7 +14,7 @@ import org.apache.spark.sql.SparkSession;
 public class FileOutput extends AbstractPlugin implements IOutput {
     @Override
     public void process(Dataset<Row> df) {
-        df.write().text(properties.get("path"));
+        df.write().mode(SaveMode.Overwrite).text(properties.get("path"));
     }
 
     /**

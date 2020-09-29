@@ -4,7 +4,9 @@ import javafx.util.Pair;
 import me.smartbde.sml.commonutils.AbstractPlugin;
 import me.smartbde.sml.commonutils.IFilter;
 import me.smartbde.sml.commonutils.ISession;
+import org.apache.spark.api.java.function.MapFunction;
 import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Encoders;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
@@ -18,12 +20,19 @@ import org.apache.spark.sql.SparkSession;
 public class JsonParser extends AbstractPlugin implements IFilter {
     @Override
     public Dataset<Row> process(SparkSession spark, Dataset<Row> df, ISession session) {
-        return null;
+        Dataset<String> ds = df.map(new MapFunction<Row, String>() {
+            @Override
+            public String call(Row row) throws Exception {
+                return row.getString(0);
+            }
+        }, Encoders.STRING());
+
+        return spark.read().json(ds);
     }
 
     @Override
     public Pair<Boolean, String> checkConfig() {
-        return null;
+        return new Pair<>(true, "");
     }
 
     @Override
@@ -33,6 +42,6 @@ public class JsonParser extends AbstractPlugin implements IFilter {
 
     @Override
     public boolean prepare(SparkSession spark) {
-        return false;
+        return true;
     }
 }

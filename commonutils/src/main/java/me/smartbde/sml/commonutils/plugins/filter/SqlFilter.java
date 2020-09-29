@@ -17,12 +17,20 @@ import org.apache.spark.sql.SparkSession;
 public class SqlFilter extends AbstractPlugin implements IFilter {
     @Override
     public Dataset<Row> process(SparkSession spark, Dataset<Row> df, ISession session) {
-        return null;
-    }
+        return df.sqlContext().sql(properties.get("sql"));
+   }
 
     @Override
     public Pair<Boolean, String> checkConfig() {
-        return null;
+        if (properties == null) {
+            return new Pair<>(false, "missing config");
+        }
+
+        if (properties.get("sql") != null) {
+            return new Pair<>(true, "");
+        }
+
+        return new Pair<>(false, "missing config");
     }
 
     @Override
@@ -32,6 +40,9 @@ public class SqlFilter extends AbstractPlugin implements IFilter {
 
     @Override
     public boolean prepare(SparkSession spark) {
+        if (properties != null && checkConfig().getKey()) {
+            return true;
+        }
         return false;
     }
 }

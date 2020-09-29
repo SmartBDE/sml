@@ -9,6 +9,7 @@ https://camel.apache.org/components/latest/jetty-component.html camel http servi
 ## 插件机制相关
 
 https://blog.csdn.net/somilong/article/details/78750904 GROOVY动态脚本加载与运行
+https://www.cnblogs.com/jizha/p/5027695.html Groovy小结：java调用Groovy方法并传递参数
 
 ## 如何开发一个spark应用
 
