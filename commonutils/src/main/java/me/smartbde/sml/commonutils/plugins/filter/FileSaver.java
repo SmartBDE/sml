@@ -44,17 +44,4 @@ public class FileSaver extends AbstractPlugin implements IFilter {
     public String getName() {
         return "FileSaver";
     }
-
-    /**
-     * Prepare before running, do things like set config default value, add broadcast variable, accumulator.
-     *
-     * @param spark
-     */
-    @Override
-    public boolean prepare(SparkSession spark) {
-        if (checkConfig().getKey()) {
-            return true;
-        }
-        return false;
-    }
 }

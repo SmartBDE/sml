@@ -28,6 +28,15 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * BatchApplication会以定时任务管理者的方式，对配置的job定时执行
+ *
+ * 运行步骤：
+ * 1. 初始化环境
+ * 2. 按输入列表循环调用
+ * 2-1. 按顺序执行filter
+ * 2-2. 按顺序执行output
+ */
 @Component
 public class AppBean implements ApplicationRunner {
     private final Integer NOW = -1;
@@ -63,38 +72,38 @@ public class AppBean implements ApplicationRunner {
                 }, 0, TimeUnit.SECONDS);
 
             } else if (s.getType().equals(ONCE)) {
-                Date date = new Date();
-
-                Calendar rightNow = Calendar.getInstance();
-                rightNow.setTime(date);
-                rightNow.add(Calendar.HOUR, 1);
-                rightNow.add(Calendar.MINUTE, -55);
-                rightNow.add(Calendar.SECOND, -30);
-                Long initialDelay = rightNow.getTime().getTime();
-
-                scheduler.scheduleAtFixedRate(new Runnable() {
-                    @Override
-                    public void run() {
-                        runBatchJob(spark, s);
-                    }
-                }, initialDelay, 0, TimeUnit.DAYS);
+//                Date date = new Date();
+//
+//                Calendar rightNow = Calendar.getInstance();
+//                rightNow.setTime(date);
+//                rightNow.add(Calendar.HOUR, 1);
+//                rightNow.add(Calendar.MINUTE, -55);
+//                rightNow.add(Calendar.SECOND, -30);
+//                Long initialDelay = rightNow.getTime().getTime();
+//
+//                scheduler.scheduleAtFixedRate(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        runBatchJob(spark, s);
+//                    }
+//                }, initialDelay, 0, TimeUnit.DAYS);
 
             } else if (s.getType().equals(EVERYDAY)) {
-                Date date = new Date();
-
-                Calendar rightNow = Calendar.getInstance();
-                rightNow.setTime(date);
-                rightNow.add(Calendar.HOUR, 1);
-                rightNow.add(Calendar.MINUTE, -55);
-                rightNow.add(Calendar.SECOND, -30);
-                Long initialDelay = rightNow.getTime().getTime();
-
-                scheduler.scheduleAtFixedRate(new Runnable() {
-                    @Override
-                    public void run() {
-                        runBatchJob(spark, s);
-                    }
-                }, initialDelay, 1, TimeUnit.DAYS);
+//                Date date = new Date();
+//
+//                Calendar rightNow = Calendar.getInstance();
+//                rightNow.setTime(date);
+//                rightNow.add(Calendar.HOUR, 1);
+//                rightNow.add(Calendar.MINUTE, -55);
+//                rightNow.add(Calendar.SECOND, -30);
+//                Long initialDelay = rightNow.getTime().getTime();
+//
+//                scheduler.scheduleAtFixedRate(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        runBatchJob(spark, s);
+//                    }
+//                }, initialDelay, 1, TimeUnit.DAYS);
             }
         }
     }

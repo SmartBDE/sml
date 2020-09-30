@@ -92,12 +92,4 @@ public class LineParser extends AbstractPlugin implements IFilter {
     public String getName() {
         return "LineParser";
     }
-
-    @Override
-    public boolean prepare(SparkSession spark) {
-        if (properties != null && checkConfig().getKey()) {
-            return true;
-        }
-        return false;
-    }
 }

@@ -56,6 +56,7 @@ insert into plugins(plugin, ckey, cvalue) values ('HttpOutput.V1', 'port', '2000
 
 insert into plugins(plugin, ckey, cvalue) values ('TcpStreamingInput.V1', 'host', '127.0.0.1');
 insert into plugins(plugin, ckey, cvalue) values ('TcpStreamingInput.V1', 'port', '19000');
+insert into plugins(plugin, ckey, cvalue) values ('TcpStreamingInput.V1', 'duration', '1');
 
 insert into plugins(plugin, ckey, cvalue) values ('StartLogger.V1', 'url', 'jdbc:mysql://127.0.0.1:33061/springtest?useUnicode=true&characterEncoding=utf-8&useSSL=false');
 insert into plugins(plugin, ckey, cvalue) values ('StartLogger.V1', 'user', 'springtest');

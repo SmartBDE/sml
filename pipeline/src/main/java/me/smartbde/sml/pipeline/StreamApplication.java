@@ -1,17 +1,15 @@
 package me.smartbde.sml.pipeline;
 
-/**
- * 1. 创建spark session
- * 2. 注册udf
- * 3. 根据配置创建input, filter, output
- * 4. 运行(以input判断是stream或batch)
- * 4-1. stream
- *    a. 初始化input, filter, output
- *    b. 把input注册到TempView
- *    c. 启动并运行
- * 4-2. batch
- *    a. 按顺序执行
- *    b. 按需触发下一个任务
- */
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+@SpringBootApplication
+@EnableJpaRepositories("me.smartbde.sml.pipeline.domain.repository")
+@ComponentScan("me.smartbde.sml.pipeline")
 public class StreamApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(StreamApplication.class, args);
+    }
 }

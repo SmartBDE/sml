@@ -40,17 +40,4 @@ public class FileOutput extends AbstractPlugin implements IOutput {
     public String getName() {
         return "FileOutput";
     }
-
-    /**
-     * Prepare before running, do things like set config default value, add broadcast variable, accumulator.
-     *
-     * @param spark
-     */
-    @Override
-    public boolean prepare(SparkSession spark) {
-        if (properties != null && checkConfig().getKey()) {
-            return true;
-        }
-        return false;
-    }
 }

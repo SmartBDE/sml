@@ -37,12 +37,4 @@ public class SqlFilter extends AbstractPlugin implements IFilter {
     public String getName() {
         return "SqlFilter";
     }
-
-    @Override
-    public boolean prepare(SparkSession spark) {
-        if (properties != null && checkConfig().getKey()) {
-            return true;
-        }
-        return false;
-    }
 }
