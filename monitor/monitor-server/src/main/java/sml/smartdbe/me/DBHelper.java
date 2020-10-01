@@ -28,7 +28,7 @@ public class DBHelper {
                 "(select act, acttime, sessionid, jobname from logs where act='stop') a " +
                 "join " +
                 "(select act, acttime, sessionid, jobname from logs where act='start') b " +
-                "on a.sessionid=b.sessionid");
+                "on a.sessionid=b.sessionid order by a.jobname");
 
         List<Map<String, Object>> items = queryHandle.createQuery(sql)
                 .mapToMap()

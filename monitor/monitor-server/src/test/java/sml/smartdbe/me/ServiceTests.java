@@ -1,15 +1,14 @@
 package sml.smartdbe.me;
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings("serial")
-public class StatJobTimeServiceImpl extends RemoteServiceServlet implements StatJobTimeService {
-    @Override
-    public Map<String, Map<String, Integer>> jobTime() throws IllegalArgumentException {
+public class ServiceTests {
+    @Test
+    public void test() throws Exception {
         DBHelper dbHelper = new DBHelper();
         List<Map<String, Object>> items = dbHelper.queryJobTime();
 
@@ -28,6 +27,6 @@ public class StatJobTimeServiceImpl extends RemoteServiceServlet implements Stat
 
             r.put(currentJob, m);
         }
-        return r;
+        System.out.println(r.toString());
     }
 }
