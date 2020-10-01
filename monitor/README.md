@@ -27,3 +27,11 @@ batch/stream运行的统计信息，主要功能列表：
   - 离线计算层，负责核心数据的持续运算（对性能敏感，需要较多的服务器资源？）
     - 模型的评估
     - 模型的持续演进
+
+关于gwt-maven-archetypes
+- 可以用，但是教程不够详细，可用的操作步骤如下
+- 使用maven monitor plugin gwt package-app打包war，把*-server下面的war包解压后，
+- 放到monitor下的target/gwt/devmode/war下
+- 运行monitor的gwt:devmode，打开http://127.0.0.1:8888
+- 不太方便，可能还不是正确的使用方法，待进一步分析研究
+- 用jetty直接运行monitor-server-version.war是最简化的方式

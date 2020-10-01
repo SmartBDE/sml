@@ -73,9 +73,3 @@ https://www.jianshu.com/p/db16d4d8d9c7 thymeleaf layout例子 引入一些公用
 https://ultraq.github.io/thymeleaf-layout-dialect/Examples.html thymeleaf-layout-dialect 把不同内容按一个特定的布局模板渲染后输出的技术
 https://www.jianshu.com/p/011288f418c3 adminlte与thymeleaf
 
-关于gwt-maven-archetypes
-- 可以用，但是教程不够详细，可用的操作步骤如下
-- 使用maven compile后，把*-server下面的war包解压后，放到*下的target/gwt/devmode/war下
-- 运行*的gwt:devmode，打开http://127.0.0.1:8888
-- 不太方便，可能还不是正确的使用方法，待进一步分析研究
-- 用jetty直接运行monitor-server-version.war是最简化的方式
