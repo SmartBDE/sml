@@ -32,6 +32,12 @@ batch/stream运行的统计信息，主要功能列表：
     - 模型的评估
     - 模型的持续演进
 
+https://github.com/pepstock-org/Charba
+http://www.pepstock.org/Charba-Showcase/Charba_Showcase.html
+https://github.com/manolo/gwt-polymer-elements
+https://manolo.github.io/gwt-polymer-elements/demo
+
+
 关于gwt-maven-archetypes
 - 可以用，但是教程不够详细，可用的操作步骤如下
 - 使用maven monitor lifecycle clean清除编译的内容
@@ -44,6 +50,7 @@ batch/stream运行的统计信息，主要功能列表：
 - 运行monitor的gwt:devmode
 - 打开http://127.0.0.1:8888/app/
 - 不太方便，可能还不是正确的使用方法，待进一步分析研究
+- 前端monitor-client的代码是可以边写边刷新访问的，后端必须编译，所以建议用单元测试来先测试后端的代码
 
 关于gwt-maven-archetypes
 - 使用maven创建项目

@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 public class DBHelper {
-    private final Jdbi queryJdbi = Jdbi.create(
+    private static final Jdbi queryJdbi = Jdbi.create(
             PropertiesUtil.prop("application.datasource.url"),
             PropertiesUtil.prop("application.datasource.username"),
             PropertiesUtil.prop("application.datasource.password"));
-    private final Handle queryHandle = queryJdbi.open();
+    private static final Handle queryHandle = queryJdbi.open();
 
     public List<Map<String, Object>> queryJobCount() {
         String sql = String.format("select jobname, count(1) as num from logs group by jobname");

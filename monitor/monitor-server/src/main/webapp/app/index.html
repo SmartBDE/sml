@@ -18,7 +18,7 @@
     <!--                                           -->
     <!-- Any title is fine                         -->
     <!--                                           -->
-    <title>app</title>
+    <title>运行统计</title>
 
     <!--                                           -->
     <!-- This script loads your compiled module.   -->
@@ -36,12 +36,20 @@
 <!-- to create a completely dynamic UI.        -->
 <!--                                           -->
 <body>
-<div align="center">
-    <div id="nameFieldContainer"></div>
-    <div id="sendButtonContainer"></div>
-    <div id="errorLabelContainer"></div>
-    <div id="chartContainer"></div>
-</div>
+<table align="center" width="960">
+    <tr>
+        <td colspan="2" style="font-weight:bold;">运行统计</td>
+    </tr>
+    <tr>
+        <td id="chartContainer"></td>
+    </tr>
+    <tr>
+        <td id="lineContainer"></td>
+    </tr>
+    <tr>
+        <td colspan="2" style="color:red;" id="errorLabelContainer"></td>
+    </tr>
+</table>
 <!-- OPTIONAL: include this if you want history support -->
 <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
 

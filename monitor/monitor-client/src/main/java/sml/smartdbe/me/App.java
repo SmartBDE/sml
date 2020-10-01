@@ -18,194 +18,165 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import org.pepstock.charba.client.colors.GoogleChartColor;
 import org.pepstock.charba.client.colors.HtmlColor;
+import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.configuration.CartesianCategoryAxis;
+import org.pepstock.charba.client.configuration.CartesianLinearAxis;
 import org.pepstock.charba.client.data.BarDataset;
+import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.data.Labels;
+import org.pepstock.charba.client.data.LineDataset;
+import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.gwt.widgets.BarChartWidget;
+import org.pepstock.charba.client.gwt.widgets.LineChartWidget;
 import org.pepstock.charba.client.resources.DeferredResources;
 import org.pepstock.charba.client.resources.EmbeddedResources;
 import org.pepstock.charba.client.resources.EntryPointStarter;
 import org.pepstock.charba.client.resources.ResourcesType;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class App implements EntryPoint {
-	/**
-	 * The message displayed to the user when the server cannot be reached or
-	 * returns an error.
-	 */
-	private static final String SERVER_ERROR = "An error occurred while "
-			+ "attempting to contact the server. Please check your network "
-			+ "connection and try again.";
+    /**
+     * Create a remote service proxy to talk to the server-side service.
+     */
+    private final StatJobCountServiceAsync statJobCountService = GWT.create(StatJobCountService.class);
+    private final StatJobTimeServiceAsync statJobTimeService = GWT.create(StatJobTimeService.class);
 
-	/**
-	 * Create a remote service proxy to talk to the server-side Greeting service.
-	 */
-	private final GreetingServiceAsync greetingService = GWT
-			.create(GreetingService.class);
+    /**
+     * This is the entry point method.
+     */
+    public void onModuleLoad() {
+        // 如果要使用chart，这里是必须要调用的
+        ResourcesType.setClientBundle(EmbeddedResources.INSTANCE);
 
-	/**
-	 * This is the entry point method.
-	 */
-	public void onModuleLoad() {
-		// sets resource type
-		ResourcesType.setClientBundle(EmbeddedResources.INSTANCE);
+        //-----------------------------------------
+        // errorLabel 初始化
+        //-----------------------------------------
+        final Label errorLabel = new Label();
+        RootPanel.get("errorLabelContainer").add(errorLabel);
 
-		// for GWT widget
-		BarChartWidget chart = new BarChartWidget();
+        //-----------------------------------------
+        // chart 任务，执行次数。按最近若干次生成柱状图
+        //-----------------------------------------
+        statJobCountService.jobCount(
+                new AsyncCallback<Map<String, Integer>>() {
+                    public void onFailure(Throwable caught) {
+                        errorLabel.setText("job count failed");
+                    }
 
-		chart.getOptions().setResponsive(true);
-		chart.getOptions().getTitle().setText("My first chart");
+                    @Override
+                    public void onSuccess(Map<String, Integer> map) {
+                        BarChartWidget chart = new BarChartWidget();
 
-		BarDataset dataset = chart.newDataset();
-		dataset.setLabel("dataset 1");
+                        chart.getOptions().setResponsive(true);
+                        chart.getOptions().getTitle().setText("任务执行次数统计");
 
-		dataset.setBackgroundColor(HtmlColor.CORNFLOWER_BLUE.alpha(0.2));
-		dataset.setBorderColor(HtmlColor.CORNFLOWER_BLUE);
-		dataset.setBorderWidth(1);
-		dataset.setData(20, 5, 40, 35, 50, 70, 80);
+                        BarDataset dataset = chart.newDataset();
+                        dataset.setLabel("任务列表");
 
-		chart.getData().setLabels("January", "February", "March", "April", "May", "June", "July");
-		chart.getData().setDatasets(dataset);
+                        dataset.setBackgroundColor(HtmlColor.CORNFLOWER_BLUE.alpha(0.2));
+                        dataset.setBorderColor(HtmlColor.CORNFLOWER_BLUE);
+                        dataset.setBorderWidth(1);
 
-		RootPanel.get("chartContainer").add(chart);
+                        List<String> keys = new ArrayList<>();
+                        List<Double> values = new ArrayList<>();
 
-		GWT.runAsync(new RunAsyncCallback() {
-			@Override
-			public void onFailure(Throwable throwable) {
-				Window.alert("Code download failed");
-			}
+                        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+                            keys.add(entry.getKey());
+                            values.add(new Double(entry.getValue()));
+                        }
 
-			@Override
-			public void onSuccess() {
-				// MOMENT
-				EntryPointStarter.run(DeferredResources.INSTANCE, new Runnable() {
-					// LUXON
-					// EntryPointStarter.run(LuxonDeferredResources.INSTANCE, new Runnable() {
-					// Datefns
-					// EntryPointStarter.run(DatefnsDeferredResources.INSTANCE, new Runnable() {
+                        dataset.setData(values);
+                        Labels labels = Labels.build();
+                        labels.load(keys);
+                        chart.getData().setLabels(labels);
+                        chart.getData().setDatasets(dataset);
 
-					@Override
-					public void run() {
-					}
-				});
-			}
-		});
+                        RootPanel.get("chartContainer").add(chart);
+                    }
+                });
 
-		final Button sendButton = new Button("Send");
-		final TextBox nameField = new TextBox();
-		nameField.setText("GWT User");
-		final Label errorLabel = new Label();
 
-		// We can add style names to widgets
-		sendButton.addStyleName("sendButton");
+        //-----------------------------------------
+        // line 任务，会话，耗时，每一个任务都会生成一条曲线
+        //-----------------------------------------
+        statJobTimeService.jobTime(
+                new AsyncCallback<Map<String, Map<String, Integer>>>() {
+                    public void onFailure(Throwable caught) {
+                        errorLabel.setText("job time failed");
+                    }
 
-		// Add the nameField and sendButton to the RootPanel
-		// Use RootPanel.get() to get the entire body element
-		RootPanel.get("nameFieldContainer").add(nameField);
-		RootPanel.get("sendButtonContainer").add(sendButton);
-		RootPanel.get("errorLabelContainer").add(errorLabel);
+                    @Override
+                    public void onSuccess(Map<String, Map<String, Integer>> map) {
+                        LineChartWidget chart = new LineChartWidget();
 
-		// Focus the cursor on the name field when the app loads
-		nameField.setFocus(true);
-		nameField.selectAll();
+                        chart.getOptions().setResponsive(true);
+                        chart.getOptions().setMaintainAspectRatio(true);
+                        chart.getOptions().getLegend().setDisplay(true);
+                        chart.getOptions().getTitle().setDisplay(true);
+                        chart.getOptions().getTitle().setText("任务会话耗时统计");
+                        chart.getOptions().getTooltips().setMode(InteractionMode.INDEX);
+                        chart.getOptions().getTooltips().setIntersect(false);
+                        chart.getOptions().getHover().setMode(InteractionMode.NEAREST);
+                        chart.getOptions().getHover().setIntersect(true);
 
-		// Create the popup dialog box
-		final DialogBox dialogBox = new DialogBox();
-		dialogBox.setText("Remote Procedure Call");
-		dialogBox.setAnimationEnabled(true);
-		final Button closeButton = new Button("Close");
-		// We can set the id of a widget by accessing its Element
-		closeButton.getElement().setId("closeButton");
-		final Label textToServerLabel = new Label();
-		final HTML serverResponseLabel = new HTML();
-		VerticalPanel dialogVPanel = new VerticalPanel();
-		dialogVPanel.addStyleName("dialogVPanel");
-		dialogVPanel.add(new HTML("<b>Sending name to the server:</b>"));
-		dialogVPanel.add(textToServerLabel);
-		dialogVPanel.add(new HTML("<br><b>Server replies:</b>"));
-		dialogVPanel.add(serverResponseLabel);
-		dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
-		dialogVPanel.add(closeButton);
-		dialogBox.setWidget(dialogVPanel);
+                        List<Dataset> datasets = chart.getData().getDatasets(true);
+                        List<String> keys = new ArrayList<>();
 
-		// Add a handler to close the DialogBox
-		closeButton.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				dialogBox.hide();
-				sendButton.setEnabled(true);
-				sendButton.setFocus(true);
-			}
-		});
+                        int colorIndex = 0;
+                        for (Map.Entry<String, Map<String, Integer>> entry : map.entrySet()) {
+                            LineDataset dataset1 = chart.newDataset();
+                            dataset1.setLabel(entry.getKey());
+                            IsColor color1 = GoogleChartColor.values()[colorIndex];
+                            dataset1.setBackgroundColor(color1.toHex());
+                            dataset1.setBorderColor(color1.toHex());
+                            dataset1.setFill(false);
 
-		// Create a handler for the sendButton and nameField
-		class MyHandler implements ClickHandler, KeyUpHandler {
-			/**
-			 * Fired when the user clicks on the sendButton.
-			 */
-			public void onClick(ClickEvent event) {
-				sendNameToServer();
-			}
+                            Map<String, Integer> datas = entry.getValue();
+                            double[] values = new double[datas.size()];
+                            int dataIndex = 0;
+                            for (Map.Entry<String, Integer> data : datas.entrySet()) {
+                                values[dataIndex] = data.getValue();
+                                keys.add(data.getKey());
+                                dataIndex++;
+                            }
 
-			/**
-			 * Fired when the user types in the nameField.
-			 */
-			public void onKeyUp(KeyUpEvent event) {
-				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-					sendNameToServer();
-				}
-			}
+                            List<Double> data = dataset1.getData(true);
+                            for (int i = 0; i < values.length; i++) {
+                                data.add(values[i]);
+                            }
+                            datasets.add(dataset1);
 
-			/**
-			 * Send the name from the nameField to the server and wait for a response.
-			 */
-			private void sendNameToServer() {
-				// First, we validate the input.
-				errorLabel.setText("");
-				String textToServer = nameField.getText();
-				if (!FieldVerifier.isValidName(textToServer)) {
-					errorLabel.setText("Please enter at least four characters");
-					return;
-				}
+                            colorIndex = colorIndex++ % GoogleChartColor.values().length;
+                        }
 
-				// Then, we send the input to the server.
-				sendButton.setEnabled(false);
-				textToServerLabel.setText(textToServer);
-				serverResponseLabel.setText("");
-				greetingService.greetServer(textToServer,
-						new AsyncCallback<GreetingResponse>() {
-							public void onFailure(Throwable caught) {
-								// Show the RPC error message to the user
-								dialogBox
-										.setText("Remote Procedure Call - Failure");
-								serverResponseLabel
-										.addStyleName("serverResponseLabelError");
-								serverResponseLabel.setHTML(SERVER_ERROR);
-								dialogBox.center();
-								closeButton.setFocus(true);
-							}
+                        CartesianCategoryAxis axis1 = new CartesianCategoryAxis(chart);
+                        axis1.setDisplay(true);
+                        axis1.getScaleLabel().setDisplay(true);
+                        axis1.getScaleLabel().setLabelString("会话");
 
-							public void onSuccess(GreetingResponse result) {
-								dialogBox.setText("Remote Procedure Call");
-								serverResponseLabel
-										.removeStyleName("serverResponseLabelError");
-								serverResponseLabel.setHTML(new SafeHtmlBuilder()
-										.appendEscaped(result.getGreeting())
-										.appendHtmlConstant("<br><br>I am running ")
-										.appendEscaped(result.getServerInfo())
-										.appendHtmlConstant(".<br><br>It looks like you are using:<br>")
-										.appendEscaped(result.getUserAgent())
-										.toSafeHtml());
-								dialogBox.center();
-								closeButton.setFocus(true);
-							}
-						});
-			}
-		}
+                        CartesianLinearAxis axis2 = new CartesianLinearAxis(chart);
+                        axis2.setDisplay(true);
+                        axis2.getScaleLabel().setDisplay(true);
+                        axis2.getScaleLabel().setLabelString("耗时");
 
-		// Add a handler to send the name to the server
-		MyHandler handler = new MyHandler();
-		sendButton.addClickHandler(handler);
-		nameField.addKeyUpHandler(handler);
-	}
+                        chart.getOptions().getScales().setXAxes(axis1);
+                        chart.getOptions().getScales().setYAxes(axis2);
+
+                        Labels labels = Labels.build();
+                        labels.load(keys);
+                        chart.getData().setLabels(labels);
+
+                        RootPanel.get("lineContainer").add(chart);
+                    }
+                });
+    }
 }
