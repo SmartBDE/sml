@@ -11,6 +11,10 @@ batch/stream运行的统计信息，主要功能列表：
    - 运行结果的规律
    - ...
 
+暂时提供以下信息：
+1. 按job类型统计次数 -> 柱状图
+2. 按job类型统计耗时 -> 折线图
+
 - monitor: (*)
   - dashboard implement
 
@@ -30,10 +34,13 @@ batch/stream运行的统计信息，主要功能列表：
 
 关于gwt-maven-archetypes
 - 可以用，但是教程不够详细，可用的操作步骤如下
-- 使用maven monitor lifecycle clean清除编译的内容，创建目录monitor/target/gwt/devmode/war
+- 使用maven monitor lifecycle clean清除编译的内容
+- 运行一次maven monitor plugins gwt-codeserver
+  - 创建目录monitor/target/gwt/devmode/war(maven monitor plugins gwt gwt-devmode/gwt-codeserver)
+  - 如果其他模块(shared/client)发生了修改，需要先运行maven monitor plugins gwt gwt-devmode/gwt-codeserver
 - 使用maven monitor-server lifecycle package打包war
-- 把monitor/monitor-server/target/monitor-server-1.0-SNAPSHOT下的目录，放到monitor下的target/gwt/devmode/war下
-- 把monitor-client\war目录拷贝到monitor\target\gwt\devmode\war\app 这里是因为需要做app的独立页面控制
+- 把monitor/monitor-server/target/monitor-server-1.0-SNAPSHOT下的目录，拷贝到monitor下的target/gwt/devmode/war下
+  - 把monitor-client\war目录拷贝到monitor\target\gwt\devmode\war\app 这里是因为需要做app的独立页面控制 <- 通过调整目录结构已不需要
 - 运行monitor的gwt:devmode
 - 打开http://127.0.0.1:8888/app/
 - 不太方便，可能还不是正确的使用方法，待进一步分析研究
@@ -43,7 +50,7 @@ batch/stream运行的统计信息，主要功能列表：
 - 运行maven monitor plugins clean clean，可以把过往编译的内容都删除
 - 运行一次maven monitor plugins gwt gwt-devmode/gwt-codeserver 把项目都编译好
 - 把monitor-server\src\main\webapp目录拷贝到monitor\target\gwt\devmode\war
-- 把monitor-client\war目录拷贝到monitor\target\gwt\devmode\war\app
+- 把monitor-client\war目录拷贝到monitor\target\gwt\devmode\war\app <- 通过调整目录结构已不需要
 - 把monitor-server\target\classes目录拷贝到monitor\target\gwt\devmode\war
 - 把monitor-shared\target\classes目录拷贝到monitor\target\gwt\devmode\war
 - 把monitor-server依赖的lib拷贝到monitor\target\gwt\devmode\war\WEB-INF\lib

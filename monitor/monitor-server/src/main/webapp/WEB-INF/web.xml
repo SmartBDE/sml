@@ -3,7 +3,7 @@
   xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   version="2.5">
 
-	<!-- Servlets -->
+  <!-- Servlets -->
   <servlet>
     <servlet-name>greetServlet</servlet-name>
     <servlet-class>sml.smartdbe.me.GreetingServiceImpl</servlet-class>
@@ -14,7 +14,27 @@
     <url-pattern>/app/greet</url-pattern>
   </servlet-mapping>
 
-	<!-- Default page to serve -->
+  <servlet>
+    <servlet-name>statJobCountServlet</servlet-name>
+    <servlet-class>sml.smartdbe.me.StatJobCountServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>statJobCountServlet</servlet-name>
+    <url-pattern>/app/jobCount</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>statJobTimeServlet</servlet-name>
+    <servlet-class>sml.smartdbe.me.StatJobTimeServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>statJobTimeServlet</servlet-name>
+    <url-pattern>/app/jobTime</url-pattern>
+  </servlet-mapping>
+
+  <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
