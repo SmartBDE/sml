@@ -4,24 +4,24 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.streaming.DataStreamWriter;
 
-public interface IStructuredStreamingOutput extends IPlugin {
+public interface IStructuredStreamingOutput {
     /**
      * Things to do before process.
      * */
-    public boolean open(Long partitionId, Long epochId);
+    boolean open(Long partitionId, Long epochId);
 
     /**
      * Things to do with each Row.
      * */
-    public void process(Row row);
+    void process(Row row);
 
     /**
      * Things to do after process.
      * */
-    public void close(Throwable errorOrNull);
+    void close(Throwable errorOrNull);
 
     /**
-     * Waterdrop Structured Streaming process.
+     * Structured Streaming process.
      * */
-    public DataStreamWriter<Row> process(Dataset<Row> df);
+    DataStreamWriter<Row> process(Dataset<Row> ds);
 }

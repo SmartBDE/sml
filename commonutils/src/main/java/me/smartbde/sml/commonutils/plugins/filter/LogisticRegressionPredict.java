@@ -2,7 +2,7 @@ package me.smartbde.sml.commonutils.plugins.filter;
 
 import javafx.util.Pair;
 import me.smartbde.sml.commonutils.AbstractPlugin;
-import me.smartbde.sml.commonutils.ISQLFilter;
+import me.smartbde.sml.commonutils.ISQLUdfFilter;
 import me.smartbde.sml.commonutils.ISession;
 import me.smartbde.sml.commonutils.UdfRegister;
 import me.smartbde.sml.scratch.JavaLogisticRegression;
@@ -31,7 +31,7 @@ import scala.collection.mutable.ArraySeq;
  *   select predict(x1,x2,x3....), x1, x2, x3... from table
  *   select predict(x1,x2,x3....) from table
  */
-public class LogisticRegressionPredict extends AbstractPlugin implements ISQLFilter {
+public class LogisticRegressionPredict extends AbstractPlugin implements ISQLUdfFilter {
     private JavaLogisticRegression javaLogisticRegression;
 
     /**

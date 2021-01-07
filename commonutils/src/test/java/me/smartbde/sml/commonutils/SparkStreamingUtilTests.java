@@ -13,7 +13,6 @@ import org.junit.Test;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 
 public class SparkStreamingUtilTests implements Serializable {
     SparkSession spark = SparkSession.builder()
@@ -54,7 +53,7 @@ public class SparkStreamingUtilTests implements Serializable {
     public void testLoader() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         IFilter filter = (IFilter) PluginUtils.newClazz("me.smartbde.sml.commonutils.plugins.filter.LogisticRegressionPredict");
         System.out.println(filter.toString());
-        if (filter instanceof ISQLFilter) {
+        if (filter instanceof ISQLUdfFilter) {
             System.out.println(filter.toString() + "is SQLFilter");
         }
     }

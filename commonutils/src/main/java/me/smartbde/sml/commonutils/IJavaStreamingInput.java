@@ -10,7 +10,7 @@ import org.apache.spark.streaming.api.java.JavaDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.apache.spark.streaming.dstream.DStream;
 
-public interface IJavaStreamingInput<T> extends IPlugin {
+public interface IJavaStreamingInput<T> extends IStreamingInput<T> {
     public Dataset<Row> rdd2dataset(SparkSession spark, RDD<T> rdd);
 
     public DStream<T> getDStream(StreamingContext ssc);

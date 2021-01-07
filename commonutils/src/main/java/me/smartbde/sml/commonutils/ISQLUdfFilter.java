@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 提供udf列表，并允许注册
  */
-public interface ISQLFilter extends IFilter {
+public interface ISQLUdfFilter extends IFilter {
     /**
      * Allow to register user defined UDFs
      *

@@ -54,7 +54,7 @@ public class AppBean implements ApplicationRunner {
     private MySQLPluginClassRepository mySQLPluginClassRepository;
     private String appName = "StreamApplication";
     private String master = "local[*]";
-    private SparkConf sparkConf = new SparkConf().setMaster(master).setAppName(appName);
+    private SparkConf sparkConf = new SparkConf().setMaster(master).setAppName(appName); // set("spark.streaming.kafka.maxRatePerPartition", "100")
     private SparkSession spark = SparkSession.builder().config(sparkConf).getOrCreate();
 
     @Override
@@ -69,6 +69,7 @@ public class AppBean implements ApplicationRunner {
         List<Jobs> jobs = mySQLJobsRepository.findByNameOrderByPriorityAsc(session.getJobName());
 
         IStreamingInput streamingInput = null;
+        IStructuredStreamingInput structuredStreamingInput = null;
         List<IInput> inputs = new ArrayList<>();
         List<IFilter> filters = new ArrayList<>();
         List<IOutput> outputs = new ArrayList<>();
@@ -85,7 +86,9 @@ public class AppBean implements ApplicationRunner {
                     filters.add((IFilter) plugin);
                 } else if (pluginClass.getType().equals("streamInput")) {
                     streamingInput = (IStreamingInput) plugin;
-                } else if (pluginClass.getType().equals("batchInput")) {
+                } else if (pluginClass.getType().equals("structuredStreamInput")) {
+                    structuredStreamingInput = (IStructuredStreamingInput) plugin;
+                }else if (pluginClass.getType().equals("batchInput")) {
                     inputs.add((IInput) plugin);
                 } else if (pluginClass.getType().equals("output")) {
                     outputs.add((IOutput) plugin);
@@ -137,6 +140,17 @@ public class AppBean implements ApplicationRunner {
                 ssc.awaitTermination();
             } finally {
                 ssc.close();
+            }
+        } else if (okFlag && structuredStreamingInput != null) {
+
+            Dataset<Row> ds = spark.readStream().load();
+
+            for (IFilter filter : filters) {
+                ds = filter.process(spark, ds, session);
+            }
+
+            for (IOutput output : outputs) {
+                output.process(ds);
             }
         }
     }

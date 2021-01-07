@@ -8,6 +8,9 @@ import org.apache.spark.sql.SparkSession;
 import org.apache.spark.streaming.api.java.JavaDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
 
+/**
+ * 专用于streaming的input
+ */
 public interface IStreamingInput<T> extends IPlugin {
     public interface Handler {
         void execute(Dataset<Row> df);
