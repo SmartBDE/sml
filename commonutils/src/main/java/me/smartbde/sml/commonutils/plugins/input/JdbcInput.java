@@ -19,7 +19,12 @@ public class JdbcInput extends AbstractPlugin implements IInput {
     @Override
     public Dataset<Row> getDataset(SparkSession spark) {
         jdbcStorage.init(spark);
-        return jdbcStorage.read(properties.get("table"));
+
+        Dataset<Row> ds = jdbcStorage.read(properties.get("table"));
+        if (properties.get("result") != null) {
+            ds.createOrReplaceTempView(properties.get("result"));
+        }
+        return ds;
     }
 
     @Override

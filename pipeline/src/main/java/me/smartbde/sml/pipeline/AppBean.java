@@ -10,6 +10,7 @@ import me.smartbde.sml.pipeline.domain.repository.MySQLJobsRepository;
 import me.smartbde.sml.pipeline.domain.repository.MySQLPluginClassRepository;
 import me.smartbde.sml.pipeline.domain.repository.MySQLPluginsRepository;
 import me.smartbde.sml.pipeline.domain.repository.MySQLStreamingsRepository;
+import me.smartbde.sml.utils.PropertiesUtil;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -18,12 +19,14 @@ import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
+import org.bytedeco.javacpp.annotation.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,9 +55,13 @@ public class AppBean implements ApplicationRunner {
     private MySQLPluginsRepository mySQLPluginsRepository;
     @Autowired
     private MySQLPluginClassRepository mySQLPluginClassRepository;
-    private String appName = "StreamApplication";
-    private String master = "local[*]";
-    private SparkConf sparkConf = new SparkConf().setMaster(master).setAppName(appName); // set("spark.streaming.kafka.maxRatePerPartition", "100")
+    private String appName = PropertiesUtil.prop("spark.application.name");
+    private String master = PropertiesUtil.prop("spark.master");
+    private String partition = PropertiesUtil.prop("spark.streaming.kafka.maxRatePerPartition");
+    private SparkConf sparkConf = new SparkConf()
+            .setMaster(master)
+            .setAppName(appName)
+            .set("spark.streaming.kafka.maxRatePerPartition", partition);
     private SparkSession spark = SparkSession.builder().config(sparkConf).getOrCreate();
 
     @Override
@@ -142,7 +149,9 @@ public class AppBean implements ApplicationRunner {
                 ssc.close();
             }
         } else if (okFlag && structuredStreamingInput != null) {
-
+            // TODO
+            throw new NotImplementedException();
+            /**
             Dataset<Row> ds = spark.readStream().load();
 
             for (IFilter filter : filters) {
@@ -152,6 +161,7 @@ public class AppBean implements ApplicationRunner {
             for (IOutput output : outputs) {
                 output.process(ds);
             }
+            */
         }
     }
 }

@@ -2,6 +2,7 @@ package me.smartbde.sml.commonutils.plugins.output
 
 import java.lang
 import javafx.util
+import javafx.util.Pair
 import me.smartbde.sml.commonutils.plugins.output.kafka.KafkaSink
 import me.smartbde.sml.commonutils.{AbstractPlugin, IOutput}
 import org.apache.kafka.common.serialization.StringSerializer
@@ -24,8 +25,8 @@ class KafkaOutput extends AbstractPlugin with IOutput {
         val kafkaProducerConfig = {
           val p = new Properties()
           p.setProperty("bootstrap.servers", properties.get("bootstrap.servers"))
-          p.setProperty("key.serializer", classOf[StringSerializer].getName)
-          p.setProperty("value.serializer", classOf[StringSerializer].getName)
+          p.setProperty("key.serializer", properties.get("key.serializer"))
+          p.setProperty("value.serializer", properties.get("value.serializer"))
           p
         }
         spark.sparkContext.broadcast(KafkaSink[String, String](kafkaProducerConfig))
@@ -40,7 +41,7 @@ class KafkaOutput extends AbstractPlugin with IOutput {
     df.foreachPartition(rdd => {
       if (!rdd.isEmpty) {
         rdd.foreach(record => {
-          //kafkaProducer.value.send(Conf.outTopics, record._1.toString, record._2)
+          kafkaProducer.value.send(properties.get("topics"), record.toString())
           // do something else
         })
       }
@@ -50,7 +51,18 @@ class KafkaOutput extends AbstractPlugin with IOutput {
   /**
    * Return true and empty string if config is valid, return false and error message if config is invalid.
    */
-  override def checkConfig(): util.Pair[lang.Boolean, String] = ???
+  override def checkConfig(): util.Pair[lang.Boolean, String] = {
+    if (properties == null)
+      return new Pair[lang.Boolean, String](false, "missing config")
+
+    if (properties.get("bootstrap.servers") != null
+      && properties.get("key.serializer") != null
+      && properties.get("value.serializer") != null
+      && properties.get("topics") != null)
+      return new Pair[lang.Boolean, String](true, "")
+
+    return new Pair[lang.Boolean, String](false, "missing config")
+  }
 
   /**
    * Get Plugin Name.

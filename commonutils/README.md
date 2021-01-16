@@ -45,3 +45,13 @@
 2. 处理器实现，sql函数通过spark udf进行扩展
 3. 插件要做类型的区分，看是否支持流式/批量
 4. 输入/输出是通过spark生态的支持，手动编码实现
+
+## 插件开发步骤
+
+1. 依接口规范开发插件
+2. 配置插件参数 insert into plugins(plugin, ckey, cvalue)
+3. 配置插件初始化对应类 insert into pluginclass(name, type, clazz)
+
+## 插件使用步骤
+
+1. 

@@ -29,7 +29,30 @@ insert into configs(cname, ckey, cvalue) values ('publisher', 'to.port', '');
 insert into configs(cname, ckey, cvalue) values ('publisher', 'to.protocol', 'file:');
 
 ----------------------------------------
--- 插件列表
+-- 插件对应类
+----------------------------------------
+insert into pluginclass(name, type, clazz) values ('GroovyScript', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.GroovyScript');
+insert into pluginclass(name, type, clazz) values ('JsonParser', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.JsonParser');
+insert into pluginclass(name, type, clazz) values ('LineParser', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.LineParser');
+insert into pluginclass(name, type, clazz) values ('LogisticRegressionPredict', 'sqlFilter', 'me.smartbde.sml.commonutils.plugins.filter.LogisticRegressionPredict');
+insert into pluginclass(name, type, clazz) values ('LogisticRegressionTrain', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.LogisticRegressionTrain');
+insert into pluginclass(name, type, clazz) values ('SqlFilter', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.SqlFilter');
+insert into pluginclass(name, type, clazz) values ('StartLogger', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.StartLogger');
+insert into pluginclass(name, type, clazz) values ('StopLogger', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.StopLogger');
+
+insert into pluginclass(name, type, clazz) values ('JdbcInput', 'batchInput', 'me.smartbde.sml.commonutils.plugins.input.JdbcInput');
+insert into pluginclass(name, type, clazz) values ('TcpStreamingInput', 'streamInput', 'me.smartbde.sml.commonutils.plugins.input.TcpStreamingInput');
+insert into pluginclass(name, type, clazz) values ('KafkaStreamingInput', 'streamInput', 'me.smartbde.sml.commonutils.plugins.input.KafkaStreamingInput');
+
+insert into pluginclass(name, type, clazz) values ('FileOutput', 'output', 'me.smartbde.sml.commonutils.plugins.output.FileOutput');
+insert into pluginclass(name, type, clazz) values ('JdbcOutput', 'output', 'me.smartbde.sml.commonutils.plugins.output.JdbcOutput');
+
+insert into pluginclass(name, type, clazz) values ('MaskFilter', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.MaskFilter');
+insert into pluginclass(name, type, clazz) values ('Stdout', 'output', 'me.smartbde.sml.commonutils.plugins.output.Stdout');
+insert into pluginclass(name, type, clazz) values ('KafkaOutpu', 'output', 'me.smartbde.sml.commonutils.plugins.output.KafkaOutput');
+
+----------------------------------------
+-- 插件配置列表
 ----------------------------------------
 insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionPredict.V1', 'modelpath', '/Volumes/Transcend/github/sml/data/model/LogisticRegressionV1.model');
 insert into plugins(plugin, ckey, cvalue) values ('LogisticRegressionPredict.V1', 'dimension', '10');
@@ -68,29 +91,27 @@ insert into plugins(plugin, ckey, cvalue) values ('StopLogger.V1', 'user', 'spri
 insert into plugins(plugin, ckey, cvalue) values ('StopLogger.V1', 'pwd', '123456');
 insert into plugins(plugin, ckey, cvalue) values ('StopLogger.V1', 'table', 'logs');
 
-----------------------------------------
--- 插件对应类
-----------------------------------------
-insert into pluginclass(name, type, clazz) values ('GroovyScript', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.GroovyScript');
-insert into pluginclass(name, type, clazz) values ('JsonParser', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.JsonParser');
-insert into pluginclass(name, type, clazz) values ('LineParser', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.LineParser');
-insert into pluginclass(name, type, clazz) values ('LogisticRegressionPredict', 'sqlFilter', 'me.smartbde.sml.commonutils.plugins.filter.LogisticRegressionPredict');
-insert into pluginclass(name, type, clazz) values ('LogisticRegressionTrain', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.LogisticRegressionTrain');
-insert into pluginclass(name, type, clazz) values ('SqlFilter', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.SqlFilter');
-insert into pluginclass(name, type, clazz) values ('StartLogger', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.StartLogger');
-insert into pluginclass(name, type, clazz) values ('StopLogger', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.StopLogger');
+insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'metadata.broker.list', '127.0.0.1:9092');
+insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'group.id', '2021.01.16');
+insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'auto.offset.reset', 'earliest');
+insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'topics', 'customer_external');
+insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'duration', '1');
+insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'result', 'input_lines');
 
-insert into pluginclass(name, type, clazz) values ('JdbcInput', 'batchInput', 'me.smartbde.sml.commonutils.plugins.input.JdbcInput');
-insert into pluginclass(name, type, clazz) values ('TcpStreamingInput', 'streamInput', 'me.smartbde.sml.commonutils.plugins.input.TcpStreamingInput');
+insert into plugins(plugin, ckey, cvalue) values ('KafkaOutput.V1', 'bootstrap.servers', '127.0.0.1:9092');
+insert into plugins(plugin, ckey, cvalue) values ('KafkaOutput.V1', 'topics', 'customer_external');
+insert into plugins(plugin, ckey, cvalue) values ('KafkaOutput.V1', 'key.serializer', 'org.apache.kafka.common.serialization.StringSerializer');
+insert into plugins(plugin, ckey, cvalue) values ('KafkaOutput.V1', 'value.serializer', 'org.apache.kafka.common.serialization.StringSerializer');
 
-insert into pluginclass(name, type, clazz) values ('FileOutput', 'output', 'me.smartbde.sml.commonutils.plugins.output.FileOutput');
-insert into pluginclass(name, type, clazz) values ('JdbcOutput', 'output', 'me.smartbde.sml.commonutils.plugins.output.JdbcOutput');
+insert into plugins(plugin, ckey, cvalue) values ('SqlFilter.V1', 'sql', 'select * from input_lines');
+insert into plugins(plugin, ckey, cvalue) values ('SqlFilter.V1', 'result', 'input_lines_1');
 
-insert into pluginclass(name, type, clazz) values ('MaskFilter', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.MaskFilter');
-insert into pluginclass(name, type, clazz) values ('Stdout', 'output', 'me.smartbde.sml.commonutils.plugins.output.Stdout');
+insert into plugins(plugin, ckey, cvalue) values ('LineParser.V1', 'delimiter', ' ');
+insert into plugins(plugin, ckey, cvalue) values ('LineParser.V1', 'schema', 'line:string');
+insert into plugins(plugin, ckey, cvalue) values ('LineParser.V1', 'result', 'input_lines');
 
 ----------------------------------------
--- 任务列表
+-- 任务配置列表
 ----------------------------------------
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionTrain', 'input', 'JdbcInput.V1');
 insert into jobs(name, type, plugin) values ('DemoLogisticRegressionTrain', 'output', 'FileOutput.V1');
@@ -110,6 +131,12 @@ insert into jobs(name, type, plugin, priority) values ('DemoLogisticRegressionPr
 insert into jobs(name, type, plugin, priority) values ('DemoLogisticRegressionPredict', 'sqlFilter', 'LogisticRegressionPredict.V1', 2);
 insert into jobs(name, type, plugin, priority) values ('DemoLogisticRegressionPredict', 'filter', 'StopLogger.V1', 3);
 
+insert into jobs(name, type, plugin) values ('DemoKafkaStreaming', 'input', 'KafkaStreamingInput.V1');
+insert into jobs(name, type, plugin) values ('DemoKafkaStreaming', 'output', 'KafkaOutput.V1');
+insert into jobs(name, type, plugin, priority) values ('DemoKafkaStreaming', 'filter', 'StartLogger.V1', 1);
+insert into jobs(name, type, plugin, priority) values ('DemoKafkaStreaming', 'filter', 'SqlFilter.V1', 2);
+insert into jobs(name, type, plugin, priority) values ('DemoKafkaStreaming', 'filter', 'StopLogger.V1', 3);
+
 ----------------------------------------
 -- 激活的任务
 ----------------------------------------
@@ -118,3 +145,4 @@ insert into schedules(jobname, type, runat) values ('DemoLogisticRegressionPredi
 insert into schedules(jobname, type, runat) values ('DemoLogisticRegressionPredict2', -2, '');
 
 insert into streamings(jobname) values ('DemoLogisticRegressionPredict');
+insert into streamings(jobname) values ('DemoKafkaStreaming');

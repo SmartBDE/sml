@@ -17,7 +17,11 @@ import org.apache.spark.sql.SparkSession;
 public class SqlFilter extends AbstractPlugin implements IFilter {
     @Override
     public Dataset<Row> process(SparkSession spark, Dataset<Row> df, ISession session) {
-        return df.sqlContext().sql(properties.get("sql"));
+        Dataset<Row> ds = df.sqlContext().sql(properties.get("sql"));
+        if (properties.get("result") != null) {
+            ds.createOrReplaceTempView(properties.get("result"));
+        }
+        return ds;
    }
 
     @Override

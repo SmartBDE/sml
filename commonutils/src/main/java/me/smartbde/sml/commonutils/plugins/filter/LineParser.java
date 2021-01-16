@@ -71,7 +71,12 @@ public class LineParser extends AbstractPlugin implements IFilter {
         }
 
         StructType schema = DataTypes.createStructType(structFields);
-        return spark.createDataFrame(rdd2, schema);
+
+        Dataset<Row> ds = spark.createDataFrame(rdd2, schema);
+        if (properties.get("result") != null) {
+            ds.createOrReplaceTempView(properties.get("result"));
+        }
+        return ds;
     }
 
     @Override

@@ -24,6 +24,9 @@ import scala.Tuple2;
 
 import java.util.*;
 
+/**
+ * 采用direct模式从kafka读取数据，由partition决定并行度(读取)，解决并行读的性能问题
+ */
 public class KafkaStreamingInput extends AbstractPlugin implements IStreamingInput {
 
     /**
@@ -38,7 +41,8 @@ public class KafkaStreamingInput extends AbstractPlugin implements IStreamingInp
         if (properties.get("metadata.broker.list") != null
                 && properties.get("group.id") != null
                 && properties.get("auto.offset.reset") != null
-                && properties.get("topics") != null) {
+                && properties.get("topics") != null
+                && properties.get("duration") != null) {
             return new Pair<>(true, "");
         }
 
@@ -73,7 +77,11 @@ public class KafkaStreamingInput extends AbstractPlugin implements IStreamingInp
             }
         });
 
-        return spark.createDataFrame(rowRDD, schema);
+        Dataset<Row> ds = spark.createDataFrame(rowRDD, schema);
+        if (properties.get("result") != null) {
+            ds.createOrReplaceTempView(properties.get("result"));
+        }
+        return ds;
     }
 
     /**

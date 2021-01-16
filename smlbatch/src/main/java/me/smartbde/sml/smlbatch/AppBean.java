@@ -51,8 +51,8 @@ public class AppBean implements ApplicationRunner {
     private MySQLPluginsRepository mySQLPluginsRepository;
     @Autowired
     private MySQLPluginClassRepository mySQLPluginClassRepository;
-    private String appName = "BatchApplication";
-    private String master = "local[*]";
+    private String appName = PropertiesUtil.prop("spark.application.name");
+    private String master = PropertiesUtil.prop("spark.master");
     private SparkConf sparkConf = new SparkConf().setMaster(master).setAppName(appName);
     private SparkSession spark = SparkSession.builder().config(sparkConf).getOrCreate();
     private final ScheduledExecutorService scheduler =
@@ -159,16 +159,20 @@ public class AppBean implements ApplicationRunner {
 
         // 只要有一个配置不通过，就不继续执行了
         if (okFlag) {
+            Dataset<Row> ds = null;
             // 从配置中装载input，调用filter，执行output
             for (IInput input : inputs) {
-                Dataset<Row> ds = input.getDataset(spark);
-                for (IFilter filter : filters) {
-                    ds = filter.process(spark, ds, session);
-                }
+                if (ds == null)
+                    ds = input.getDataset(spark);
+                else
+                    input.getDataset(spark);
+            }
+            for (IFilter filter : filters) {
+                ds = filter.process(spark, ds, session);
+            }
 
-                for (IOutput output : outputs) {
-                    output.process(ds);
-                }
+            for (IOutput output : outputs) {
+                output.process(ds);
             }
 
             // 看是否有触发下一步的执行

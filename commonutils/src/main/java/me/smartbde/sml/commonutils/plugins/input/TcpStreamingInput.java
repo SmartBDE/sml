@@ -3,7 +3,6 @@ package me.smartbde.sml.commonutils.plugins.input;
 import javafx.util.Pair;
 import me.smartbde.sml.commonutils.AbstractPlugin;
 import me.smartbde.sml.commonutils.IStreamingInput;
-import me.smartbde.sml.storage.JdbcStorage;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.VoidFunction2;
@@ -17,9 +16,7 @@ import org.apache.spark.sql.types.StructField;
 import org.apache.spark.sql.types.StructType;
 import org.apache.spark.streaming.Time;
 import org.apache.spark.streaming.api.java.JavaDStream;
-import org.apache.spark.streaming.api.java.JavaReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * 格式输入要求：无
@@ -39,7 +36,11 @@ public class TcpStreamingInput extends AbstractPlugin implements IStreamingInput
             }
         });
 
-        return spark.createDataFrame(rowRDD, schema);
+        Dataset<Row> ds = spark.createDataFrame(rowRDD, schema);
+        if (properties.get("result") != null) {
+            ds.createOrReplaceTempView(properties.get("result"));
+        }
+        return ds;
     }
 
     @Override

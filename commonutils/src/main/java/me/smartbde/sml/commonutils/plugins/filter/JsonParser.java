@@ -27,7 +27,11 @@ public class JsonParser extends AbstractPlugin implements IFilter {
             }
         }, Encoders.STRING());
 
-        return spark.read().json(ds);
+        Dataset<Row> ds2 = spark.read().json(ds);
+        if (properties.get("result") != null) {
+            ds2.createOrReplaceTempView(properties.get("result"));
+        }
+        return ds2;
     }
 
     @Override
