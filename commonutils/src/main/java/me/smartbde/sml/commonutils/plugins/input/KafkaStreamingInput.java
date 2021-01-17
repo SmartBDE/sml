@@ -22,12 +22,13 @@ import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.apache.spark.streaming.kafka.KafkaUtils;
 import scala.Tuple2;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * 采用direct模式从kafka读取数据，由partition决定并行度(读取)，解决并行读的性能问题
  */
-public class KafkaStreamingInput extends AbstractPlugin implements IStreamingInput {
+public class KafkaStreamingInput extends AbstractPlugin implements IStreamingInput, Serializable {
 
     /**
      * Return true and empty string if config is valid, return false and error message if config is invalid.
@@ -66,7 +67,7 @@ public class KafkaStreamingInput extends AbstractPlugin implements IStreamingInp
     @Override
     public Dataset<Row> rdd2dataset(SparkSession spark, JavaRDD rdd) {
         StructType schema = DataTypes.createStructType(new StructField[] {
-                new StructField("content", DataTypes.StringType, false, Metadata.empty())
+                new StructField("kafka_input", DataTypes.StringType, false, Metadata.empty())
         });
 
         // 把JavaRDD<String>转换成为JavaRDD<Row>

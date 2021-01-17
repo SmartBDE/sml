@@ -49,7 +49,7 @@ insert into pluginclass(name, type, clazz) values ('JdbcOutput', 'output', 'me.s
 
 insert into pluginclass(name, type, clazz) values ('MaskFilter', 'filter', 'me.smartbde.sml.commonutils.plugins.filter.MaskFilter');
 insert into pluginclass(name, type, clazz) values ('Stdout', 'output', 'me.smartbde.sml.commonutils.plugins.output.Stdout');
-insert into pluginclass(name, type, clazz) values ('KafkaOutpu', 'output', 'me.smartbde.sml.commonutils.plugins.output.KafkaOutput');
+insert into pluginclass(name, type, clazz) values ('KafkaOutput', 'output', 'me.smartbde.sml.commonutils.plugins.output.KafkaOutput');
 
 ----------------------------------------
 -- 插件配置列表
@@ -93,18 +93,18 @@ insert into plugins(plugin, ckey, cvalue) values ('StopLogger.V1', 'table', 'log
 
 insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'metadata.broker.list', '127.0.0.1:9092');
 insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'group.id', '2021.01.16');
-insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'auto.offset.reset', 'earliest');
+insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'auto.offset.reset', 'smallest');
 insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'topics', 'customer_external');
 insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'duration', '1');
 insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'result', 'input_lines');
 
 insert into plugins(plugin, ckey, cvalue) values ('KafkaOutput.V1', 'bootstrap.servers', '127.0.0.1:9092');
-insert into plugins(plugin, ckey, cvalue) values ('KafkaOutput.V1', 'topics', 'customer_external');
+insert into plugins(plugin, ckey, cvalue) values ('KafkaOutput.V1', 'topics', 'customer_out');
 insert into plugins(plugin, ckey, cvalue) values ('KafkaOutput.V1', 'key.serializer', 'org.apache.kafka.common.serialization.StringSerializer');
 insert into plugins(plugin, ckey, cvalue) values ('KafkaOutput.V1', 'value.serializer', 'org.apache.kafka.common.serialization.StringSerializer');
 
 insert into plugins(plugin, ckey, cvalue) values ('SqlFilter.V1', 'sql', 'select * from input_lines');
-insert into plugins(plugin, ckey, cvalue) values ('SqlFilter.V1', 'result', 'input_lines_1');
+insert into plugins(plugin, ckey, cvalue) values ('SqlFilter.V1', 'result', 'input_lines_out');
 
 insert into plugins(plugin, ckey, cvalue) values ('LineParser.V1', 'delimiter', ' ');
 insert into plugins(plugin, ckey, cvalue) values ('LineParser.V1', 'schema', 'line:string');

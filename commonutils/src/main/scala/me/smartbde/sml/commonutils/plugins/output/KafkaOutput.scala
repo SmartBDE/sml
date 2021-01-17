@@ -15,8 +15,9 @@ import java.util.Properties
  * 功能说明：Kafka的批量输出模式
  * 格式输入要求：无
  */
-class KafkaOutput extends AbstractPlugin with IOutput {
+class KafkaOutput extends AbstractPlugin with IOutput with Serializable {
   var kafkaProducer: Broadcast[KafkaSink[String, String]] = _
+  val topic = properties.get("topics")
 
   override def prepare (spark: SparkSession): Boolean = {
     if (super.prepare(spark)) { // 这里创建并广播Kafka
@@ -41,7 +42,9 @@ class KafkaOutput extends AbstractPlugin with IOutput {
     df.foreachPartition(rdd => {
       if (!rdd.isEmpty) {
         rdd.foreach(record => {
-          kafkaProducer.value.send(properties.get("topics"), record.toString())
+          val s = record.getString(0)
+          if (s.nonEmpty)
+              kafkaProducer.value.send(topic, s)
           // do something else
         })
       }

@@ -20,6 +20,7 @@ import org.apache.spark.sql.SparkSession;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.bytedeco.javacpp.annotation.Properties;
+import org.omg.CORBA.portable.ApplicationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +70,17 @@ public class AppBean implements ApplicationRunner {
         Logger logger = LoggerFactory.getLogger(AppBean.class);
 
         List<Streamings> streamings = mySQLStreamingsRepository.findAll();
-        Streamings streaming = streamings.get(0); // 这里应该只有一个
+        Streamings streaming = null;
+        for (Streamings stream : streamings) {
+            if (stream.getJobname().equals(PropertiesUtil.prop("application.streaming.name"))) {
+                streaming = stream;
+                break;
+            }
+        }
+        if (streaming == null) {
+            throw new IllegalArgumentException("streaming configuration not found");
+        }
+
         FilterSession session = new FilterSession(streaming.getJobname());
 
         // 从配置中装载插件并初始化
@@ -108,7 +119,7 @@ public class AppBean implements ApplicationRunner {
                 }
                 plugin.setConfig(map);
 
-                // 然后调用plugin的prepare
+                // 接着调用plugin的prepare
                 Pair<Boolean, String> r = plugin.checkConfig();
                 if (r.getKey()) {
                     plugin.prepare(spark);
