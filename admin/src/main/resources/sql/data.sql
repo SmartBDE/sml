@@ -103,12 +103,16 @@ insert into plugins(plugin, ckey, cvalue) values ('KafkaOutput.V1', 'topics', 'c
 insert into plugins(plugin, ckey, cvalue) values ('KafkaOutput.V1', 'key.serializer', 'org.apache.kafka.common.serialization.StringSerializer');
 insert into plugins(plugin, ckey, cvalue) values ('KafkaOutput.V1', 'value.serializer', 'org.apache.kafka.common.serialization.StringSerializer');
 
-insert into plugins(plugin, ckey, cvalue) values ('SqlFilter.V1', 'sql', 'select concat(\'sql:\', kafka_input) from input_lines');
+insert into plugins(plugin, ckey, cvalue) values ('SqlFilter.V1', 'sql', 'select concat(\'sql:\', kafka_input) as kafka_input from input_lines where length(kafka_input) > 5');
 insert into plugins(plugin, ckey, cvalue) values ('SqlFilter.V1', 'result', 'input_lines_out');
 
-insert into plugins(plugin, ckey, cvalue) values ('LineParser.V1', 'delimiter', ' ');
-insert into plugins(plugin, ckey, cvalue) values ('LineParser.V1', 'schema', 'line:string');
-insert into plugins(plugin, ckey, cvalue) values ('LineParser.V1', 'result', 'input_lines');
+insert into plugins(plugin, ckey, cvalue) values ('SqlFilter.V2', 'sql', 'select concat(\'sql2:\', kafka_input) as kafka_input from input_lines_out');
+insert into plugins(plugin, ckey, cvalue) values ('SqlFilter.V2', 'result', 'input_lines_out_2');
+
+insert into plugins(plugin, ckey, cvalue) values ('GroovyScript.V1', 'script', '/Volumes/Transcend/github/sml/data/script/Reverse.groovy');
+insert into plugins(plugin, ckey, cvalue) values ('GroovyScript.V1', 'func', 'reverse');
+insert into plugins(plugin, ckey, cvalue) values ('GroovyScript.V1', 'inputSchema', 'kafka_input:string');
+insert into plugins(plugin, ckey, cvalue) values ('GroovyScript.V1', 'outputSchema', 'kafka_input:string');
 
 ----------------------------------------
 -- 任务配置列表
@@ -135,7 +139,9 @@ insert into jobs(name, type, plugin) values ('DemoKafkaStreaming', 'input', 'Kaf
 insert into jobs(name, type, plugin) values ('DemoKafkaStreaming', 'output', 'KafkaOutput.V1');
 insert into jobs(name, type, plugin, priority) values ('DemoKafkaStreaming', 'filter', 'StartLogger.V1', 1);
 insert into jobs(name, type, plugin, priority) values ('DemoKafkaStreaming', 'filter', 'SqlFilter.V1', 2);
-insert into jobs(name, type, plugin, priority) values ('DemoKafkaStreaming', 'filter', 'StopLogger.V1', 3);
+insert into jobs(name, type, plugin, priority) values ('DemoKafkaStreaming', 'filter', 'SqlFilter.V2', 3);
+insert into jobs(name, type, plugin, priority) values ('DemoKafkaStreaming', 'filter', 'GroovyScript.V1', 4);
+insert into jobs(name, type, plugin, priority) values ('DemoKafkaStreaming', 'filter', 'StopLogger.V1', 5);
 
 ----------------------------------------
 -- 激活的任务

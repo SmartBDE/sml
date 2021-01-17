@@ -7,58 +7,59 @@ import me.smartbde.sml.commonutils.AbstractPlugin;
 import me.smartbde.sml.commonutils.IFilter;
 import me.smartbde.sml.commonutils.ISession;
 import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.Function;
-import org.apache.spark.api.java.function.MapFunction;
+import org.apache.spark.broadcast.Broadcast;
 import org.apache.spark.sql.*;
 import org.apache.spark.sql.types.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import scala.reflect.ClassTag;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
  * 功能说明：对Dataset<Row>中的信息，用脚本进行处理，通常这发生在Dataset<Row>.map中
  * 格式输入要求：无
  *
- * 可以热加载的脚本，以及编译后不错的速度，是groovy的一大亮点
+ * 可以灵活加载的脚本，以及编译后不错的速度，是groovy的一大亮点
  */
-public class GroovyScript extends AbstractPlugin implements IFilter {
-    private GroovyClassLoader groovyClassLoader;
+public class GroovyScript extends AbstractPlugin implements IFilter, Serializable {
     private Logger logger = LoggerFactory.getLogger(GroovyScript.class);
-    private GroovyObject groovyObject;
+    private Broadcast<GroovyObject> broadcastGroovyObject;
+
 
     @Override
     public Dataset<Row> process(SparkSession spark, Dataset<Row> df, ISession session) {
         JavaRDD<Row> rdd = df.toJavaRDD();
 
+        String schemaFormat = properties.get("inputSchema");
+        StructField[] structFields = parseSchema(schemaFormat);
+        int length = structFields.length;
+        String funcName = properties.get("func");
+
         JavaRDD<Row> rdd2 = rdd.map(new Function<Row, Row>() {
             @Override
             public Row call(Row row) throws Exception {
+                GroovyObject groovyObject = broadcastGroovyObject.value();
                 // 解析row，然后将参数传给script
-
-                String schemaFormat = properties.get("inputSchema");
-                StructField[] structFields = parseSchema(schemaFormat);
-                int length = structFields.length;
-
-                List<Object> args = new ArrayList<>();
-                for (int i = 0; i < length; i++) {
-                    args.add(row.get(i));
+                if (length == 1) {
+                    Object args = row.get(0);
+                    Object object = groovyObject.invokeMethod(funcName, args);
+                    return RowFactory.create(object);
+                } else {
+                    List<Object> args = new ArrayList<>();
+                    for (int i = 0; i < length; i++) {
+                        args.add(row.get(i));
+                    }
+                    List<Object> objects = (List<Object>) groovyObject.invokeMethod(funcName, args);
+                    return RowFactory.create(objects.toArray());
                 }
-
-                Object object = groovyObject.invokeMethod(properties.get("func"), args);
-                List<Object> objects = (List<Object>) object;
-
-                // 将object转换为Row
-                Row r = RowFactory.create(objects);
-                return r;
             }
         });
 
@@ -109,8 +110,8 @@ public class GroovyScript extends AbstractPlugin implements IFilter {
 
         if (properties.get("script") != null
                 && properties.get("func") != null
-                && properties.get("ischema") != null
-                && properties.get("oschema") != null) {
+                && properties.get("inputSchema") != null
+                && properties.get("outputSchema") != null) {
             return new Pair<>(true, "");
         }
 
@@ -132,7 +133,7 @@ public class GroovyScript extends AbstractPlugin implements IFilter {
 //                String root = path.substring(0, index);
 //                String file = path.substring(index+1, path.length());
                 ClassLoader cl = GroovyScript.class.getClassLoader();
-                groovyClassLoader = new GroovyClassLoader(cl);
+                GroovyClassLoader groovyClassLoader = new GroovyClassLoader(cl);
                 try {
                     FileInputStream inputStream = new FileInputStream(properties.get("script"));
                     int length = inputStream.available();
@@ -143,7 +144,9 @@ public class GroovyScript extends AbstractPlugin implements IFilter {
                     String content = new String(bytes, StandardCharsets.UTF_8);
                     // 装载并编译
                     Class groovyClass = groovyClassLoader.parseClass(content);
-                    groovyObject = (GroovyObject) groovyClass.newInstance();
+                    GroovyObject groovyObject = (GroovyObject) groovyClass.newInstance();
+                    JavaSparkContext javaSparkContext = JavaSparkContext.fromSparkContext(spark.sparkContext());
+                    broadcastGroovyObject = javaSparkContext.broadcast(groovyObject);
                 } catch (IOException e) {
                     logger.warn(e.toString());
                 } catch (Exception e) {
