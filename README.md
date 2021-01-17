@@ -23,15 +23,15 @@
 - 人性化图形化使用和管理后台
 - 方便的对外调用接口，便于和其他应用对接
 
-## 产品特性管理
+## 需求管理
 
 https://github.com/SmartBDE/sml-rfc
 
-## 每月版本规划
+## 版本规划
 
 https://github.com/SmartBDE/sml/issues
 
-## 每周一博
+## 博客分享
 
 https://github.com/SmartBDE/sml/wiki
 

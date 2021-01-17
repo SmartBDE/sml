@@ -5,7 +5,6 @@ import javafx.util
 import javafx.util.Pair
 import me.smartbde.sml.commonutils.plugins.output.kafka.KafkaSink
 import me.smartbde.sml.commonutils.{AbstractPlugin, IOutput}
-import org.apache.kafka.common.serialization.StringSerializer
 import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.sql.{Dataset, Row, SparkSession}
 
@@ -16,11 +15,12 @@ import java.util.Properties
  * 格式输入要求：无
  */
 class KafkaOutput extends AbstractPlugin with IOutput with Serializable {
+  var topic: String = _
   var kafkaProducer: Broadcast[KafkaSink[String, String]] = _
-  val topic = properties.get("topics")
 
   override def prepare (spark: SparkSession): Boolean = {
-    if (super.prepare(spark)) { // 这里创建并广播Kafka
+    if (super.prepare(spark)) {
+      topic = properties.get("topics")
       // 广播KafkaSink
       kafkaProducer = {
         val kafkaProducerConfig = {

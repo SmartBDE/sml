@@ -92,10 +92,10 @@ insert into plugins(plugin, ckey, cvalue) values ('StopLogger.V1', 'pwd', '12345
 insert into plugins(plugin, ckey, cvalue) values ('StopLogger.V1', 'table', 'logs');
 
 insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'metadata.broker.list', '127.0.0.1:9092');
-insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'group.id', '2021.01.16');
+insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'group.id', '2021.01.17');
 insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'auto.offset.reset', 'smallest');
 insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'topics', 'customer_external');
-insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'duration', '1');
+insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'duration', '10');
 insert into plugins(plugin, ckey, cvalue) values ('KafkaStreamingInput.V1', 'result', 'input_lines');
 
 insert into plugins(plugin, ckey, cvalue) values ('KafkaOutput.V1', 'bootstrap.servers', '127.0.0.1:9092');
@@ -103,7 +103,7 @@ insert into plugins(plugin, ckey, cvalue) values ('KafkaOutput.V1', 'topics', 'c
 insert into plugins(plugin, ckey, cvalue) values ('KafkaOutput.V1', 'key.serializer', 'org.apache.kafka.common.serialization.StringSerializer');
 insert into plugins(plugin, ckey, cvalue) values ('KafkaOutput.V1', 'value.serializer', 'org.apache.kafka.common.serialization.StringSerializer');
 
-insert into plugins(plugin, ckey, cvalue) values ('SqlFilter.V1', 'sql', 'select * from input_lines');
+insert into plugins(plugin, ckey, cvalue) values ('SqlFilter.V1', 'sql', 'select concat(\'sql:\', kafka_input) from input_lines');
 insert into plugins(plugin, ckey, cvalue) values ('SqlFilter.V1', 'result', 'input_lines_out');
 
 insert into plugins(plugin, ckey, cvalue) values ('LineParser.V1', 'delimiter', ' ');
