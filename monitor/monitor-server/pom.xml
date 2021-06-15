@@ -11,6 +11,11 @@
   <artifactId>monitor-server</artifactId>
   <packaging>war</packaging>
 
+  <properties >
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding >
+    <jersey.version>2.21.1</jersey.version >
+  </properties >
+
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
@@ -25,6 +30,16 @@
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.containers</groupId>
+      <artifactId>jersey-container-servlet</artifactId>
+      <version>${jersey.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.media</groupId>
+      <artifactId>jersey-media-json-jackson</artifactId>
+      <version>${jersey.version}</version>
     </dependency>
     <dependency>
       <groupId>commons-dbcp</groupId>
