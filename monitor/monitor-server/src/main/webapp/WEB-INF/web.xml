@@ -6,7 +6,7 @@
   <!-- Servlets -->
   <servlet>
     <servlet-name>greetServlet</servlet-name>
-    <servlet-class>sml.smartdbe.me.GreetingServiceImpl</servlet-class>
+    <servlet-class>sml.smartdbe.me.service.GreetingServiceImpl</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -16,7 +16,7 @@
 
   <servlet>
     <servlet-name>statJobCountServlet</servlet-name>
-    <servlet-class>sml.smartdbe.me.StatJobCountServiceImpl</servlet-class>
+    <servlet-class>sml.smartdbe.me.service.StatJobCountServiceImpl</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -26,7 +26,7 @@
 
   <servlet>
     <servlet-name>statJobTimeServlet</servlet-name>
-    <servlet-class>sml.smartdbe.me.StatJobTimeServiceImpl</servlet-class>
+    <servlet-class>sml.smartdbe.me.service.StatJobTimeServiceImpl</servlet-class>
   </servlet>
 
   <servlet-mapping>

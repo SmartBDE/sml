@@ -1,6 +1,9 @@
-package sml.smartdbe.me;
+package sml.smartdbe.me.service;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import sml.smartdbe.me.FieldVerifier;
+import sml.smartdbe.me.GreetingResponse;
+import sml.smartdbe.me.GreetingService;
 
 /**
  * The server side implementation of the RPC service.

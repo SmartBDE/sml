@@ -75,3 +75,10 @@ https://manolo.github.io/gwt-polymer-elements/demo
   - 通过组件注册到属性的方式建立通信关联（属性到组件）
   - 属性更新时触发组件的界面刷新
 - 第五，可以使用JSON构建界面模板，底层解析并显示的方式，形成界面中间件，在Java中是比较好实现的
+
+
+对monitor-server的优化
+- 组件：Jersey/Jackson/Logback/Hibernate Validator 极简的RESTFUL服务
+- 基于SQL实现查询，基于JAVA数据结构实现传递，提供高性能高灵活性的后端服务（这里后续可以考虑代码生成器）
+- 部署方式：war
+

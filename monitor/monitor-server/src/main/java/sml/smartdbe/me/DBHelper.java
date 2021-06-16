@@ -13,22 +13,8 @@ public class DBHelper {
             PropertiesUtil.prop("application.datasource.password"));
     private static final Handle queryHandle = queryJdbi.open();
 
-    public List<Map<String, Object>> queryJobCount() {
-        String sql = String.format("select jobname, count(1) as num from logs group by jobname");
-
-        List<Map<String, Object>> items = queryHandle.createQuery(sql)
-                .mapToMap()
-                .list();
-
-        return items;
-    }
-
-    public List<Map<String, Object>> queryJobTime() {
-        String sql = String.format("select a.jobname, a.sessionid, (a.acttime-b.acttime) as t from " +
-                "(select act, acttime, sessionid, jobname from logs where act='stop') a " +
-                "join " +
-                "(select act, acttime, sessionid, jobname from logs where act='start') b " +
-                "on a.sessionid=b.sessionid order by a.jobname");
+    public List<Map<String, Object>> queryObjects(String query) {
+        String sql = String.format(query);
 
         List<Map<String, Object>> items = queryHandle.createQuery(sql)
                 .mapToMap()
