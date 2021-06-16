@@ -46,7 +46,7 @@
 
   <servlet-mapping>
     <servlet-name>JerseyServletContainer</servlet-name>
-    <url-pattern>/webapi/*</url-pattern>
+    <url-pattern>/app/webapi/*</url-pattern>
   </servlet-mapping>
 
   <!-- Default page to serve -->

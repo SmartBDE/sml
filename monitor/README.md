@@ -38,7 +38,7 @@ https://github.com/manolo/gwt-polymer-elements
 https://manolo.github.io/gwt-polymer-elements/demo
 
 
-关于gwt-maven-archetypes
+关于gwt-maven-archetypes(V2)
 - 可以用，但是教程不够详细，可用的操作步骤如下
 - 使用maven monitor lifecycle clean清除编译的内容
 - 运行一次maven monitor plugins gwt-codeserver
@@ -52,7 +52,7 @@ https://manolo.github.io/gwt-polymer-elements/demo
 - 不太方便，可能还不是正确的使用方法，待进一步分析研究
 - 前端monitor-client的代码是可以边写边刷新访问的，后端必须编译，所以建议用单元测试来先测试后端的代码
 
-关于gwt-maven-archetypes
+关于gwt-maven-archetypes(V1)
 - 使用maven创建项目
 - 运行maven monitor plugins clean clean，可以把过往编译的内容都删除
 - 运行一次maven monitor plugins gwt gwt-devmode/gwt-codeserver 把项目都编译好
@@ -63,3 +63,15 @@ https://manolo.github.io/gwt-polymer-elements/demo
 - 把monitor-server依赖的lib拷贝到monitor\target\gwt\devmode\war\WEB-INF\lib
 - 再运行一次maven monitor plugins gwt gwt-devmode 把项目都编译好
 - 访问http://127.0.0.1:8888/app/
+
+
+经过一段时间的探索，对GWT的理解
+- 首先是冷门，这意味这出问题的解决成本很高，对资深人员不是问题，但是对业务开发人员太不友好，注定了框架只能走中间件的路
+- 第二，不好调试，造成了整个技术栈的成本很高，对业务开发人员来说非常不友善
+- 第三，前端resty-gwt + 后端springboot这样的搭配，开发效率才是高效的
+- 第四，前端的组件使用，要采用MVVM的模式来优化，提升开发的效率和质量
+  - 原有直接找到组件并更新的方式，在界面发生调整时代码修改成本很高
+  - 建立ViewModel，把属性的更新和组件的显示分离
+  - 通过组件注册到属性的方式建立通信关联（属性到组件）
+  - 属性更新时触发组件的界面刷新
+- 第五，可以使用JSON构建界面模板，底层解析并显示的方式，形成界面中间件，在Java中是比较好实现的
