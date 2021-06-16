@@ -18,6 +18,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import org.fusesource.restygwt.client.Method;
+import org.fusesource.restygwt.client.MethodCallback;
 import org.pepstock.charba.client.colors.GoogleChartColor;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
@@ -62,6 +64,21 @@ public class App implements EntryPoint {
         //-----------------------------------------
         final Label errorLabel = new Label();
         RootPanel.get("errorLabelContainer").add(errorLabel);
+
+        HelloService helloService = GWT.create(HelloService.class);
+        helloService.order(
+                new MethodCallback<String>() {
+                    @Override
+                    public void onFailure(Method method, Throwable throwable) {
+                        errorLabel.setText("??");
+                    }
+
+                    @Override
+                    public void onSuccess(Method method, String s) {
+                        errorLabel.setText(s);
+                    }
+                }
+            );
 
         //-----------------------------------------
         // chart 任务，执行次数。按最近若干次生成柱状图
