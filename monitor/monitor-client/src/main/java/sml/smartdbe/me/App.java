@@ -12,6 +12,7 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
+import elemental2.dom.DomGlobal;
 import org.dominokit.domino.ui.button.Button;
 import org.dominokit.domino.ui.icons.Icons;
 import org.dominokit.domino.ui.style.Color;
@@ -59,15 +60,14 @@ public class App implements EntryPoint {
         //-----------------------------------------
         // errorLabel 初始化
         //-----------------------------------------
-
-        final Label errorLabel = new Label();
-        RootPanel.get("errorLabelContainer").add(errorLabel);
-
         Button addButton = Button.create(Icons.ALL.add())
                 .setBackground(Color.THEME)
                 .setContent("ADD TASK");
 
-//        RootPanel.get("errorLabelContainer").add((IsWidget) addButton);
+        DomGlobal.document.body.appendChild(addButton.element());
+
+        final Label errorLabel = new Label();
+        RootPanel.get("errorLabelContainer").add(errorLabel);
 
         HelloService helloService = GWT.create(HelloService.class);
         helloService.order(
