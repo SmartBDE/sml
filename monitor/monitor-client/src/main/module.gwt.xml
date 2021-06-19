@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
   <inherits name="com.google.gwt.user.User" />
-  <inherits name="com.google.gwt.user.theme.clean.Clean" />
-  <inherits name="com.vaadin.polymer.Elements"/>
+  <inherits name="org.dominokit.domino.ui.DominoUI"/>
   <inherits name="org.pepstock.charba.Charba"/>
   <inherits name="org.fusesource.restygwt.RestyGWT"/>
 

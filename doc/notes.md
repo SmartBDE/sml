@@ -52,6 +52,7 @@ https://www.jianshu.com/p/83d273dfea1c spark jdbc(mysql) 读取并发度优化
 https://blog.csdn.net/Android_xue/article/details/102825672 spark row
 https://blog.csdn.net/xiuaiba/article/details/107770529 JPA 读写分离
 https://blog.csdn.net/zhuyu19911016520/article/details/88777844 mongo读写文件
+https://github.com/leonchen83/redis-replicator 把redis的数据同步到其他存储引擎
 
 ## 前端/后端实现技术
 
@@ -73,3 +74,6 @@ https://www.jianshu.com/p/db16d4d8d9c7 thymeleaf layout例子 引入一些公用
 https://ultraq.github.io/thymeleaf-layout-dialect/Examples.html thymeleaf-layout-dialect 把不同内容按一个特定的布局模板渲染后输出的技术
 https://www.jianshu.com/p/011288f418c3 adminlte与thymeleaf
 
+## 第三方数据可视化工具
+
+http://www.spagobi.org/homepage/services/documentation/

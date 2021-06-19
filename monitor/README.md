@@ -1,4 +1,6 @@
-我们需要一个可以展现系统运行状况的可视化界面
+我们需要可以自助实现系统功能开放式自主的可视化界面
+- 数据录入
+- 
 
 计划使用gwt实现，达到简化开发流程，快速迭代的效果
 
@@ -32,11 +34,12 @@ batch/stream运行的统计信息，主要功能列表：
     - 模型的评估
     - 模型的持续演进
 
-https://github.com/pepstock-org/Charba
-http://www.pepstock.org/Charba-Showcase/Charba_Showcase.html
-https://github.com/manolo/gwt-polymer-elements
-https://manolo.github.io/gwt-polymer-elements/demo
-
+https://github.com/GwtMaterialDesign/gwt-material
+https://gwtmaterialdesign.github.io/gmd-core-demo/
+https://dev.arcbees.com/gwtp/index.html
+https://github.com/DominoKit/domino-ui/
+https://demo.dominokit.org/samples?theme=indigo
+https://github.com/NaluKit/gwt-boot-starter-nalu
 
 关于gwt-maven-archetypes(V2)
 - 可以用，但是教程不够详细，可用的操作步骤如下
@@ -57,7 +60,7 @@ https://manolo.github.io/gwt-polymer-elements/demo
 - 运行maven monitor plugins clean clean，可以把过往编译的内容都删除
 - 运行一次maven monitor plugins gwt gwt-devmode/gwt-codeserver 把项目都编译好
 - 把monitor-server\src\main\webapp目录拷贝到monitor\target\gwt\devmode\war
-- 把monitor-client\war目录拷贝到monitor\target\gwt\devmode\war\app <- 通过调整目录结构已不需要
+- 把monitor-client\war目录拷贝到monitor\target\gwt\devmode\war\app <- 通过调整目录结构已不需要（从client移到server）
 - 把monitor-server\target\classes目录拷贝到monitor\target\gwt\devmode\war
 - 把monitor-shared\target\classes目录拷贝到monitor\target\gwt\devmode\war
 - 把monitor-server依赖的lib拷贝到monitor\target\gwt\devmode\war\WEB-INF\lib
@@ -82,3 +85,8 @@ https://manolo.github.io/gwt-polymer-elements/demo
 - 基于SQL实现查询，基于JAVA数据结构实现传递，提供高性能高灵活性的后端服务（这里后续可以考虑代码生成器）
 - 部署方式：war
 
+对monitor-client的优化
+- 方案
+  - 组件：resty-gwt/domino-ui/Charba
+  - 组件：gwt-material，学习gwt-material的实现，沿用gwt-material体系
+- 基于model-view-presenter architecture (MVP)理念的界面搭建，后续考虑采用JSON自动生成界面

@@ -6,7 +6,7 @@ spring-test: a demo app to show how to implement spark application
 程序底层使用spark实现，通过spark的流批一体能力，以job的方式，提交到spark集群中运行
 
 包括：
-1. 启动运行的环境，组件包括collector/publisher/smlbatch/pipeline/monitor/bi
+1. 启动运行的环境，组件包括collector/publisher/smlbatch/pipeline/monitor
 2. 启动collector对外的接口，基于Camel，我们先假设数据都是从http/kafka过来
 3. 启动publisher对外的发布，基于Camel，提供消息发布监听的实现
 4. 提供插件的参数配置及运行状态监控界面(TipDM)

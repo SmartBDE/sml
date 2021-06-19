@@ -11,13 +11,10 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.*;
+import org.dominokit.domino.ui.button.Button;
+import org.dominokit.domino.ui.icons.Icons;
+import org.dominokit.domino.ui.style.Color;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 import org.pepstock.charba.client.colors.GoogleChartColor;
@@ -62,8 +59,15 @@ public class App implements EntryPoint {
         //-----------------------------------------
         // errorLabel 初始化
         //-----------------------------------------
+
         final Label errorLabel = new Label();
         RootPanel.get("errorLabelContainer").add(errorLabel);
+
+        Button addButton = Button.create(Icons.ALL.add())
+                .setBackground(Color.THEME)
+                .setContent("ADD TASK");
+
+//        RootPanel.get("errorLabelContainer").add((IsWidget) addButton);
 
         HelloService helloService = GWT.create(HelloService.class);
         helloService.order(
